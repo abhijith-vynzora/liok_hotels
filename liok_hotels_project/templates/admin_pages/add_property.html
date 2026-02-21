@@ -1,0 +1,159 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if property %}Edit Property{% else %}Add New Property{% endif %} | Liok Admin
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Reuse styles from create_blog.html */
+    .modern-input {
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        padding: 0.85rem 1rem;
+        background-color: #fff;
+    }
+    .dashboard__section__title {
+        border-bottom: 1px solid #eaeaea;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Styles for FormSets (Rooms/Nearby) */
+    .formset-card {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+    .formset-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #495057;
+        border-left: 4px solid #2563eb;
+        padding-left: 10px;
+    }
+    .delete-checkbox-wrapper {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #fee2e2;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: #dc2626;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard sp_bottom_100">
+    <div class="container-fluid full__width__padding">
+        
+        <div class="dashboard__section__title">
+            <h4 class="mb-0">{% if property %}Edit Property: {{ property.name }}{% else %}Add New Property{% endif %}</h4>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {% csrf_token %}
+
+            <div class="card mb-4 shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <h5 class="m-0 text-primary"><i class="icofont-hotel"></i> Property Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Property Name <span class="text-danger">*</span></label>
+                            {{ form.name.errors }}
+                            <input type="text" name="name" class="form-control modern-input" value="{{ form.name.value|default:'' }}" required>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Location / Address <span class="text-danger">*</span></label>
+                            {{ form.address.errors }}
+                            <input type="text" name="address" class="form-control modern-input" value="{{ form.address.value|default:'' }}" required>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Overview / Description <span class="text-danger">*</span></label>
+                            {{ form.overview.errors }}
+                            <textarea name="overview" id="overviewEditor" class="form-control modern-input" rows="5">{{ form.overview.value|default:'' }}</textarea>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Amenities (Comma separated)</label>
+                            <small class="text-muted d-block mb-1">E.g., Swimming Pool, Free Wifi, Spa, Parking</small>
+                            {{ form.amenities_list.errors }}
+                            <textarea name="amenities_list" class="form-control modern-input" rows="2">{{ form.amenities_list.value|default:'' }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">WhatsApp Number <span class="text-danger">*</span></label>
+                            <input type="text" name="whatsapp_number" class="form-control modern-input" value="{{ form.whatsapp_number.value|default:'' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Contact Phone (Optional)</label>
+                            <input type="text" name="contact_phone" class="form-control modern-input" value="{{ form.contact_phone.value|default:'' }}">
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Google Maps Embed HTML</label>
+                            <textarea name="map_embed_code" class="form-control modern-input" rows="3" placeholder='<iframe src="..."></iframe>'>{{ form.map_embed_code.value|default:'' }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Cover Image</label>
+                            <input type="file" name="cover_image" class="form-control modern-input" accept="image/*">
+                            {% if form.instance.cover_image %}
+                                <div class="mt-2">
+                                    <img src="{{ form.instance.cover_image.url }}" alt="Current Cover" height="100" class="rounded">
+                                    <small class="text-muted d-block">Current Image</small>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class="d-flex gap-3 pb-5">
+                <button type="submit" class="btn btn-primary btn-lg px-5">
+                    <i class="fas fa-save"></i> Save Property
+                </button>
+                <a href="{% url 'admin_pages:property_list' %}" class="btn btn-secondary btn-lg">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    // Initialize CKEditor for the Overview field
+    ClassicEditor
+        .create(document.querySelector('#overviewEditor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo']
+        })
+        .catch(error => console.error(error));
+
+    // Style Django Formset Inputs automatically
+    document.addEventListener("DOMContentLoaded", function() {
+        // Find all inputs inside the formset cards and add Bootstrap classes
+        const inputs = document.querySelectorAll('.formset-card input, .formset-card textarea');
+        inputs.forEach(input => {
+            if (input.type !== 'checkbox' && input.type !== 'file') {
+                input.classList.add('form-control');
+            } else if (input.type === 'file') {
+                input.classList.add('form-control');
+            }
+        });
+    });
+</script>
+{% endblock %}

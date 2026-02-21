@@ -1,0 +1,210 @@
+{% extends "admin_pages/base.html" %}
+{% block title %}Room Categories | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard__form__wraper">
+    <div class="create__course__title mb-4 d-flex justify-content-between align-items-center">
+        <h4>Room Categories</h4>
+        <a href="{% url 'admin_pages:room_create' %}" class="btn btn-success btn-sm">
+            <i class="fas fa-plus"></i> Add New Category
+        </a>
+    </div>
+
+    <div class="accordion" id="roomPropertyAccordion">
+        {% for property in properties %}
+        <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header" id="heading{{ property.id }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{ property.id }}" aria-expanded="false"
+                        aria-controls="collapse{{ property.id }}">
+                    <div class="d-flex align-items-center w-100">
+                        <i class="icofont-hotel me-2 text-primary" style="font-size: 1.2rem;"></i>
+                        <span class="fw-bold">{{ property.name }}</span>
+                        <span class="badge bg-primary ms-auto me-3">{{ property.rooms.count }} Rooms</span>
+                    </div>
+                </button>
+            </h2>
+            <div id="collapse{{ property.id }}" class="accordion-collapse collapse"
+                 aria-labelledby="heading{{ property.id }}" data-bs-parent="#roomPropertyAccordion">
+                <div class="accordion-body bg-light">
+                    <div class="row">
+                        {% for room in property.rooms.all %}
+                        <div class="col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                                {% if room.image %}
+                                <img src="{{ room.image.url }}" class="card-img-top"
+                                     style="height: 160px; object-fit: cover;" alt="{{ room.name }}">
+                                {% else %}
+                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center"
+                                     style="height: 160px;">No Image</div>
+                                {% endif %}
+
+                                <div class="card-body">
+                                    <h6 class="card-title mb-1">{{ room.name }}</h6>
+                                    <p class="text-muted small mb-2">{{ room.description|truncatechars:80 }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold text-success">₹{{ room.price_per_night }}</span>
+                                        <span class="small text-muted"><i class="icofont-users"></i> Max: {{ room.max_occupancy }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer bg-white border-0 d-flex gap-2 pb-3">
+                                    <button type="button" class="btn btn-sm btn-outline-warning flex-grow-1"
+                                        data-bs-toggle="modal" data-bs-target="#updateRoomModal{{ room.id }}">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger flex-grow-1"
+                                        data-bs-toggle="modal" data-bs-target="#deleteRoomModal{{ room.id }}">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update Room Modal -->
+                        <div class="modal fade" id="updateRoomModal{{ room.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <form method="post" enctype="multipart/form-data" action="{% url 'admin_pages:room_update' room.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="property" value="{{ room.property.id }}">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit: {{ room.name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Room Name</label>
+                                                <input type="text" name="name" class="form-control" value="{{ room.name }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Description</label>
+                                                <textarea name="description" class="form-control room-description" id="roomEditor{{ room.id }}" rows="4" required>{{ room.description }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Price per Night (₹)</label>
+                                                <input type="number" name="price_per_night" class="form-control" value="{{ room.price_per_night }}" step="0.01" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Max Occupancy</label>
+                                                <input type="number" name="max_occupancy" class="form-control" value="{{ room.max_occupancy }}" min="1" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Room Image</label>
+                                                <input type="file" name="image" class="form-control room-image-input" data-preview="#roomImgPreview{{ room.id }}" accept="image/*">
+                                                <div class="mt-2">
+                                                    {% if room.image %}
+                                                    <img id="roomImgPreview{{ room.id }}" src="{{ room.image.url }}" class="img-fluid rounded" width="120" height="90" style="object-fit:cover;">
+                                                    {% else %}
+                                                    <img id="roomImgPreview{{ room.id }}" src="https://via.placeholder.com/120x90?text=No+Image" class="img-fluid rounded" width="120" height="90">
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">Save Changes</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Room Modal -->
+                        <div class="modal fade" id="deleteRoomModal{{ room.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="post" action="{% url 'admin_pages:room_delete' room.id %}">
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Room</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete <strong>"{{ room.name }}"</strong>?
+                                            <p class="text-danger mt-2">This action cannot be undone.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% empty %}
+                        <div class="col-12 text-center py-4">
+                            <p class="text-muted mb-0">No room categories found for this property.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center py-5 bg-white rounded shadow-sm">
+            <p class="text-muted">No properties found. Add a property first.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Image preview
+    document.querySelectorAll('.room-image-input').forEach((input) => {
+        input.addEventListener('change', function () {
+            const preview = document.querySelector(this.dataset.preview);
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => preview.src = e.target.result;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    // CKEditor - init when modal opens
+    document.querySelectorAll('.modal').forEach((modal) => {
+        modal.addEventListener('shown.bs.modal', function () {
+            const textarea = this.querySelector('textarea.room-description');
+            if (textarea && !textarea.classList.contains('ckeditor-applied')) {
+                ClassicEditor.create(textarea, {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'blockQuote', 'undo', 'redo']
+                }).then(editor => {
+                    textarea.classList.add('ckeditor-applied');
+                    editor.plugins.get('FileRepository').createUploadAdapter = loader => ({
+                        upload: () => loader.file.then(file => new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve({ default: reader.result });
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        })),
+                        abort: () => {}
+                    });
+                }).catch(console.error);
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .accordion-button:not(.collapsed) {
+        background-color: #f8fbff;
+        color: #2563eb;
+        box-shadow: none;
+    }
+    .card {
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .modal .ck.ck-editor__editable {
+        min-height: 150px;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+</style>
+{% endblock %}

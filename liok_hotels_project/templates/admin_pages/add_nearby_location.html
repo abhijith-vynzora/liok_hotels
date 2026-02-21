@@ -1,0 +1,96 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block title %}Add Nearby Location | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard sp_bottom_100">
+    <div class="container-fluid full__width__padding">
+        <div class="dashboard__section__title">
+            <h4 class="mb-0">{% if location %}Edit{% else %}Add{% endif %} Nearby Location</h4>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data" class="form-wrapper">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Target Property <span class="text-danger">*</span></label>
+                            {{ form.property }}
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Attraction Name <span class="text-danger">*</span></label>
+                            {{ form.name }}
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Distance (e.g., 5km or 10 min drive)</label>
+                            {{ form.distance }}
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Location Image</label>
+                            {{ form.image }}
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Brief Description</label>
+                            {{ form.description }}
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <div class="dashboard__form__button">
+                                <button type="submit" class="default__button">Save Location</button>
+                                <a href="{% url 'admin_pages:nearby_list' %}" class="default__button" style="background: #6c757d;">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const textarea = document.querySelector('textarea[name="description"]');
+    if (textarea) {
+        ClassicEditor.create(textarea, {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'blockQuote', 'undo', 'redo']
+        }).then(editor => {
+            editor.plugins.get('FileRepository').createUploadAdapter = loader => ({
+                upload: () => loader.file.then(file => new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve({ default: reader.result });
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                })),
+                abort: () => {}
+            });
+        }).catch(console.error);
+    }
+});
+</script>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    input, select, textarea {
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        padding: 0.85rem 1rem;
+        margin-top: 5px;
+    }
+    .ck.ck-editor__editable {
+        min-height: 150px;
+        max-height: 300px;
+        overflow-y: auto;
+        border-radius: 8px !important;
+    }
+</style>
+{% endblock %}

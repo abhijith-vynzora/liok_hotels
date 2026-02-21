@@ -1,0 +1,179 @@
+{% extends "admin_pages/base.html" %}
+{% block title %}Nearby Locations | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard__form__wraper">
+    <div class="create__course__title mb-4 d-flex justify-content-between align-items-center">
+        <h4>Nearby Attractions</h4>
+        <a href="{% url 'admin_pages:nearby_create' %}" class="btn btn-success btn-sm">
+            <i class="fas fa-plus"></i> Add New Location
+        </a>
+    </div>
+
+    <div class="accordion" id="propertyLocationAccordion">
+        {% for property in properties %}
+        <div class="accordion-item mb-3 border rounded shadow-sm">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#prop{{ property.id }}">
+                    <i class="icofont-hotel me-2" ></i> <strong>{{ property.name }}</strong>
+                    <span class="badge bg-primary ms-2">{{ property.nearby_locations.count }} Locations</span>
+                </button>
+            </h2>
+            <div id="prop{{ property.id }}" class="accordion-collapse collapse" data-bs-parent="#propertyLocationAccordion">
+                <div class="accordion-body bg-light">
+                    <div class="row">
+                        {% for loc in property.nearby_locations.all %}
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                {% if loc.image %}
+                                <img src="{{ loc.image.url }}" class="card-img-top" style="height: 140px; object-fit: cover;">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h6 class="mb-1">{{ loc.name }}</h6>
+                                    <p class="text-muted small mb-0"><i class="icofont-location-arrow"></i> {{ loc.distance }}</p>
+                                </div>
+                                <div class="card-footer bg-white border-0 d-flex gap-2 pb-3">
+                                    <button type="button" class="btn btn-sm btn-warning flex-grow-1"
+                                        data-bs-toggle="modal" data-bs-target="#updateNearbyModal{{ loc.id }}">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-danger flex-grow-1"
+                                        data-bs-toggle="modal" data-bs-target="#deleteNearbyModal{{ loc.id }}">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Update Modal -->
+                        <div class="modal fade" id="updateNearbyModal{{ loc.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <form method="post" enctype="multipart/form-data" action="{% url 'admin_pages:nearby_update' loc.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="property" value="{{ loc.property.id }}">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit: {{ loc.name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Name</label>
+                                                <input type="text" name="name" class="form-control" value="{{ loc.name }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Distance</label>
+                                                <input type="text" name="distance" class="form-control" value="{{ loc.distance }}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Description</label>
+                                                <textarea name="description" class="form-control nearby-description" id="nearbyEditor{{ loc.id }}" rows="4">{{ loc.description }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Image</label>
+                                                <input type="file" name="image" class="form-control nearby-image-input" data-preview="#nearbyImgPreview{{ loc.id }}" accept="image/*">
+                                                <div class="mt-2">
+                                                    {% if loc.image %}
+                                                    <img id="nearbyImgPreview{{ loc.id }}" src="{{ loc.image.url }}" class="img-fluid rounded" width="120" height="90" style="object-fit:cover;">
+                                                    {% else %}
+                                                    <img id="nearbyImgPreview{{ loc.id }}" src="https://via.placeholder.com/120x90?text=No+Image" class="img-fluid rounded" width="120" height="90">
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">Save Changes</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deleteNearbyModal{{ loc.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="post" action="{% url 'admin_pages:nearby_delete' loc.id %}">
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Location</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete <strong>"{{ loc.name }}"</strong>?
+                                            <p class="text-danger mt-2">This action cannot be undone.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% empty %}
+                        <div class="col-12 text-center py-3">
+                            <p class="text-muted mb-0">No attractions added for this property.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Image preview
+    document.querySelectorAll('.nearby-image-input').forEach((input) => {
+        input.addEventListener('change', function () {
+            const preview = document.querySelector(this.dataset.preview);
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => preview.src = e.target.result;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    // CKEditor - init when modal opens
+    document.querySelectorAll('.modal').forEach((modal) => {
+        modal.addEventListener('shown.bs.modal', function () {
+            const textarea = this.querySelector('textarea.nearby-description');
+            if (textarea && !textarea.classList.contains('ckeditor-applied')) {
+                ClassicEditor.create(textarea, {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'blockQuote', 'undo', 'redo']
+                }).then(editor => {
+                    textarea.classList.add('ckeditor-applied');
+                    editor.plugins.get('FileRepository').createUploadAdapter = loader => ({
+                        upload: () => loader.file.then(file => new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve({ default: reader.result });
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        })),
+                        abort: () => {}
+                    });
+                }).catch(console.error);
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.modal .ck.ck-editor__editable {
+    min-height: 150px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.icofont-hotel {
+    color: #007bff;
+    font-size: 1.2rem;
+}
+</style>
+{% endblock %}
