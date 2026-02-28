@@ -8,6 +8,8 @@ from django.db.models.functions import TruncMonth
 from django.utils import timezone
 import json
 from django.db.models.functions import Lower
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import (
     Property, Blog, Testimonial, Category, GalleryImage,
@@ -16,7 +18,7 @@ from .models import (
 
 from .forms import (
     PropertyForm, BlogForm, TestimonialForm,NearbyLocationForm, RoomCategoryForm,
-    CategoryForm, GalleryImageForm
+    CategoryForm, GalleryImageForm, BookingInquiryForm, ContactForm
 )
 
 # =================ADMIIN AUTHENTICATION & DASHBOARD VIEWS==========================
@@ -183,12 +185,14 @@ def delete_booking(request, pk):
     return redirect("admin_pages:view_bookings")
 
 @login_required(login_url="admin_login")
+@login_required(login_url="admin_login")
 def view_contacts(request):
-    contacts = ContactMessage.objects.all().order_by("-created_at")
-    paginator = Paginator(contacts, 10)
+    contacts_list = ContactMessage.objects.all().order_by("-created_at")
+    paginator = Paginator(contacts_list, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
+    # Key must be 'contacts' to match the template loop
     return render(request, "admin_pages/view_contacts.html", {"contacts": page_obj})
 
 @login_required(login_url="admin_login")
@@ -393,7 +397,7 @@ def testimonial_update(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Testimonial updated successfully!")
-            return redirect("admin_pages:testimonial_list")
+            return redirect("admin_pages:review_list")
     else:
         form = TestimonialForm(instance=testimonial)
     return render(
@@ -500,3 +504,201 @@ def room_category_delete(request, pk):
         room.delete()
         messages.success(request, "Room Category deleted.")
     return redirect("admin_pages:room_list")
+
+
+# ==========================frontend pages==============================
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from .models import (
+    Property, RoomCategory, NearbyLocation,
+    Blog, Testimonial, Category, GalleryImage,
+    ContactMessage, BookingInquiry
+)
+
+
+# Home Page
+def home(request):
+    properties = Property.objects.all()
+    testimonials = Testimonial.objects.all()[:5]
+    blogs = Blog.objects.all()[:3]
+
+    context = {
+        "properties": properties,
+        "testimonials": testimonials,
+        "blogs": blogs,
+    }
+    return render(request, "frontend/index4.html", context)
+
+def about(request):
+    # Fetch data to populate the sliders in about.html
+    testimonials = Testimonial.objects.all()[:5]
+    
+    # If you have a Team model, you would fetch it here. 
+    # For now, we'll just render the page.
+    context = {
+        "testimonials": testimonials,
+    }
+    return render(request, "frontend/about.html", context)
+
+# All Properties Listing (The page you shared)
+def properties_all(request):
+    properties = Property.objects.all().order_by("-created_at")
+    testimonials = Testimonial.objects.all()[:5]
+    return render(request, "frontend/properties.html", {"properties": properties, "testimonials": testimonials})
+
+# Property Detail Page
+def property_detail(request, slug):
+    property_obj = get_object_or_404(Property, slug=slug)
+    rooms = property_obj.rooms.all()
+    nearby = property_obj.nearby_locations.all()
+
+    # Convert the textarea string into a clean Python list
+    # This handles extra spaces if a user types 'Wifi,  Pool'
+    raw_amenities = property_obj.amenities_list.split(',')
+    amenities = [item.strip() for item in raw_amenities if item.strip()]
+
+    context = {
+        "property": property_obj,
+        "rooms": rooms,
+        "nearby": nearby,
+        "amenities": amenities,
+    }
+    return render(request, "frontend/property-details.html", context)
+
+
+# Rooms Page (All Rooms)
+def rooms(request):
+    rooms = RoomCategory.objects.select_related("property")
+    return render(request, "frontend/rooms.html", {"rooms": rooms})
+
+
+# Single Room Detail
+def room_detail(request, pk):
+    room = get_object_or_404(RoomCategory, pk=pk)
+    return render(request, "frontend/room-details.html", {"room": room})
+
+
+# Frontend Blog List View
+def frontend_blog_list(request):
+    blogs_qs = Blog.objects.all().order_by("-created_at")
+    paginator = Paginator(blogs_qs, 6) # 
+    page_number = request.GET.get("page")
+    blogs = paginator.get_page(page_number)
+    return render(request, "frontend/news.html", {"blogs": blogs}) # [cite: 9, 19]
+
+# Frontend Blog Detail View
+def frontend_blog_detail(request, slug):
+    blog = get_object_or_404(Blog, slug=slug) # [cite: 14]
+    return render(request, "frontend/post.html", {"blog": blog}) # [cite: 9]
+
+
+# Gallery Page
+def gallery(request):
+    categories = Category.objects.all()
+    images = GalleryImage.objects.all().order_by('-uploaded_at')
+    
+    context = {
+        'categories': categories,
+        'images': images,
+    }
+    return render(request, "frontend/gallery.html", context)
+
+# def contact(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Your message was sent successfully!')
+#             return redirect('admin_pages:contact')  # Note the app_name prefix
+#     else:
+#         form = ContactForm()
+    
+#     return render(request, 'frontend/contact.html', {'form': form})
+
+def contact(request):
+    if request.method == "POST":
+        if not all([request.POST.get("first_name"), 
+                    request.POST.get("last_name"), 
+                    request.POST.get("phone")]):
+            messages.error(request, "Please fill in all required fields.")
+            return redirect("admin_pages:contact")  # Add namespace
+        
+        ContactMessage.objects.create(
+            first_name=request.POST.get("first_name").strip(),
+            last_name=request.POST.get("last_name").strip(),
+            phone=request.POST.get("phone").strip(),
+            email=request.POST.get("email", "").strip() or None,
+            message=request.POST.get("message", "").strip()
+        )
+        
+        messages.success(request, "Your message has been sent successfully!")
+        return redirect("admin_pages:contact")  # Add namespace
+    
+    return render(request, "frontend/contact.html")
+
+def booking_view(request):
+    if request.method == "POST":
+        # Get data from the form
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        phone = request.POST.get("phone")
+        email = request.POST.get("email")
+        property_id = request.POST.get("property")
+        
+        # NEW: Capture the room category selected in the dropdown
+        room_category = request.POST.get("room_category")
+        
+        check_in = request.POST.get("check_in")
+        check_out = request.POST.get("check_out")
+        guests = request.POST.get("guests", 2)
+        message_text = request.POST.get("message")
+
+        # Basic Validation
+        if not all([first_name, last_name, phone, property_id, check_in, check_out]):
+            messages.error(request, "Please fill in all required fields.")
+            return redirect("admin_pages:book_now")
+
+        try:
+            # Save to database using your updated BookingInquiry model
+            property_obj = get_object_or_404(Property, id=property_id)
+            BookingInquiry.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                phone=phone,
+                email=email if email else None,
+                property=property_obj,
+                
+                # NEW: Save the room category to the database
+                room_category=room_category,
+                
+                check_in=check_in,
+                check_out=check_out,
+                guests=int(guests),
+                message=message_text,
+                status='pending'
+            )
+            messages.success(request, "Your booking inquiry has been submitted successfully!")
+            return redirect("admin_pages:book_now")
+            
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+            return redirect("admin_pages:book_now")
+
+    # GET request: Show the form and provide the list of properties
+    properties = Property.objects.all()
+    return render(request, "frontend/booking.html", {"properties": properties})
+
+def nearby_attractions_view(request):
+    # Fetch all properties for the category filter buttons
+    properties = Property.objects.all()
+    
+    # Fetch all nearby locations and prefetch property data for performance
+    nearby_locations = NearbyLocation.objects.select_related('property').all()
+    
+    context = {
+        'properties': properties,
+        'nearby_locations': nearby_locations,
+    }
+    
+    return render(request, "frontend/nearby.html", context)

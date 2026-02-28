@@ -1,0 +1,156 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Nearby Attractions - Liok Hotel{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Styling for location cards */
+    .nearby-grid {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .nearby-item {
+        margin-bottom: 30px;
+    }
+    /* Filter styling consistent with Gallery */
+    .filtering span {
+        margin: 0 10px;
+        padding: 5px 20px;
+        cursor: pointer;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-block;
+        transition: all 0.3s ease;
+        color: #666;
+    }
+    .filtering span.active {
+        color: #aa8453;
+        border-bottom: 2px solid #aa8453;
+    }
+    /* Content Box Styling */
+    .nearby-box {
+        background: #fff;
+        border: 1px solid #f4f4f4;
+        transition: all 0.3s ease;
+    }
+    .nearby-img {
+        overflow: hidden;
+        position: relative;
+        height: 250px;
+    }
+    .nearby-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .nearby-box:hover .nearby-img img {
+        transform: scale(1.1);
+    }
+    .nearby-content {
+        padding: 20px;
+    }
+    .nearby-content h4 {
+        font-family: 'Gilda Display', serif;
+        font-size: 22px;
+        margin-bottom: 5px;
+        color: #222;
+    }
+    .nearby-distance {
+        color: #aa8453;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 10px;
+        display: block;
+    }
+    .nearby-desc {
+        font-size: 15px;
+        color: #666;
+        line-height: 1.6;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/2.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-left caption mt-90">
+                    <h5>Explore the Area</h5>
+                    <h1>Nearby Attractions</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">Discover</div>
+                    <div class="section-title">Points of Interest</div>
+                </div>
+                
+                <div class="col-md-12 text-center mb-30">
+                    <div class="filtering">
+                        <span data-filter='*' class="active">All Locations</span>
+                        {% for property in properties %}
+                        <span data-filter='.prop-{{ property.id }}'>{{ property.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row nearby-grid">
+                {% for location in nearby_locations %}
+                <div class="col-md-4 nearby-item prop-{{ location.property.id }}">
+                    <div class="nearby-box">
+                        <div class="nearby-img">
+                            {% if location.image %}
+                            <img src="{{ location.image.url }}" alt="{{ location.name }}">
+                            {% else %}
+                            <img src="{% static 'img/slider/1.jpg' %}" alt="{{ location.name }}">
+                            {% endif %}
+                        </div>
+                        <div class="nearby-content">
+                            <span class="nearby-distance">
+                                <i class="ti-location-pin"></i> {{ location.distance }} </span>
+                            <h4>{{ location.name }}</h4> <p class="nearby-desc">{{ location.description|truncatewords:20 |safe }}</p> </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-md-12">
+                    <p class="text-center">No nearby locations listed yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(window).on("load", function () {
+        // Initialize Isotope for the nearby locations grid
+        var $grid = $('.nearby-grid').isotope({
+            itemSelector: '.nearby-item',
+            layoutMode: 'fitRows',
+            transitionDuration: '0.6s'
+        });
+
+        // Filter items on click
+        $('.filtering').on('click', 'span', function () {
+            var filterValue = $(this).attr('data-filter');
+            $grid.isotope({ filter: filterValue });
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+
+        // Ensure layout is correct after images load
+        $grid.imagesLoaded().progress(function () {
+            $grid.isotope('layout');
+        });
+    });
+</script>
+{% endblock %}

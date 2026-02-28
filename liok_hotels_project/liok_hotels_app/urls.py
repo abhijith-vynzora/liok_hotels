@@ -63,6 +63,24 @@ urlpatterns = [
     path("dashboard/testimonials/<int:pk>/edit/",views.testimonial_update,name="testimonial_update"),
     path("dashboard/testimonials/<int:pk>/delete/",views.testimonial_delete,name="testimonial_delete"),
 
+    # ==============================frontend urls=========================
+    path("", views.home, name="home"),
+    path('about-us/', views.about, name='about'),
+
+    path("properties/", views.properties_all, name="properties_all"),
+    path("property/<slug:slug>/", views.property_detail, name="property_detail"),
+
+    path("rooms/", views.rooms, name="rooms"),
+    path("room/<int:pk>/", views.room_detail, name="room_detail"),
+
+    path("news/", views.frontend_blog_list, name="news_list"), 
+    path("news/<slug:slug>/", views.frontend_blog_detail, name="news_detail"),
+
+    path("gallery/", views.gallery, name="gallery"),
+
+    path("contact/", views.contact, name="contact"),
+    path('book-now/', views.booking_view, name='book_now'),
+    path('nearby-attractions/', views.nearby_attractions_view, name='nearby_attractions'),
 ]
 
 if settings.DEBUG:

@@ -75,14 +75,13 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
         fields = ["first_name", "last_name", "phone", "email", "message"]
-
-
+        
 class BookingInquiryForm(forms.ModelForm):
     class Meta:
         model = BookingInquiry
         fields = [
             "first_name", "last_name", "phone", "email", 
-            "property", "check_in", "check_out", "guests", "message"
+            "property", "room_category", "check_in", "check_out", "guests", "message"
         ]
         widgets = {
             'check_in': forms.DateInput(attrs={'type': 'date'}),

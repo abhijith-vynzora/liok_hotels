@@ -1,0 +1,252 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}Properties - Luxury Hotel{% endblock %}
+
+{% block content %}
+    <!-- Header Banner -->
+    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/3.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-left caption mt-90">
+                    <h5>Discover</h5>
+                    <h1>Our Properties</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Services -->
+    <section class="services section-padding">
+        <div class="container">
+            {% for property in properties %}
+                {% if forloop.counter|divisibleby:2 %}
+                <div class="row">
+                    <div class="col-md-6 bg-cream p-0 order2 valign animate-box" data-animate-effect="fadeInLeft">
+                        <div class="content">
+                            <div class="cont text-left">
+                                <div class="info">
+                                    <h6>{{ property.address }}</h6>
+                                </div>
+                                <h4>{{ property.name }}</h4>
+                                <p>{{ property.overview|truncatewords:30 | safe}}</p>
+                                <div class="butn-dark"> 
+                                    <a href="{% url 'admin_pages:property_detail' property.slug %}"><span>Explore Property</span></a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-0 order1 animate-box" data-animate-effect="fadeInRight">
+                        <div class="img">
+                            <a href="{% url 'admin_pages:property_detail' property.slug %}">
+                                <img src="{{ property.cover_image.url }}" alt="{{ property.name }}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                {% else %}
+                <div class="row">
+                    <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
+                        <div class="img left">
+                            <a href="{% url 'admin_pages:property_detail' property.slug %}">
+                                <img src="{{ property.cover_image.url }}" alt="{{ property.name }}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-0 bg-cream valign animate-box" data-animate-effect="fadeInRight">
+                        <div class="content">
+                            <div class="cont text-left">
+                                <div class="info">
+                                    <h6>{{ property.address }}</h6>
+                                </div>
+                                <h4>{{ property.name }}</h4>
+                                <p>{{ property.overview|truncatewords:30 | safe}}</p>
+                                <div class="butn-dark"> 
+                                    <a href="{% url 'admin_pages:property_detail' property.slug %}"><span>Explore Property</span></a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% empty %}
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>No properties listed at the moment.</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+<section class="testimonials">
+    <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="testimonials-box">
+                        <div class="head-box">
+                            <h6>Testimonials</h6>
+                            <h4>What Client's Say?</h4>
+                            <div class="line"></div>
+                        </div>
+                        <div class="owl-carousel owl-theme">
+                            {% for testimonial in testimonials %}
+                            <div class="item"> 
+                                <span class="quote"><img src="{% static 'img/quot.png' %}" alt=""></span>
+                                <p>{{ testimonial.review | safe}}</p>
+                                <div class="info">
+                                    <div class="author-img">
+                                        {% if testimonial.image %}
+                                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+                                        {% else %}
+                                            <img src="{% static 'img/team/4.jpg' %}" alt="{{ testimonial.name }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="cont"> 
+                                        {% comment %} <span>
+                                            {% for i in "12345" %}
+                                                <i class="star-rating"></i>
+                                            {% endfor %}
+                                        </span> {% endcomment %}
+                                        <h6>{{ testimonial.name }}</h6> 
+                                        <span>Guest review</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="item">
+                                <p>No testimonials available yet.</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    {% comment %} <!-- Reservation & Booking Form -->
+    <section class="testimonials">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 mb-30 mt-30">
+                        <p><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></p>
+                        <h5>Our premium rooms feature high-end amenities and direct booking support</h5>
+                        <div class="reservations mb-30">
+                            <div class="icon color-1"><span class="flaticon-call"></span></div>
+                            <div class="text">
+                                <p class="color-1">Direct Booking</p> 
+                                <a class="color-1" href="tel:+919876543210">+91 98765 43210</a>
+                            </div>
+                        </div>
+                        <p><i class="ti-check"></i><small>Increase direct booking inquiries.</small></p>
+                    </div>
+                    
+                    <div class="col-md-5 offset-md-2">
+                        <div class="booking-box">
+                            <div class="head-box">
+                                <h6>Rooms & Suites</h6>
+                                <h4>Hotel Booking Form</h4>
+                            </div>
+                            <div class="booking-inner clearfix">
+                                <form action="{% url 'admin_pages:booking' %}" method="POST" class="form1 clearfix">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="select1_wrapper">
+                                                <label>Select Property</label>
+                                                <div class="select1_inner">
+                                                    <select class="select2 select" name="property" style="width: 100%" required>
+                                                        <option value="">Choose a Property</option>
+                                                        {% for property in properties %}
+                                                            <option value="{{ property.id }}">{{ property.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input1_wrapper">
+                                                <label>Check in</label>
+                                                <div class="input1_inner">
+                                                    <input type="text" name="check_in" class="form-control input datepicker" placeholder="Check in" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input1_wrapper">
+                                                <label>Check out</label>
+                                                <div class="input1_inner">
+                                                    <input type="text" name="check_out" class="form-control input datepicker" placeholder="Check out" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="select1_wrapper">
+                                                <label>Total Guests</label>
+                                                <div class="select1_inner">
+                                                    <select class="select2 select" name="guests" style="width: 100%">
+                                                        <option value="1">1 Person</option>
+                                                        <option value="2" selected>2 Persons</option>
+                                                        <option value="3">3 Persons</option>
+                                                        <option value="4">4 Persons</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" name="first_name" class="form-control" placeholder="First Name" required style="margin-bottom: 15px;">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="text" name="phone" class="form-control" placeholder="Phone Number" required style="margin-bottom: 15px;">
+                                        </div>
+    
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn-form1-submit mt-15">Submit Inquiry</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+    {% comment %} <!-- Clients -->
+    <section class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                <div class="owl-carousel owl-theme">
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/1.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/2.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/3.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/4.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/5.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/6.png' %}" alt=""></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+{% endblock %}

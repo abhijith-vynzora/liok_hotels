@@ -1,0 +1,383 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    
+    <title>{% block title %}Luxury Hotel & Resort{% endblock %}</title>
+    
+    <meta name="description" content="{% block meta_description %}Luxury hotel and resort with premium accommodations, world-class amenities, and exceptional hospitality.{% endblock %}">
+    <meta name="author" content="{% block meta_author %}Luxury Hotel{% endblock %}">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png" sizes="32x32">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Barlow:wght@400&family=Gilda+Display&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <style>
+        {% comment %} .logo-wrapper .logo-img {
+            height: 105px; /* Adjust this value to your preferred size */
+
+            
+        }
+        
+        /* Mobile adjustment if it needs to be even smaller on phones */
+        @media (max-width: 767px) {
+            .logo-wrapper .logo-img {
+                height: 70px;
+            }
+        } {% endcomment %}
+        /* Scrolled State: Fixed and Smaller */
+.nav-scroll .logo-img {
+    height: 60px !important; /* Reduced size for sticky navbar */
+    width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Base State: Initial larger size */
+.navbar:not(.nav-scroll) .logo-img {
+    height: 103px !important;
+}
+
+/* Ensure the wrapper doesn't restrict the logo */
+.nav-scroll .logo-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    height: 90px !important;
+}
+        
+        .btn-booking {
+            background-color: #aa8453; /* Gold color matching your logo */
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        {% comment %} .btn-booking:hover {
+            background-color: #000; /* Contrast black on hover */
+            color: #d4af37;
+            transform: translateY(-2px);
+        } {% endcomment %}
+        
+        /* Mobile adjustments */
+        @media (max-width: 991px) {
+            .navbar-nav.ms-lg-4 {
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+            .btn-booking {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+
+        /* Layout Fixes */
+.navbar .container-fluid {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Remove old floats that cause spacing issues */
+.logo-wrapper {
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 0 0 auto;
+}
+
+/* Force Menu Centering */
+#navbar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Logo Size & Visibility Fixes */
+.logo-img {
+    height: 70px !important; /* Smaller base height to prevent overlap */
+    width: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.nav-scroll .logo-img {
+    height: 45px !important; /* Sleek size when scrolling */
+}
+
+/* Disappearing Logo Scroll Fix */
+.nav-scroll .logo-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    height: 90px !important;
+}
+
+/* Booking Button Alignment */
+.navbar-booking-btn {
+    flex: 0 0 auto;
+    margin-left: 20px;
+}
+    </style>
+    <!-- Preloader -->
+    <div class="preloader-bg"></div>
+    <div id="preloader">
+        <div id="preloader-status">
+            <div class="preloader-position loader"> <span></span> </div>
+        </div>
+    </div>
+    
+    <!-- Progress scroll totop -->
+    <div class="progress-wrap cursor-pointer">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    
+    {% comment %} <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-wrapper">
+                <a class="logo" href="{% url 'admin_pages:home' %}">
+                    <img src="{% static 'logo_gold.jpg' %}" class="logo-img" alt="Logo">
+                </a>
+            </div>
+            
+            <!-- Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="ti-menu"></i></span>
+            </button>
+            
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'admin_pages:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'rooms' %}active{% endif %}" href="{% url 'admin_pages:properties_all' %}">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'news_list' %}active{% endif %}" 
+                           href="{% url 'admin_pages:news_list' %}">
+                           Blog / Stories
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}" href="{% url 'admin_pages:gallery' %}">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'admin_pages:contact' %}">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav ms-lg-4">
+                    <a href="{% url 'admin_pages:contact' %}" class="btn-booking">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </nav> {% endcomment %}
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-lg-5"> <div class="logo-wrapper">
+                <a class="logo" href="{% url 'admin_pages:home' %}">
+                    <img src="{% static 'logo_gold.jpg' %}" class="logo-img" alt="Logo">
+                </a>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon"><i class="ti-menu"></i></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-center" id="navbar">
+                <ul class="navbar-nav"> <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'admin_pages:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'rooms' %}active{% endif %}" href="{% url 'admin_pages:about' %}">About</a>
+                    </li>
+                   
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'property_detail' or request.resolver_match.url_name == 'properties_all' %}active{% endif %}" 
+                           href="#" role="button" data-bs-toggle="dropdown">
+                            Properties <i class="ti-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            {% for prop in all_properties %}
+                            <li>
+                                <a class="dropdown-item {% if property.slug == prop.slug %}active{% endif %}" 
+                                   href="{% url 'admin_pages:property_detail' prop.slug %}">
+                                    {{ prop.name }}
+                                </a>
+                            </li>
+                            {% empty %}
+                            <li><a class="dropdown-item disabled" href="#">No properties found</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'rooms' %}active{% endif %}" href="{% url 'admin_pages:nearby_attractions' %}">Attractions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'news_list' %}active{% endif %}" href="{% url 'admin_pages:news_list' %}">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}" href="{% url 'admin_pages:gallery' %}">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'admin_pages:contact' %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="navbar-booking-btn d-none d-lg-block">
+                <a href="{% url 'admin_pages:book_now' %}" class="btn-booking">Book Now</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    {% block content %}{% endblock %}
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-column footer-about">
+                            <h3 class="footer-title">About Hotel</h3>
+                            <p class="footer-about-text">Welcome to the best five-star deluxe hotel. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat.</p>
+                            
+                            <div class="footer-language">
+                                <i class="lni ti-world"></i>
+                                <select onchange="location = this.value;">
+                                    <option value="#0">English</option>
+                                    <option value="#0">German</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 offset-md-1">
+                        <div class="footer-column footer-explore clearfix">
+                            <h3 class="footer-title">Explore</h3>
+                            <ul class="footer-explore-list list-unstyled">
+                                <li><a href="{% url 'admin_pages:home' %}">Home</a></li>
+                                <li><a href="{% url 'admin_pages:properties_all' %}">Properties</a></li>
+                                <li><a href="{% url 'admin_pages:news_list' %}">Blog / Stories</a></li>
+                                <li><a href="{% url 'admin_pages:gallery' %}">Gallery</a></li>
+                                <li><a href="{% url 'admin_pages:contact' %}">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="footer-column footer-contact">
+                            <h3 class="footer-title">Contact</h3>
+                            <p class="footer-contact-text">Your Address Here<br>City, State, Country</p>
+                            <div class="footer-contact-info">
+                                <p class="footer-contact-phone"><span class="flaticon-call"></span> 855 100 4444</p>
+                                <p class="footer-contact-mail">info@luxuryhotel.com</p>
+                            </div>
+                            <div class="footer-about-social-list">
+                                <a href="#"><i class="ti-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="#"><i class="ti-youtube"></i></a>
+                                <a href="#"><i class="ti-facebook"></i></a>
+                                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-bottom-inner">
+                            <p class="footer-bottom-copy-right">© Copyright <span id="copyright-year"></span> by <a href="#">Your Hotel Name</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- jQuery & Scripts -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.isotope.v3.0.2.js' %}"></script>
+    <script src="{% static 'js/pace.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/scrollIt.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'js/YouTubePopUp.js' %}"></script>
+    <script src="{% static 'js/select2.js' %}"></script>
+    <script src="{% static 'js/datepicker.js' %}"></script>
+    <script src="{% static 'js/smooth-scroll.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    
+    <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    </script>
+    <script>
+        $(document).ready(function() {
+            var logoImg = document.querySelector('.logo-img');
+            var goldLogoPath = "{% static 'logo_gold.jpg' %}";
+    
+            if (logoImg) {
+                // 1. Initial Force
+                logoImg.src = goldLogoPath;
+    
+                // 2. Watch for changes and block them
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === "attributes" && mutation.attributeName === "src") {
+                            if (logoImg.getAttribute('src') !== goldLogoPath) {
+                                logoImg.src = goldLogoPath;
+                            }
+                        }
+                    });
+                });
+    
+                observer.observe(logoImg, { attributes: true });
+            }
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -135,6 +135,7 @@ class BookingInquiry(models.Model):
     last_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
     email = models.EmailField(blank=True, null=True)
+    room_category = models.CharField(max_length=100, blank=True, null=True, help_text="The type of room selected by the guest")
 
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="bookings")
 

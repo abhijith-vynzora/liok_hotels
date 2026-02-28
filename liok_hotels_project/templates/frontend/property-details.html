@@ -1,0 +1,417 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}{{ property.name }} - Liok Hotels{% endblock %}
+
+{% block content %}
+<style>
+    /* Fixed Height for Room Images */
+    .rooms1 .item .position-re {
+        height: 450px !important;
+        width: 100%;
+    }
+
+    .rooms1 .item .position-re img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* --- Nearby Attractions Card Styling --- */
+    .nearby-box {
+        transition: all 0.4s ease-in-out;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .nearby-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+        border-color: #aa8453 !important;
+    }
+
+    .nearby-img img {
+        transition: transform 0.6s ease;
+    }
+
+    .nearby-box:hover .nearby-img img {
+        transform: scale(1.1);
+    }
+
+    .nearby-content h4 {
+        transition: color 0.3s ease;
+    }
+
+    .nearby-box:hover .nearby-content h4 {
+        color: #aa8453;
+    }
+
+    .nearby-desc {
+        margin-top: 15px;
+        border-top: 1px solid #f4f4f4;
+        padding-top: 15px;
+    }/* Reduce section spacing specifically for Attractions */
+.attractions-section {
+    padding: 60px 0 !important;
+}
+
+/* Increase Card Presence */
+.nearby-box {
+    width: 100%;
+    min-height: 450px; /* Increased overall height */
+}
+
+.nearby-img {
+    height: 300px !important; /* Larger image area */
+}
+
+.nearby-content h4 {
+    font-size: 28px !important; /* Larger title for better visibility */
+}
+/* Reduce section spacing specifically for Attractions */
+.attractions-section {
+    padding: 60px 0 !important;
+}
+
+/* Increase Card Presence */
+.nearby-box {
+    width: 100%;
+    min-height: 450px; /* Increased overall height */
+}
+
+.nearby-img {
+    height: 300px !important; /* Larger image area */
+}
+
+.nearby-content h4 {
+    font-size: 28px !important; /* Larger title for better visibility */
+}
+</style>
+
+    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{{ property.cover_image.url }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 caption mt-90">
+                    <h5>Liok Hotels</h5>
+                    <h1>{{ property.name }}</h1> </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="about section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp"> 
+                    <span>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                        <i class="star-rating"></i>
+                    </span>
+                    <div class="section-subtitle">{{ property.name }}</div>
+                    <div class="section-title">Enjoy a Luxury Experience</div>
+                    <p>{{ property.overview|safe }}</p> <div class="reservations">
+                        <div class="icon"><span class="flaticon-call"></span></div>
+                        <div class="text">
+                            <p>Direct Contact</p> <a href="tel:{{ property.contact_phone }}">{{ property.contact_phone }}</a> </div>
+                    </div>
+                </div>
+                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp"> 
+                    {% if rooms.0 %}
+                        <img src="{{ rooms.0.image.url }}" alt="{{ rooms.0.name }}" class="mt-90 mb-30"> 
+                    {% endif %}
+                </div>
+                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp"> 
+                    {% if rooms.1 %}
+                        <img src="{{ rooms.1.image.url }}" alt="{{ rooms.1.name }}"> 
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rooms1 section-padding bg-cream" data-scroll-index="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">{{ property.name }}</div>
+                    <div class="section-title">Rooms & Suites</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel owl-theme">
+                        {% for room in rooms %}
+                        <div class="item">
+                            <div class="position-re o-hidden"> 
+                                <img src="{{ room.image.url }}" alt="{{ room.name }}"> 
+                            </div> 
+                            <span class="category"><a href="{% url 'admin_pages:book_now' %}">Book</a></span>
+                            <div class="con">
+                                <h6><a href="#">₹{{ room.price_per_night }} / Night</a></h6>
+                                <h5><a href="#">{{ room.name }}</a></h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li style="color: #aa8453; font-size: 11px;">Max: {{ room.max_occupancy }} Guests</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <div class="permalink"><a href="#">Details <i class="ti-arrow-right"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-md-12 text-center"><p>No room types available.</p></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="facilties section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">Our Services</div>
+                    <div class="section-title">Hotel Facilities</div>
+                </div>
+            </div>
+            <div class="row">
+                {% for amenity in amenities %}
+                <div class="col-md-4">
+                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                        {% with a=amenity|lower %}
+                        <span class="{% if 'wifi' in a %}flaticon-wifi
+                                     {% elif 'pool' in a %}flaticon-swimming
+                                     {% elif 'park' in a %}flaticon-car
+                                     {% elif 'food' in a or 'breakfast' in a %}flaticon-breakfast
+                                     {% elif 'service' in a %}flaticon-bed
+                                     {% else %}flaticon-world{% endif %}">
+                        </span>
+                        {% endwith %}
+                        <h5>{{ amenity }}</h5> 
+                        <p>High-quality {{ amenity|lower }} designed for comfort at {{ property.name }}.</p> 
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="attractions-section" style="background-color: #f8f5f0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">Discover</div>
+                    <div class="section-title">Nearby Attractions</div>
+                </div>
+            </div>
+            <div class="row d-flex align-items-stretch"> 
+                {% for location in nearby %}
+                <div class="col-md-6 mb-30 d-flex">
+                    <div class="nearby-box" style="background: #fff; border: 1px solid #f4f4f4; width: 100%; display: flex; flex-direction: column;">
+                        <div class="nearby-img" style="position: relative; overflow: hidden; height: 300px;">
+                            {% if location.image %}
+                                <img src="{{ location.image.url }}" alt="{{ location.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                                <img src="{% static 'img/slider/1.jpg' %}" alt="{{ location.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% endif %}
+                        </div>
+                        <div class="nearby-content" style="padding: 30px; flex-grow: 1;">
+                            <span class="nearby-distance" style="color: #aa8453; font-size: 14px; font-weight: 600; text-transform: uppercase;">
+                                <i class="ti-location-pin"></i> {{ location.distance }} 
+                            </span>
+                            <h4 style="font-family: 'Gilda Display', serif; margin-bottom: 15px; color: #222;">{{ location.name }}</h4> 
+                            <div class="nearby-desc" style="font-size: 16px; color: #666; line-height: 1.8;">
+                                {{ location.description|safe }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-md-12 text-center"><p>Explore the area around {{ property.name }}.</p></div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+   <!-- Booking -->
+   <section class="section-padding" style="background-color: #fff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mb-30">
+                <div class="section-subtitle">Reservations</div>
+                <div class="section-title">Book Your Stay</div>
+                <p>
+                    Experience the luxury of {{ property.name }}. Provide your details below, 
+                    and our team will contact you shortly to confirm your reservation.
+                </p>
+                <div class="reservations mb-30">
+                    <div class="icon"><span class="flaticon-call"></span></div>
+                    <div class="text">
+                        <p>Reservation Support</p>
+                        <a href="tel:{{ property.contact_phone }}">{{ property.contact_phone }}</a>
+                    </div>
+                </div>
+                <div class="reservations">
+                    <div class="icon"><span class="flaticon-envelope"></span></div>
+                    <div class="text">
+                        <p>Email Inquiry</p>
+                        <a href="mailto:info@liokhotels.com">info@liokhotels.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 offset-md-1">
+                <form method="post" action="{% url 'admin_pages:book_now' %}" class="contact__form">
+                    {% csrf_token %}
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success contact__msg" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="first_name" type="text" class="form-control" placeholder="First Name *" required>
+                        </div>
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="last_name" type="text" class="form-control" placeholder="Last Name *" required>
+                        </div>
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="phone" type="text" class="form-control" placeholder="Phone Number *" required>
+                        </div>
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="email" type="email" class="form-control" placeholder="Email Address">
+                        </div>
+
+                        <div class="col-md-12 form-group mb-3">
+                            <select name="room_category" class="form-control" required style="background: transparent; color: #666;">
+                                <option value="" disabled selected>Select Room Category *</option>
+                                {% for room in rooms %}
+                                    <option value="{{ room.name }}">{{ room.name }} (₹{{ room.price_per_night }}/night)</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="property" value="{{ property.id }}">
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label style="font-size: 12px; color: #aa8453;">Check-In *</label>
+                            <input name="check_in" type="date" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 form-group mb-3">
+                            <label style="font-size: 12px; color: #aa8453;">Check-Out *</label>
+                            <input name="check_out" type="date" class="form-control" required>
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <input name="guests" type="number" class="form-control" placeholder="Number of Guests" min="1" value="2">
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <textarea name="message" rows="3" class="form-control" placeholder="Special Requests"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="butn-dark2 w-100">
+                                <span>Submit Booking Inquiry</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.contact__form');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const checkIn = form.querySelector('input[name="check_in"]');
+            const checkOut = form.querySelector('input[name="check_out"]');
+    
+            // 1. Prevent past dates and set min checkout date
+            const today = new Date().toISOString().split('T')[0];
+            checkIn.setAttribute('min', today);
+            checkOut.setAttribute('min', today);
+    
+            // 2. Automatically update Checkout minimum based on Check-In
+            checkIn.addEventListener('change', function() {
+                if (this.value) {
+                    checkOut.setAttribute('min', this.value);
+                    if (checkOut.value && checkOut.value < this.value) {
+                        checkOut.value = this.value; // Reset checkout if it's now invalid
+                    }
+                }
+            });
+    
+            // 3. Handle Submission with UI Feedback
+            if (form && submitBtn) {
+                form.addEventListener('submit', function(e) {
+                    // Change button state to prevent double clicks
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<span>Success!</span>';
+                    
+                    // If validation fails, revert button (though checkValidity usually handles this)
+                    if (!form.checkValidity()) {
+                        e.preventDefault();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.getElementById('booking-success-alert'); // cite: [6]
+            
+            if (successAlert) {
+                // Initial animation state
+                successAlert.style.transition = "all 0.8s ease";
+                successAlert.style.opacity = "1";
+                
+                // Wait 5 seconds before starting the fade-out
+                setTimeout(function() {
+                    successAlert.style.opacity = "0";
+                    successAlert.style.transform = "translateY(-20px)";
+                    
+                    // Remove the element from the DOM once the transition finishes
+                    setTimeout(function() {
+                        successAlert.remove();
+                    }, 800);
+                }, 5000);
+            }
+        });
+    </script>
+</section>
+
+    <!-- map -->
+    {% if property.map_embed_code %}
+<div class="row">
+    <div class="col-md-12 map animate-box" data-animate-effect="fadeInUp">
+        <div class="google-map">
+            {{ property.map_embed_code|safe }}
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling to ensure the dynamic iframe is responsive */
+    .google-map iframe {
+        width: 100% !important;
+        height: 600px !important;
+        border: 0 !important;
+    }
+</style>
+{% endif %}
+
+{% endblock %}

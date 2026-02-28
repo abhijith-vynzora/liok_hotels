@@ -1,0 +1,122 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Gallery - Liok Hotel{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Ensure gallery items have spacing and correct display */
+    .gallery {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .gallery-item {
+        margin-bottom: 30px;
+    }
+    .filtering span {
+        margin: 0 10px;
+        padding: 5px 20px;
+        cursor: pointer;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-block;
+        transition: all 0.3s ease;
+        color: #666;
+    }
+    .filtering span.active {
+        color: #aa8453;
+        border-bottom: 2px solid #aa8453;
+    }
+    .gallery-box {
+        overflow: hidden;
+        position: relative;
+    }
+    .gallery-img img {
+        transition: transform 0.5s ease;
+    }
+    .gallery-box:hover .gallery-img img {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/3.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-left caption mt-90">
+                    <h5>Images & Videos</h5>
+                    <h1>Our Gallery</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle">Images</div>
+                    <div class="section-title">Image Gallery</div>
+                </div>
+                
+                <div class="col-md-12 text-center mb-30">
+                    <div class="filtering">
+                        <span data-filter='*' class="active">All</span>
+                        {% for category in categories %}
+                        <span data-filter='.cat-{{ category.id }}'>{{ category.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gallery">
+                {% for image in images %}
+                <div class="col-md-4 gallery-item cat-{{ image.category.id }}">
+                    <a href="{{ image.image.url }}" title="{{ image.title }}" class="img-zoom">
+                        <div class="gallery-box">
+                            <div class="gallery-img">
+                                <img src="{{ image.image.url }}" class="img-fluid mx-auto d-block" alt="{{ image.title }}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col-md-12">
+                    <p class="text-center">No images available yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(window).on("load", function () {
+        // Initialize Isotope after all images have loaded
+        var $gallery = $('.gallery').isotope({
+            itemSelector: '.gallery-item',
+            layoutMode: 'fitRows',
+            transitionDuration: '0.6s'
+        });
+
+        // Filter items on span click
+        $('.filtering').on('click', 'span', function () {
+            var filterValue = $(this).attr('data-filter');
+            $gallery.isotope({ filter: filterValue });
+        });
+
+        // Handle active class switching for filter buttons
+        $('.filtering span').on('click', function () {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+
+        // Re-layout Isotope if images take a moment to load
+        $gallery.imagesLoaded().progress(function () {
+            $gallery.isotope('layout');
+        });
+    });
+</script>
+{% endblock %}
