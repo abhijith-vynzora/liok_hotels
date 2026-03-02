@@ -77,7 +77,14 @@
             {% endfor %}
         </div>
     </section>
-
+    <style>
+        /* Rounding the Services Rows */
+.services .row {
+    border-radius: 30px !important; /* Adjust for desired curvature */
+    overflow: hidden !important;   /* Critical to clip images and backgrounds */
+    margin-bottom: 20px; /* Space between rows */
+}
+    </style>
     <!-- Testimonials -->
 <section class="testimonials">
     <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="3">

@@ -578,21 +578,6 @@ def room_detail(request, pk):
     room = get_object_or_404(RoomCategory, pk=pk)
     return render(request, "frontend/room-details.html", {"room": room})
 
-
-# Frontend Blog List View
-def frontend_blog_list(request):
-    blogs_qs = Blog.objects.all().order_by("-created_at")
-    paginator = Paginator(blogs_qs, 6) # 
-    page_number = request.GET.get("page")
-    blogs = paginator.get_page(page_number)
-    return render(request, "frontend/news.html", {"blogs": blogs}) # [cite: 9, 19]
-
-# Frontend Blog Detail View
-def frontend_blog_detail(request, slug):
-    blog = get_object_or_404(Blog, slug=slug) # [cite: 14]
-    return render(request, "frontend/post.html", {"blog": blog}) # [cite: 9]
-
-
 # Gallery Page
 def gallery(request):
     categories = Category.objects.all()
@@ -604,25 +589,14 @@ def gallery(request):
     }
     return render(request, "frontend/gallery.html", context)
 
-# def contact(request):
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Your message was sent successfully!')
-#             return redirect('admin_pages:contact')  # Note the app_name prefix
-#     else:
-#         form = ContactForm()
-    
-#     return render(request, 'frontend/contact.html', {'form': form})
-
 def contact(request):
     if request.method == "POST":
         if not all([request.POST.get("first_name"), 
                     request.POST.get("last_name"), 
                     request.POST.get("phone")]):
             messages.error(request, "Please fill in all required fields.")
-            return redirect("admin_pages:contact")  # Add namespace
+            # Redirect back to the referring page, or fallback to the contact page
+            return redirect(request.META.get('HTTP_REFERER', 'admin_pages:contact')) 
         
         ContactMessage.objects.create(
             first_name=request.POST.get("first_name").strip(),
@@ -633,9 +607,31 @@ def contact(request):
         )
         
         messages.success(request, "Your message has been sent successfully!")
-        return redirect("admin_pages:contact")  # Add namespace
+        # Redirect back to the referring page (e.g., /news/ or /property/...)
+        return redirect(request.META.get('HTTP_REFERER', 'admin_pages:contact')) 
     
     return render(request, "frontend/contact.html")
+
+# def contact(request):
+#     if request.method == "POST":
+#         if not all([request.POST.get("first_name"), 
+#                     request.POST.get("last_name"), 
+#                     request.POST.get("phone")]):
+#             messages.error(request, "Please fill in all required fields.")
+#             return redirect("admin_pages:contact")  # Add namespace
+        
+#         ContactMessage.objects.create(
+#             first_name=request.POST.get("first_name").strip(),
+#             last_name=request.POST.get("last_name").strip(),
+#             phone=request.POST.get("phone").strip(),
+#             email=request.POST.get("email", "").strip() or None,
+#             message=request.POST.get("message", "").strip()
+#         )
+        
+#         messages.success(request, "Your message has been sent successfully!")
+#         return redirect("admin_pages:contact")  # Add namespace
+    
+#     return render(request, "frontend/contact.html")
 
 def booking_view(request):
     if request.method == "POST":
@@ -702,3 +698,37 @@ def nearby_attractions_view(request):
     }
     
     return render(request, "frontend/nearby.html", context)
+
+def frontend_blog_list(request):
+    # 1. Main Blog List (Ordered by newest first)
+    all_blogs = Blog.objects.all().order_by("-created_at")
+    
+    # 2. Sidebar Data: Get the 3 most recent posts
+    recent_posts = all_blogs[:3]
+
+    # 3. Pagination (Show 4 posts per page)
+    paginator = Paginator(all_blogs, 4)
+    page_number = request.GET.get("page")
+    blogs = paginator.get_page(page_number)
+
+    context = {
+        "blogs": blogs,
+        "recent_posts": recent_posts,
+    }
+    
+    return render(request, "frontend/news.html", context)
+
+def frontend_blog_detail(request, slug):
+    # 1. Fetch the single blog post requested
+    blog = get_object_or_404(Blog, slug=slug)
+    
+    # 2. Sidebar Data: Fetch the 3 most recent posts 
+    # (We need this context so the sidebar on the detail page isn't empty)
+    recent_posts = Blog.objects.all().order_by("-created_at")[:3]
+    
+    context = {
+        "blog": blog,
+        "recent_posts": recent_posts,
+    }
+    
+    return render(request, "frontend/news2.html", context)

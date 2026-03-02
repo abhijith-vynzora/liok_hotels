@@ -73,8 +73,8 @@ urlpatterns = [
     path("rooms/", views.rooms, name="rooms"),
     path("room/<int:pk>/", views.room_detail, name="room_detail"),
 
-    path("news/", views.frontend_blog_list, name="news_list"), 
-    path("news/<slug:slug>/", views.frontend_blog_detail, name="news_detail"),
+    path('news/', views.frontend_blog_list, name='news_list'),
+    path('news/<slug:slug>/', views.frontend_blog_detail, name='news_detail'),
 
     path("gallery/", views.gallery, name="gallery"),
 

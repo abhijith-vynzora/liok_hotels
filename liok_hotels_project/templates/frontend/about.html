@@ -3,7 +3,48 @@
 {% block title %}About - Luxury Hotel{% endblock %}
 
 {% block content %}
-
+<style>
+    /* Reusable Gold CTA Button */
+    .btn-gold {
+        background-color: #aa8453; /* Your Brand Gold */
+        border: 1px solid #aa8453;
+        color: #fff !important;
+        padding: 12px 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-block;
+        border-radius: 5px; /* Sharp corners for luxury feel */
+        transition: all 0.4s ease;
+        text-decoration: none;
+        margin-top: 20px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Hover Effect: Turns dark or transparent */
+    .btn-gold:hover {
+        background-color: transparent;
+        color: #aa8453 !important;
+        border-color: #aa8453;
+        transform: translateY(-3px); /* Subtle lift */
+    }
+    
+    /* Optional: Icon spacing inside the button */
+    .btn-gold i {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+    .pricing-card {
+        border-radius: 20px;   /* adjust if needed */
+        overflow: hidden;      /* important */
+    }
+    .single-facility {
+        border-radius: 20px;   /* adjust value if needed */
+        overflow: hidden;      /* keeps everything inside rounded corners */
+    }
+</style>
     <!-- Header Banner -->
     <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/1.jpg' %}">
         <div class="container">
@@ -16,43 +57,74 @@
         </div>
     </div>
     <!-- About -->
-    <section class="about section-padding">
+    <section class="about section-padding wow animate__fadeInUp" data-wow-delay="0.3s">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp"> 
+                
+                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
                     <span>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
+                        <i class="star-rating"></i><i class="star-rating"></i>
+                        <i class="star-rating"></i><i class="star-rating"></i>
                         <i class="star-rating"></i>
                     </span>
                     <div class="section-subtitle">The Cappa Luxury Hotel</div>
                     <div class="section-title">Enjoy a Luxury Experience</div>
-                    <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
+                    
+                    <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane. Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
                     <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
-                    <!-- reservation -->
-                    <div class="reservations">
-                        <div class="icon"><span class="flaticon-call"></span></div>
-                        <div class="text">
-                            <p>Reservation</p> <a href="tel:855-100-4444">855 100 4444</a>
+                    
+                    {% comment %} <a href="{% url 'admin_pages:about' %}" class="btn-gold">
+                        Read More <i class="ti-arrow-right"></i>
+                    </a> {% endcomment %}
+                    
+                    <a href="{% url "admin_pages:contact" %}" class="btn-gold">
+                        Contact Us <i class="ti-arrow-right"></i>
+                    </a>
+    
+                    </div>
+    
+                <div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
+                    <div class="owl-carousel owl-theme about-slider">
+                        <div class="item">
+                            <img src="{% static 'img/rooms/8.jpg' %}" alt="Luxury Room" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                        </div>
+                        <div class="item">
+                            <img src="{% static 'img/rooms/2.jpg' %}" alt="Hotel Interior" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                        </div>
+                        <div class="item">
+                            <img src="{% static 'img/rooms/1.jpg' %}" alt="Resort View" class="img-fluid" style="width: 100%; border-radius: 20px;">
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp"> <img src="{% static 'img/rooms/8.jpg' %}" alt="" class="mt-90 mb-30"> </div>
-                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp"> <img src="{% static 'img/rooms/2.jpg' %}" alt=""> </div>
+    
             </div>
         </div>
     </section>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof $.fn.owlCarousel !== 'undefined') {
+                $('.about-slider').owlCarousel({
+                    items: 1,
+                    loop: true,
+                    margin: 0,
+                    autoplay: true,
+                    autoplayTimeout: 4000,
+                    smartSpeed: 1000,
+                    dots: true,
+                    nav: false
+                });
+            }
+        });
+    </script>
     <!-- Pricing -->
-    <section class="pricing section-padding bg-blck">
+    <section class="pricing section-padding bg-blck wow animate__fadeIn" data-wow-delay="0.1s">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 wow animate__fadeInLeft" data-wow-delay="0.3s">
                     <div class="section-subtitle"><span>Best Prices</span></div>
                     <div class="section-title"><span>Extra Services</span></div>
-                    <p class="color-2">The best prices for your relaxing vacation. The utanislen quam nestibulum ac quame odion elementum sceisue the aucan.</p>
-                    <p class="color-2">Orci varius natoque penatibus et magnis disney parturient monte nascete ridiculus mus nellen etesque habitant morbine.</p>
+                    <p class="color-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt pariatur temporibus soluta mollitia provident, tempora vero magnam iste quis, quia incidunt non eos, cumque reprehenderit minus. Itaque ipsa ea officia.</p>
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-call"></span></div>
                         <div class="text">
@@ -60,56 +132,27 @@
                         </div>
                     </div>
                 </div>
+    
                 <div class="col-md-8">
                     <div class="owl-carousel owl-theme">
-                        <div class="pricing-card">
+                        
+                        <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.5s">
                             <img src="{% static 'img/pricing/1.jpg' %}" alt="">
                             <div class="desc">
                                 <div class="name">Room cleaning</div>
                                 <div class="amount">$50<span>/ month</span></div>
-                                <ul class="list-unstyled list">
-                                    <li><i class="ti-check"></i> Hotel ut nisan the duru</li>
-                                    <li><i class="ti-check"></i> Orci miss natoque vasa ince</li>
-                                    <li><i class="ti-close unavailable"></i>Clean sorem ipsum morbin</li>
-                                </ul>
-                            </div>
+                                </div>
                         </div>
-                        <div class="pricing-card">
+    
+                        <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.4s">
                             <img src="{% static 'img/pricing/2.jpg' %}" alt="">
                             <div class="desc">
                                 <div class="name">Drinks included</div>
-                                <div class="amount">$30<span>/ daily</span></div>
-                                <ul class="list-unstyled list">
-                                    <li><i class="ti-check"></i> Hotel ut nisan the duru</li>
-                                    <li><i class="ti-check"></i> Orci miss natoque vasa ince</li>
-                                    <li><i class="ti-close unavailable"></i>Clean sorem ipsum morbin</li>
-                                </ul>
-                            </div>
+                                <div class="amount">$5<span>/ month</span></div>
+
+                                </div>
                         </div>
-                        <div class="pricing-card">
-                            <img src="{% static 'img/pricing/3.jpg' %}" alt="">
-                            <div class="desc">
-                                <div class="name">Room Breakfast</div>
-                                <div class="amount">$30<span>/ daily</span></div>
-                                <ul class="list-unstyled list">
-                                    <li><i class="ti-check"></i> Hotel ut nisan the duru</li>
-                                    <li><i class="ti-check"></i> Orci miss natoque vasa ince</li>
-                                    <li><i class="ti-close unavailable"></i>Clean sorem ipsum morbin</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="pricing-card">
-                            <img src="{% static 'img/pricing/4.jpg' %}" alt="">
-                            <div class="desc">
-                                <div class="name">Safe & Secure</div>
-                                <div class="amount">$15<span>/ daily</span></div>
-                                <ul class="list-unstyled list">
-                                    <li><i class="ti-check"></i> Hotel ut nisan the duru</li>
-                                    <li><i class="ti-check"></i> Orci miss natoque vasa ince</li>
-                                    <li><i class="ti-close unavailable"></i>Clean sorem ipsum morbin</li>
-                                </ul>
-                            </div>
-                        </div>
+    
                     </div>
                 </div>
             </div>
@@ -290,8 +333,9 @@
             </div>
         </div>
     </section> {% endcomment %}
+  
     <!-- Testimonials -->
-    <section class="testimonials">
+    <section class="testimonials wow animate__fadeInUp" data-wow-delay="0.3s">
         <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="3">
             <div class="container">
                 <div class="row">
