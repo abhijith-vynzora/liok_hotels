@@ -60,6 +60,36 @@
         from { transform: translateY(-20px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
+    /* Rounding News Cards */
+.news .item {
+    border-radius: 20px !important;
+    overflow: hidden !important; /* Clips the image and date tag to the radius */
+    background: #1b1b1b;       /* Ensures background matches your theme */
+}
+
+/* Ensure images inside cards follow the radius */
+.news .item img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+/* Rounding the Booking Inquiry Box */
+.booking-box {
+    padding: 40px !important;
+    background: #fff !important;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 20px !important; /* Changed from 4px to 20px */
+    overflow: hidden;
+}
+
+/* Rounding the Submit Button */
+.butn-dark2 {
+    border-radius: 10px !important; /* Slightly smaller radius for buttons looks cleaner */
+}
+.news .item .con {
+    border-radius: 20px;
+    overflow: hidden;
+}
 </style>
 
     <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/5.jpg' %}">
@@ -73,12 +103,17 @@
         </div>
     </div>
     
-    <section class="news section-padding bg-blck">
+    <section class="news section-padding bg-blck wow animate__fadeInUp" data-wow-delay="0.3s">
         <div class="container">
             <div class="row">
+                <div class="col-md-12">
+                    <div class="section-subtitle"><span>Hotel Blog</span></div>
+                    <div class="section-title"><span>Our News</span></div>
+                </div>
+            </div>
+            <div class="row">
                 {% for blog in blogs %}
-                <div class="col-md-4 mb-30">
-                    <div class="item">
+                <div class="col-md-4 mb-30 d-flex"> <div class="item wow animate__slideInRight" data-wow-delay="0.2s">
                         <div class="position-re o-hidden">
                             <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
                             <div class="date">
@@ -102,26 +137,7 @@
                 {% endfor %}
             </div>
             
-            {% if blogs.has_other_pages %}
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <ul class="news-pagination-wrap align-center mb-30 mt-30">
-                        {% if blogs.has_previous %}
-                        <li><a href="?page={{ blogs.previous_page_number }}"><i class="ti-angle-left"></i></a></li>
-                        {% endif %}
-                        
-                        {% for num in blogs.paginator.page_range %}
-                        <li><a href="?page={{ num }}" {% if blogs.number == num %}class="active"{% endif %}>{{ num }}</a></li>
-                        {% endfor %}
-                        
-                        {% if blogs.has_next %}
-                        <li><a href="?page={{ blogs.next_page_number }}"><i class="ti-angle-right"></i></a></li>
-                        {% endif %}
-                    </ul>
-                </div>
             </div>
-            {% endif %}
-        </div>
     </section>
 
     <section class="testimonials">
@@ -217,7 +233,35 @@
             </div>
         </div>
     </section>
-
+    <!-- Clients -->
+    <section class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                <div class="owl-carousel owl-theme">
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/1.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/2.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/3.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/4.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/5.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/6.png' %}" alt=""></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const alert = document.getElementById('contact-success-alert');

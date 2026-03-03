@@ -164,6 +164,36 @@
         .footer-contact-phone:last-child {
             margin-bottom: 0;
         }
+
+        /* --- GSAP ANIMATION STYLES --- */
+
+        /* The container that hides the image initially */
+        .reveal-img {
+            visibility: hidden; /* GSAP's autoAlpha will turn this on */
+            overflow: hidden;   /* This cuts off the image as it slides in */
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* The image itself */
+        .reveal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image fills the box without stretching */
+            display: block;
+            will-change: transform; /* Optimizes performance for smooth animation */
+        }
+
+        /* Optional: Ensures text doesn't flash before animating */
+        .animate-text-section h1, 
+        .animate-text-section h2, 
+        .animate-text-section p, 
+        .animate-text-section .btn-gold {
+            /* We don't hide them with CSS because GSAP handles it immediately, 
+            but if you see a "flash" of text on load, add 'opacity: 0' here. */
+        }
     </style>
 
     <div class="preloader-bg"></div>
@@ -200,9 +230,9 @@
                         <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'admin_pages:about' %}">About</a>
                     </li>
                    
-                    <li class="nav-item dropdown">
+                    {% comment %} <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'property_detail' or request.resolver_match.url_name == 'properties_all' %}active{% endif %}" 
-                           href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                           href="{% url 'admin_pages:properties_all' %}" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             Properties <i class="ti-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -217,6 +247,44 @@
                             <li><a class="dropdown-item disabled" href="#">No properties found</a></li>
                             {% endfor %}
                         </ul>
+                    </li> {% endcomment %}
+
+                    <li class="nav-item dropdown">
+
+                        <!-- Main Link (Clickable) -->
+                        <a class="nav-link {% if request.resolver_match.url_name == 'properties_all' %}active{% endif %}" 
+                           href="{% url 'admin_pages:properties_all' %}">
+                            Properties
+                        </a>
+                    
+                        <!-- Dropdown Arrow -->
+                        <a class="nav-link dropdown-toggle dropdown-toggle-split"
+                           href="#"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                        </a>
+                    
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu">
+                    
+                            {% for prop in all_properties %}
+                            <li>
+                                <a class="dropdown-item {% if property and property.slug == prop.slug %}active{% endif %}" 
+                                   href="{% url 'admin_pages:property_detail' prop.slug %}">
+                                    {{ prop.name }}
+                                </a>
+                            </li>
+                            {% empty %}
+                            <li>
+                                <a class="dropdown-item disabled" href="#">
+                                    No properties found
+                                </a>
+                            </li>
+                            {% endfor %}
+                    
+                        </ul>
+                    
                     </li>
                     
                     <li class="nav-item">
@@ -329,7 +397,8 @@
                             <ul class="footer-explore-list list-unstyled">
                                 <li><a href="{% url 'admin_pages:home' %}">Home</a></li>
                                 <li><a href="{% url 'admin_pages:about' %}">About Us</a></li>
-                                <li><a href="{% url 'admin_pages:properties_all' %}">Our Resorts & Hotel</a></li>
+                                <li><a href="{% url 'admin_pages:properties_all' %}">Properties</a></li>
+                                <li><a href="{% url 'admin_pages:gallery' %}">Gallery</a></li>
                                 <li><a href="{% url 'admin_pages:contact' %}">Contact Us</a></li>
                             </ul>
                         </div>
@@ -448,7 +517,64 @@
             }
         });
     </script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Register the ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- 1. REVEAL IMAGE ANIMATION (The "Curtain" Effect) ---
+        // This looks for any div with class "reveal-img"
+        const revealImages = document.querySelectorAll(".reveal-img");
+
+        revealImages.forEach((container) => {
+            let image = container.querySelector("img");
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    toggleActions: "play none none reverse", // Plays on enter, reverses on leave
+                }
+            });
+
+            tl.set(container, { autoAlpha: 1 }); 
+            tl.from(container, {
+                duration: 1.5,
+                xPercent: -100, // Slide container from left
+                ease: "power2.out"
+            });
+            tl.from(image, {
+                duration: 1.5,
+                xPercent: 100, // Slide image from right (counter-acting the container)
+                scale: 1.3, // Slight zoom out
+                delay: -1.5,
+                ease: "power2.out"
+            });
+        });
+
+        // --- 2. TEXT STAGGER ANIMATION (Lines rising up) ---
+        // This looks for any div with class "animate-text-section"
+        const textSections = document.querySelectorAll(".animate-text-section");
+
+        textSections.forEach((section) => {
+            // Select headings, paragraphs, buttons, and spans inside
+            let elements = section.querySelectorAll("h1, h2, h3, h4, h5, h6, p, .btn-gold, span");
+            
+            gsap.from(elements, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%", // Starts when top of section hits 85% of viewport height
+                    toggleActions: "play none none reverse"
+                },
+                y: 50, // Move up from 50px down
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15, // 0.15s delay between each line
+                ease: "power3.out"
+            });
+        });
+    </script>
+        
     {% block extra_js %}{% endblock %}
 </body>
 </html>

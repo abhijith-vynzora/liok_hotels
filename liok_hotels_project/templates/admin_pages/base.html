@@ -1052,26 +1052,61 @@
                 <h6 class="sidebar-title">Management</h6>
                 <ul class="sidebar-menu">
     
-                    <li>
-                        <a href="{% url 'admin_pages:property_list' %}"
-                           class="{% if request.resolver_match.url_name == 'property_list' %}active{% endif %}">
+                    
+                    {% comment %} <li class="has-dropdown {% if request.resolver_match.url_name == 'list_image' or request.resolver_match.url_name == 'category_list' %}open{% endif %}">
+                        <a href="#">
+                            <i class="icofont-picture"></i>
+                            Properties
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{% url 'admin_pages:category_list' %}"
+                                    class="{% if request.resolver_match.url_name == 'category_list' %}active{% endif %}">
+                                    All Properties
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin_pages:list_image' %}"
+                                    class="{% if request.resolver_match.url_name == 'list_image' %}active{% endif %}">
+                                    Room Categories
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin_pages:list_image' %}"
+                                    class="{% if request.resolver_match.url_name == 'list_image' %}active{% endif %}">
+                                    Nearby Locations
+                                </a>
+                            </li>
+                        </ul>
+                    </li> {% endcomment %}
+
+                    <li class="has-dropdown {% if request.resolver_match.url_name == 'property_list' or request.resolver_match.url_name == 'room_list' or request.resolver_match.url_name == 'nearby_list' %}open{% endif %}">
+                        <a href="#">
                             <i class="icofont-building-alt"></i>
                             Properties
                         </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{% url 'admin_pages:property_list' %}"
+                                   class="{% if request.resolver_match.url_name == 'property_list' %}active{% endif %}">
+                                    All Properties
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin_pages:room_list' %}"
+                                   class="{% if request.resolver_match.url_name == 'room_list' %}active{% endif %}">
+                                    Room Categories
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'admin_pages:nearby_list' %}"
+                                   class="{% if request.resolver_match.url_name == 'nearby_list' %}active{% endif %}">
+                                    Nearby Locations
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="{% url 'admin_pages:nearby_list' %}"
-                           class="{% if request.resolver_match.url_name == 'nearby_list' %}active{% endif %}">
-                            <i class="icofont-location-pin"></i>
-                            Nearby Locations
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'admin_pages:room_list' %}"
-                           class="{% if request.resolver_match.url_name == 'room_list' %}active{% endif %}">
-                            <i class="icofont-bed"></i> Room Categories
-                        </a>
-                    </li>
+
                     <li>
                         <a href="{% url 'admin_pages:blog_list' %}"
                            class="{% if request.resolver_match.url_name == 'blog_list' %}active{% endif %}">

@@ -60,7 +60,7 @@
     padding: 40px !important;
     background: #fff !important;
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: 20px;
 }
 
 .booking-box h4 {
@@ -108,12 +108,53 @@
     border-radius: 20px;   /* adjust if needed */
     overflow: hidden;      /* very important */
 }
-</style>
-<!-- Slider -->
 
+/* --- Added for GSAP Compatibility in Services --- */
+.reveal-img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    overflow: hidden; 
+}
+.reveal-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+/* FORCE BUTTON VISIBILITY */
+/* This overrides the GSAP animation specifically for the button so it never disappears */
+a.btn-gold {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* --- FORCE FIX FOR SEND MESSAGE BUTTON --- */
+
+/* 1. Normal State (Before Hover) */
+button.butn-dark2 {
+    background-color: #1b1b1b !important; /* Dark Black Background */
+    color: #ffffff !important;            /* White Text */
+    border: 1px solid #1b1b1b !important;
+    opacity: 1 !important;                /* Ensure it's visible */
+}
+
+/* 2. Hover State (When Mouse is Over) */
+button.butn-dark2:hover {
+    background-color: #aa8453 !important; /* Turns GOLD on hover */
+    color: #ffffff !important;            /* Text stays WHITE */
+    border-color: #aa8453 !important;
+}
+
+/* 3. Disable any conflicting animation layers */
+button.butn-dark2::after,
+button.butn-dark2::before {
+    display: none !important;
+}
+</style>
 <header class="header slider-fade">
     <div class="owl-carousel owl-theme">
-        <div class="text-center item bg-img" data-overlay-dark="2" data-background="{% static 'img/slider/2.jpg' %}">
+        {% comment %} <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'haze_mountain.jpg' %}">
             <div class="v-middle caption">
                 <div class="container">
                     <div class="row">
@@ -132,9 +173,30 @@
                     </div>
                 </div>
             </div>
+        </div> {% endcomment %}
+        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'haze_mountain.jpg' %}">
+            <div class="v-middle caption">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <span>
+                                <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;">
+                                <i class="star-rating"></i><i class="star-rating"></i>
+                                <i class="star-rating"></i><i class="star-rating"></i>
+                                <i class="star-rating"></i>
+                            </span>
+                            <h4>Luxury Hotel & Best Resort</h4>
+                            <h1>Enjoy a Luxury Experience</h1>
+                            <div class="butn-light mt-30 mb-30"> 
+                                <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="text-center item bg-img" data-overlay-dark="2" data-background="{% static 'img/slider/3.jpg' %}">
+        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'hotel1.jpg' %}">
             <div class="v-middle caption">
                 <div class="container">
                     <div class="row">
@@ -155,7 +217,7 @@
             </div>
         </div>
 
-        <div class="text-center item bg-img" data-overlay-dark="3" data-background="{% static 'img/slider/1.jpg' %}">
+        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'tree.jpg' %}">
             <div class="v-middle caption">
                 <div class="container">
                     <div class="row">
@@ -187,132 +249,27 @@
     </div>
 </header>
 
-{% comment %} <div class="booking-wrapper">
-    <div class="container">
-        <div class="booking-inner clearfix">
-            <form action="{% url 'admin_pages:book_now' %}" class="form1 clearfix">
-                <div class="col1 c1">
-                    <div class="input1_wrapper">
-                        <label>Check in</label>
-                        <div class="input1_inner">
-                            <input type="text" name="check_in" class="form-control input datepicker" placeholder="Check in">
-                        </div>
-                    </div>
-                </div>
-                <div class="col1 c2">
-                    <div class="input1_wrapper">
-                        <label>Check out</label>
-                        <div class="input1_inner">
-                            <input type="text" name="check_out" class="form-control input datepicker" placeholder="Check out">
-                        </div>
-                    </div>
-                </div>
-                <div class="col2 c3">
-                    <div class="select1_wrapper">
-                        <label>Adults</label>
-                        <div class="select1_inner">
-                            <select name="guests" class="select2 select" style="width: 100%">
-                                <option value="1">1 Adult</option>
-                                <option value="2">2 Adults</option>
-                                <option value="3">3 Adults</option>
-                                <option value="4">4 Adults</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col2 c4">
-                    <div class="select1_wrapper">
-                        <label>Children</label>
-                        <div class="select1_inner">
-                            <select name="children" class="select2 select" style="width: 100%">
-                                <option value="0">Children</option>
-                                <option value="1">1 Child</option>
-                                <option value="2">2 Children</option>
-                                <option value="3">3 Children</option>
-                                <option value="4">4 Children</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col2 c5">
-                    <div class="select1_wrapper">
-                        <label>Rooms</label>
-                        <div class="select1_inner">
-                            <select name="rooms" class="select2 select" style="width: 100%">
-                                <option value="1">1 Room</option>
-                                <option value="2">2 Rooms</option>
-                                <option value="3">3 Rooms</option>
-                                <option value="4">4 Rooms</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col3 c6">
-                    <button type="submit" class="btn-form1-submit">Check Now</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> {% endcomment %}
-    <!-- About -->
-    {% comment %} <section class="about section-padding wow animate__fadeInUp" data-wow-delay="0.3s">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
-                    <span>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                    </span>
-                    <div class="section-subtitle">The Cappa Luxury Hotel</div>
-                    <div class="section-title">Enjoy a Luxury Experience</div>
-                    <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
-                    <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
-                    <!-- call -->
-                    <div class="reservations">
-                        <div class="icon"><span class="flaticon-call"></span></div>
-                        <div class="text">
-                            <p>Reservation</p> <a href="tel:855-100-4444">855 100 4444</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
-                    <img src="{% static 'img/rooms/8.jpg' %}" alt="" class="mt-90 mb-30">
-                </div>
-                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
-                    <img src="{% static 'img/rooms/2.jpg' %}" alt="">
-                </div>
-            </div>
-        </div>
-    </section> {% endcomment %}
-
-    <section class="about section-padding wow animate__fadeInUp" data-wow-delay="0.3s">
+    <section class="about section-padding">
         <div class="container">
             <div class="row">
                 
-                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
+                <div class="col-md-6 mb-30 animate-text-section">
                     <span>
                         <i class="star-rating"></i><i class="star-rating"></i>
                         <i class="star-rating"></i><i class="star-rating"></i>
                         <i class="star-rating"></i>
                     </span>
-                    <div class="section-subtitle">The Cappa Luxury Hotel</div>
+                    <div class="section-subtitle ">The Liok Hotel</div>
                     <div class="section-title">Enjoy a Luxury Experience</div>
                     
                     <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane. Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
                     <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
                     
-                    {% comment %} <a href="{% url 'admin_pages:about' %}" class="btn-gold">
-                        Read More <i class="ti-arrow-right"></i>
-                    </a> {% endcomment %}
-                    
                     <a href="{% url "admin_pages:contact" %}" class="btn-gold">
                         Contact Us <i class="ti-arrow-right"></i>
                     </a>
     
-                    </div>
+                </div>
     
                 <div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
                     <div class="owl-carousel owl-theme about-slider">
@@ -348,13 +305,18 @@
             }
         });
     </script>
-    <!-- Rooms -->
-    <section class="rooms1 section-padding bg-cream wow animate__fadeInUp" data-wow-delay="0.3s">
+
+    <section class="rooms1 section-padding bg-cream">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row align-items-end mb-30">
+                <div class="col-md-8 animate-text-section">
                     <div class="section-subtitle">Liok Hotels</div>
                     <div class="section-title">Our Luxury Properties</div>
+                </div>
+                <div class="col-md-4 text-md-end text-start animate-text-section">
+                    <a href="{% url 'admin_pages:properties_all' %}" class="btn-gold">
+                        View All Properties <i class="ti-arrow-right"></i>
+                    </a>
                 </div>
             </div>
             
@@ -411,21 +373,30 @@
                     </div>
                 </div>
             </div>
-    
-            <div class="row mt-30">
-                <div class="col-md-12 text-center">
-                    <a href="{% url 'admin_pages:properties_all' %}" class="btn-gold">
-                        View All Properties <i class="ti-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+
         </div>
     </section>
-    <!-- Pricing -->
-    <section class="pricing section-padding bg-blck wow animate__fadeIn" data-wow-delay="0.1s">
+    <style>
+        /* Adjusts the top-right button alignment */
+        @media (min-width: 768px) {
+            .align-items-end .btn-gold {
+                margin-top: 0; /* Removes top margin on desktop for better alignment */
+                margin-bottom: 10px; /* Aligns with the base of the section title */
+            }
+        }
+        
+        /* Ensure the button doesn't look cramped on mobile */
+        @media (max-width: 767px) {
+            .btn-gold {
+                margin-top: 15px;
+            }
+        }
+    </style>
+    
+    <section class="pricing section-padding bg-blck">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 wow animate__fadeInLeft" data-wow-delay="0.3s">
+                <div class="col-md-4 animate-text-section">
                     <div class="section-subtitle"><span>Best Prices</span></div>
                     <div class="section-title"><span>Extra Services</span></div>
                     <p class="color-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt pariatur temporibus soluta mollitia provident, tempora vero magnam iste quis, quia incidunt non eos, cumque reprehenderit minus. Itaque ipsa ea officia.</p>
@@ -462,11 +433,11 @@
             </div>
         </div>
     </section>
-    <!-- Promo Video -->
+
     <section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="3" data-background="{% static 'img/slider/2.jpg' %}">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 offset-md-2 text-center">
+                    <div class="col-md-8 offset-md-2 text-center animate-text-section">
                        <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
                         <div class="section-subtitle"><span>The Cappa Luxury Hotel</span></div>
                         <div class="section-title"><span>Promotional Video</span></div>
@@ -486,11 +457,11 @@
                 </div>
             </div>
     </section>
-    <!-- Facilties -->
+
     <section class="facilties section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 animate-text-section">
                     <div class="section-subtitle">Our Services</div>
                     <div class="section-title">Hotel Facilities</div>
                 </div>
@@ -547,13 +518,13 @@
             </div>
         </div>
     </section>
-    <!-- Testimonials -->
-    <section class="testimonials wow animate__fadeInUp" data-wow-delay="0.3s">
+
+    <section class="testimonials">
         <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="3">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
-                        <div class="testimonials-box">
+                        <div class="testimonials-box animate-text-section">
                             <div class="head-box">
                                 <h6>Testimonials</h6>
                                 <h4>What Client's Say?</h4>
@@ -573,11 +544,6 @@
                                             {% endif %}
                                         </div>
                                         <div class="cont"> 
-                                            {% comment %} <span>
-                                                {% for i in "12345" %}
-                                                    <i class="star-rating"></i>
-                                                {% endfor %}
-                                            </span> {% endcomment %}
                                             <h6>{{ testimonial.name }}</h6> 
                                             <span>Guest review</span>
                                         </div>
@@ -595,16 +561,21 @@
             </div>
         </div>
     </section>
-    <!-- Services -->
+
     <section class="services section-padding">
         <div class="container" >
+            
             <div class="row">
-                <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
+                <div class="col-md-6 p-0">
                     <div class="img left">
-                        <a href="restaurant.html"><img src="{% static 'img/restaurant/1.jpg' %}" alt=""></a>
+                        <a href="restaurant.html">
+                            <div class="reveal-img">
+                                <img src="{% static 'img/restaurant/1.jpg' %}" alt="">
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-6 p-0 bg-cream valign animate-box" data-animate-effect="fadeInRight">
+                <div class="col-md-6 p-0 bg-cream valign animate-text-section">
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
@@ -617,8 +588,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-md-6 bg-cream p-0 order2 valign animate-box" data-animate-effect="fadeInLeft">
+                <div class="col-md-6 bg-cream p-0 order2 valign animate-text-section">
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
@@ -630,19 +602,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 p-0 order1 animate-box" data-animate-effect="fadeInRight">
+                <div class="col-md-6 p-0 order1">
                     <div class="img">
-                        <a href="spa-wellness.html"><img src="{% static 'img/spa/3.jpg' %}" alt=""></a>
+                        <a href="spa-wellness.html">
+                            <div class="reveal-img">
+                                <img src="{% static 'img/spa/3.jpg' %}" alt="">
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
+                <div class="col-md-6 p-0">
                     <div class="img left">
-                        <a href="spa-wellness.html"><img src="{% static 'img/spa/2.jpg' %}" alt=""></a>
+                        <a href="spa-wellness.html">
+                             <div class="reveal-img">
+                                <img src="{% static 'img/spa/2.jpg' %}" alt="">
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-6 p-0 bg-cream valign animate-box" data-animate-effect="fadeInRight">
+                <div class="col-md-6 p-0 bg-cream valign animate-text-section">
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
@@ -655,8 +636,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-md-6 bg-cream p-0 order2 valign animate-box" data-animate-effect="fadeInLeft">
+                <div class="col-md-6 bg-cream p-0 order2 valign animate-text-section">
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
@@ -668,19 +650,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 p-0 order1 animate-box" data-animate-effect="fadeInRight">
+                <div class="col-md-6 p-0 order1">
                     <div class="img">
-                        <a href="spa-wellness.html"><img src="{% static 'img/spa/1.jpg' %}" alt=""></a>
+                        <a href="spa-wellness.html">
+                             <div class="reveal-img">
+                                <img src="{% static 'img/spa/1.jpg' %}" alt="">
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- News -->
+
     <section class="news section-padding bg-blck wow animate__fadeInUp" data-wow-delay="0.3s">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 animate-text-section">
                     <div class="section-subtitle"><span>Hotel Blog</span></div>
                     <div class="section-title"><span>Our News</span></div>
                 </div>
@@ -745,12 +731,12 @@
         overflow: hidden;
     }
    </style>
-    <!-- Reservation & Booking Form -->
+
     <section class="testimonials">
         <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 mb-30 mt-30">
+                    <div class="col-md-5 mb-30 mt-30 animate-text-section">
                         <p>
                             <i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i>
                         </p>
@@ -767,7 +753,7 @@
                     </div>
     
                     <div class="col-md-5 offset-md-2">
-                        <div class="booking-box">
+                        <div class="booking-box animate-box" data-animate-effect="fadeInUp">
                             <div class="head-box">
                                 <h6>Inquiry</h6>
                                 <h4>Contact Us</h4>
@@ -835,6 +821,34 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                <div class="owl-carousel owl-theme">
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/1.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/2.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/3.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/4.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/5.png' %}" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="{% static 'img/clients/6.png' %}" alt=""></a>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

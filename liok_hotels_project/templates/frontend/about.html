@@ -44,8 +44,27 @@
         border-radius: 20px;   /* adjust value if needed */
         overflow: hidden;      /* keeps everything inside rounded corners */
     }
+
+    /* --- GSAP Animation Helper (ADDED) --- */
+    .reveal-img {
+        height: 100%;
+        width: 100%;
+        display: block;
+        overflow: hidden; 
+    }
+    .reveal-img img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    /* FORCE BUTTON VISIBILITY */
+/* This overrides the GSAP animation specifically for the button so it never disappears */
+a.btn-gold {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
 </style>
-    <!-- Header Banner -->
     <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/1.jpg' %}">
         <div class="container">
             <div class="row">
@@ -56,12 +75,12 @@
             </div>
         </div>
     </div>
-    <!-- About -->
-    <section class="about section-padding wow animate__fadeInUp" data-wow-delay="0.3s">
+    
+    <section class="about section-padding">
         <div class="container">
             <div class="row">
                 
-                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
+                <div class="col-md-6 mb-30 animate-text-section">
                     <span>
                         <i class="star-rating"></i><i class="star-rating"></i>
                         <i class="star-rating"></i><i class="star-rating"></i>
@@ -73,15 +92,10 @@
                     <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane. Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
                     <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
                     
-                    {% comment %} <a href="{% url 'admin_pages:about' %}" class="btn-gold">
-                        Read More <i class="ti-arrow-right"></i>
-                    </a> {% endcomment %}
-                    
                     <a href="{% url "admin_pages:contact" %}" class="btn-gold">
                         Contact Us <i class="ti-arrow-right"></i>
                     </a>
-    
-                    </div>
+                </div>
     
                 <div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
                     <div class="owl-carousel owl-theme about-slider">
@@ -117,11 +131,11 @@
             }
         });
     </script>
-    <!-- Pricing -->
-    <section class="pricing section-padding bg-blck wow animate__fadeIn" data-wow-delay="0.1s">
+
+    <section class="pricing section-padding bg-blck">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 wow animate__fadeInLeft" data-wow-delay="0.3s">
+                <div class="col-md-4 animate-text-section">
                     <div class="section-subtitle"><span>Best Prices</span></div>
                     <div class="section-title"><span>Extra Services</span></div>
                     <p class="color-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt pariatur temporibus soluta mollitia provident, tempora vero magnam iste quis, quia incidunt non eos, cumque reprehenderit minus. Itaque ipsa ea officia.</p>
@@ -135,34 +149,30 @@
     
                 <div class="col-md-8">
                     <div class="owl-carousel owl-theme">
-                        
                         <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.5s">
                             <img src="{% static 'img/pricing/1.jpg' %}" alt="">
                             <div class="desc">
                                 <div class="name">Room cleaning</div>
                                 <div class="amount">$50<span>/ month</span></div>
-                                </div>
+                            </div>
                         </div>
-    
                         <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.4s">
                             <img src="{% static 'img/pricing/2.jpg' %}" alt="">
                             <div class="desc">
                                 <div class="name">Drinks included</div>
                                 <div class="amount">$5<span>/ month</span></div>
-
-                                </div>
+                            </div>
                         </div>
-    
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Facilties -->
+
     <section class="facilties section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 animate-text-section">
                     <div class="section-subtitle">Our Services</div>
                     <div class="section-title">Hotel Facilities</div>
                 </div>
@@ -219,128 +229,13 @@
             </div>
         </div>
     </section>
-    {% comment %} <!-- Team -->
-    <section class="team section-padding bg-cream">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-subtitle">Professionals</div>
-                    <div class="section-title">Meet The Team</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="img"> <img src="{% static 'img/team/4.jpg' %}" alt=""> </div>
-                        <div class="info">
-                            <h6>Valentina Karla</h6>
-                            <p>General Manager</p>
-                            <div class="social valign">
-                                <div class="full-width"> 
-                                   <a href="#"><i class="ti-instagram"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
-                                   <a href="#"><i class="ti-facebook"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                                   <p>valentina@hotel.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"> 
-                        <img src="{% static 'img/team/1.jpg' %}" alt=""> </div>
-                        <div class="info">
-                            <h6>Micheal White</h6>
-                            <p>Guest Service Department</p>
-                            <div class="social valign">
-                                <div class="full-width"> 
-                                    <a href="#"><i class="ti-instagram"></i></a>
-                                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
-                                    <a href="#"><i class="ti-facebook"></i></a> 
-                                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                                    <p>micheal@hotel.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"> <img src="{% static 'img/team/2.jpg' %}" alt=""> </div>
-                        <div class="info">
-                            <h6>Olivia Martin</h6>
-                            <p>Reservations Manager</p>
-                            <div class="social valign">
-                                <div class="social valign">
-                                    <div class="full-width"> 
-                                       <a href="#"><i class="ti-instagram"></i></a> 
-                                       <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
-                                       <a href="#"><i class="ti-facebook"></i></a> 
-                                       <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                                       <p>olivia@hotel.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"> <img src="{% static 'img/team/5.jpg' %}" alt=""> </div>
-                        <div class="info">
-                            <h6>Mariana Dana</h6>
-                            <p>F&B Manager</p>
-                            <div class="social valign">
-                                <div class="full-width"> 
-                                   <a href="#"><i class="ti-instagram"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
-                                   <a href="#"><i class="ti-facebook"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                                   <p>mariana@hotel.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"> <img src="{% static 'img/team/3.jpg' %}" alt=""> </div>
-                        <div class="info">
-                            <h6>Enrico Brown</h6>
-                            <p>Head Chef</p>
-                            <div class="social valign">
-                                <div class="full-width"> 
-                                   <a href="#"><i class="ti-instagram"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
-                                   <a href="#"><i class="ti-facebook"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                                   <p>enrico@hotel.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"> <img src="{% static 'img/team/6.jpg' %}" alt=""> </div>
-                        <div class="info">
-                            <h6>Victoria Dan</h6>
-                            <p>Meetings and Events Manager</p>
-                            <div class="social valign">
-                                <div class="full-width"> 
-                                   <a href="#"><i class="ti-instagram"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
-                                   <a href="#"><i class="ti-facebook"></i></a> 
-                                   <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                                   <p>victoria@hotel.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> {% endcomment %}
   
-    <!-- Testimonials -->
-    <section class="testimonials wow animate__fadeInUp" data-wow-delay="0.3s">
+    <section class="testimonials">
         <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="3">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
-                        <div class="testimonials-box">
+                        <div class="testimonials-box animate-text-section">
                             <div class="head-box">
                                 <h6>Testimonials</h6>
                                 <h4>What Client's Say?</h4>
@@ -360,11 +255,6 @@
                                             {% endif %}
                                         </div>
                                         <div class="cont"> 
-                                            {% comment %} <span>
-                                                {% for i in "12345" %}
-                                                    <i class="star-rating"></i>
-                                                {% endfor %}
-                                            </span> {% endcomment %}
                                             <h6>{{ testimonial.name }}</h6> 
                                             <span>Guest review</span>
                                         </div>

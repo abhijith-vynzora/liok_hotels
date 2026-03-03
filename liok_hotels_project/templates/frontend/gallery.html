@@ -38,6 +38,26 @@
     .gallery-box:hover .gallery-img img {
         transform: scale(1.1);
     }
+    /* Updated Gallery Styling with Rounding */
+.gallery-box {
+    overflow: hidden !important;   /* Critical: clips the zooming image to the radius */
+    position: relative;
+    border-radius: 20px !important; /* Matches News and Property cards */
+    margin-bottom: 0;
+}
+
+.gallery-img {
+    border-radius: 20px !important;
+    overflow: hidden;
+    {% comment %} height: 300px; /* Optional: ensures all gallery images have a uniform height */ {% endcomment %}
+}
+
+.gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents image distortion */
+    transition: transform 0.5s ease;
+}
 </style>
 {% endblock %}
 
@@ -53,7 +73,7 @@
         </div>
     </div>
 
-    <section class="section-padding">
+    <section class="section-padding wow fadeInUp" data-wow-delay=".3s">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -73,7 +93,7 @@
 
             <div class="row gallery">
                 {% for image in images %}
-                <div class="col-md-4 gallery-item cat-{{ image.category.id }}">
+                <div class="col-md-4 gallery-item cat-{{ image.category.id }} wow fadeInUp" data-wow-delay=".3s">
                     <a href="{{ image.image.url }}" title="{{ image.title }}" class="img-zoom">
                         <div class="gallery-box">
                             <div class="gallery-img">

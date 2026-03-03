@@ -6,15 +6,20 @@
 
 <style>
     .news2 .post-img {
-        height: 800px !important; /* Adjust this value to your preferred height */
+        height: 600px !important; /* Adjust this value to your preferred height */
         overflow: hidden;
         width: 100%;
         position: relative;
+        border-radius: 20px;
         
     }
     .news2-sidebar .recent .thum {
         width: 80px !important;
         height: 80px !important;
+        border-radius: 20px !important;
+    }
+    .news2-sidebar .widget{
+        border-radius: 20px;
     }
 </style>
     <!-- Header Banner -->
@@ -28,7 +33,7 @@
             </div>
         </div>
     </div>
-    <section class="news2 section-padding">
+    <section class="news2 section-padding wow fadeInUp" data-wow-delay=".3s">
         <div class="container">
             <div class="row">
                 
@@ -54,7 +59,7 @@
                                     <h2 style="font-family: 'Gilda Display', serif; margin-bottom: 20px;">{{ blog.title }}</h2>
                                     
                                     <div class="content-text" style="line-height: 1.8; color: #666; font-size: 16px;">
-                                        {{ blog.description|linebreaks }}
+                                        {{ blog.description| safe }}
                                     </div>
                                     
                                     <div class="share-post mt-40">
