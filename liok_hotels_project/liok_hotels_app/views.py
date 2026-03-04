@@ -633,57 +633,236 @@ def contact(request):
     
 #     return render(request, "frontend/contact.html")
 
+# def booking_view(request):
+#     if request.method == "POST":
+#         # Get data from the form
+#         first_name = request.POST.get("first_name")
+#         last_name = request.POST.get("last_name")
+#         phone = request.POST.get("phone")
+#         email = request.POST.get("email")
+#         property_id = request.POST.get("property")
+        
+#         # NEW: Capture the room category selected in the dropdown
+#         room_category = request.POST.get("room_category")
+        
+#         check_in = request.POST.get("check_in")
+#         check_out = request.POST.get("check_out")
+#         guests = request.POST.get("guests", 2)
+#         message_text = request.POST.get("message")
+
+#         # Basic Validation
+#         if not all([first_name, last_name, phone, property_id, check_in, check_out]):
+#             messages.error(request, "Please fill in all required fields.")
+#             return redirect("admin_pages:book_now")
+
+#         try:
+#             # Save to database using your updated BookingInquiry model
+#             property_obj = get_object_or_404(Property, id=property_id)
+#             BookingInquiry.objects.create(
+#                 first_name=first_name,
+#                 last_name=last_name,
+#                 phone=phone,
+#                 email=email if email else None,
+#                 property=property_obj,
+                
+#                 # NEW: Save the room category to the database
+#                 room_category=room_category,
+                
+#                 check_in=check_in,
+#                 check_out=check_out,
+#                 guests=int(guests),
+#                 message=message_text,
+#                 status='pending'
+#             )
+#             messages.success(request, "Your booking inquiry has been submitted successfully!")
+#             return redirect("admin_pages:book_now")
+            
+#         except Exception as e:
+#             messages.error(request, f"An error occurred: {e}")
+#             return redirect("admin_pages:book_now")
+
+#     # GET request: Show the form and provide the list of properties
+#     properties = Property.objects.all()
+#     return render(request, "frontend/booking.html", {"properties": properties})
+
+
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.conf import settings
 def booking_view(request):
     if request.method == "POST":
-        # Get data from the form
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        phone = request.POST.get("phone")
-        email = request.POST.get("email")
+        # 1. Capture Form Data
+        first_name = request.POST.get("first_name", "").strip()
+        last_name = request.POST.get("last_name", "").strip()
+        phone = request.POST.get("phone", "").strip()
+        email_address = request.POST.get("email", "").strip()
         property_id = request.POST.get("property")
-        
-        # NEW: Capture the room category selected in the dropdown
         room_category = request.POST.get("room_category")
-        
         check_in = request.POST.get("check_in")
         check_out = request.POST.get("check_out")
-        guests = request.POST.get("guests", 2)
-        message_text = request.POST.get("message")
+        
+        # New Guest Fields
+        adults = request.POST.get("adults", 1)
+        children_8_12 = request.POST.get("children_8_12", 0)
+        children_13_plus = request.POST.get("children_13_plus", 0)
+        
+        message_text = request.POST.get("message", "").strip()
+        
+        # NEW: Get the source page
+        source_page = request.POST.get("source_page", "booking")  # Default to booking page
 
         # Basic Validation
         if not all([first_name, last_name, phone, property_id, check_in, check_out]):
             messages.error(request, "Please fill in all required fields.")
+            
+            # Redirect based on source
+            if source_page == "property_detail":
+                property_obj = get_object_or_404(Property, id=property_id)
+                return redirect('admin_pages:property_detail', slug=property_obj.slug)
             return redirect("admin_pages:book_now")
 
         try:
-            # Save to database using your updated BookingInquiry model
+            # 2. Save to Database
             property_obj = get_object_or_404(Property, id=property_id)
-            BookingInquiry.objects.create(
+            
+            inquiry = BookingInquiry.objects.create(
                 first_name=first_name,
                 last_name=last_name,
                 phone=phone,
-                email=email if email else None,
+                email=email_address if email_address else None,
                 property=property_obj,
-                
-                # NEW: Save the room category to the database
                 room_category=room_category,
-                
                 check_in=check_in,
                 check_out=check_out,
-                guests=int(guests),
+                adults=int(adults),
+                children_8_12=int(children_8_12),
+                children_13_plus=int(children_13_plus),
                 message=message_text,
                 status='pending'
             )
+
+            # 3. Email Logic (keeping your existing code)
+            subject = f"New Booking Inquiry - {first_name} {last_name}"
+            
+            html_message = f"""
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"></head>
+            <body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, sans-serif;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 20px;">
+                    <tr>
+                        <td align="center">
+                            <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+                                <tr>
+                                    <td style="background:#C5A880; padding:30px; text-align:center;">
+                                        <h2 style="margin:0; color:#ffffff;">New Booking Inquiry</h2>
+                                        <p style="margin:5px 0 0; color:#f9f9f9; font-size:14px;">{property_obj.name}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:30px;">
+                                        <p style="color:#555; font-size:15px; margin-bottom:20px;">A new booking inquiry has been submitted through the Liok Hotels website.</p>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e0e0e0; border-radius:6px; font-size:14px;">
+                                            <tr>
+                                                <td style="padding:12px; font-weight:bold; width:40%; border-bottom:1px solid #eee;">Guest Name</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{first_name} {last_name}</td>
+                                            </tr>
+                                            
+                                            <tr style="background:#f8f9fa;">
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Property</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{property_obj.name}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Phone</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{phone}</td>
+                                            </tr>
+
+                                            <tr style="background:#f8f9fa;">
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Email</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{email_address}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Dates</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{check_in} to {check_out}</td>
+                                            </tr>
+
+                                            <tr style="background:#f8f9fa;">
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Room Category</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{room_category or 'Not Selected'}</td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Adults</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{adults}</td>
+                                            </tr>
+
+                                            <tr style="background:#f8f9fa;">
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Children (8-12)</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{children_8_12}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Children (13+)</td>
+                                                <td style="padding:12px; border-bottom:1px solid #eee;">{children_13_plus}</td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <div style="margin-top:25px;">
+                                            <p style="font-weight:bold; margin-bottom:5px;">Message:</p>
+                                            <p style="background:#f9f9f9; padding:15px; border-radius:4px; color:#555;">{message_text}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background:#333; padding:20px; text-align:center;">
+                                        <p style="margin:0; font-size:13px; color:#aaa;">&copy; {timezone.now().year} Liok Hotels Admin System</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+            </html>
+            """
+            
+            # Send Email
+            plain_message = strip_tags(html_message)
+            email = EmailMultiAlternatives(
+                subject,
+                plain_message,
+                settings.EMAIL_HOST_USER,
+                [settings.EMAIL_HOST_USER]
+            )
+            email.attach_alternative(html_message, "text/html")
+            email.send(fail_silently=False)
+
             messages.success(request, "Your booking inquiry has been submitted successfully!")
+            
+            # Redirect based on source page
+            if source_page == "property_detail":
+                return redirect('admin_pages:property_detail', slug=property_obj.slug)
+            
             return redirect("admin_pages:book_now")
             
         except Exception as e:
-            messages.error(request, f"An error occurred: {e}")
+            print(f"Booking Error: {e}") 
+            messages.error(request, "An error occurred. Please try again.")
+            
+            # Redirect based on source page
+            if source_page == "property_detail":
+                property_obj = get_object_or_404(Property, id=property_id)
+                return redirect('admin_pages:property_detail', slug=property_obj.slug)
+            
             return redirect("admin_pages:book_now")
 
-    # GET request: Show the form and provide the list of properties
+    # GET request: Show form
     properties = Property.objects.all()
     return render(request, "frontend/booking.html", {"properties": properties})
+
 
 def nearby_attractions_view(request):
     # Fetch all properties for the category filter buttons

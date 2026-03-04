@@ -139,7 +139,6 @@ class BookingInquiry(models.Model):
 
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="bookings")
 
-
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('confirmed', 'Confirmed'),
@@ -149,7 +148,12 @@ class BookingInquiry(models.Model):
 
     check_in = models.DateField()
     check_out = models.DateField()
-    guests = models.IntegerField(default=2)
+
+    # --- NEW FIELDS ---
+    adults = models.PositiveIntegerField(default=1)
+    children_8_12 = models.PositiveIntegerField(default=0)
+    children_13_plus = models.PositiveIntegerField(default=0)
+    # ------------------
     
     message = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
