@@ -1,6 +1,7 @@
 {% extends 'frontend/base.html' %}
 {% load static %}
 {% block title %}Home - Liok Hotels{% endblock %}
+{% block meta_description %}Liok Hotels offers boutique hotel stays in Munnar, Kerala with mountain views, nature experiences, and direct booking for family and couple getaways.{% endblock %}
 
 {% block content %}
 
@@ -165,6 +166,19 @@ button.butn-dark2::before {
         height: 350px !important;  /* Smaller height for mobile screens */
     }
 }
+
+/* Keep service CTA text readable on dark hover states */
+.services .butn-dark a,
+.services .butn-dark a span {
+    color: #ffffff !important;
+}
+
+.services .butn-dark:hover a,
+.services .butn-dark:hover a span,
+.services .butn-dark a:hover,
+.services .butn-dark a:hover span {
+    color: #ffffff !important;
+}
 </style>
 <header class="header slider-fade">
     <div class="owl-carousel owl-theme">
@@ -178,10 +192,10 @@ button.butn-dark2::before {
                                 <i class="star-rating"></i><i class="star-rating"></i>
                                 <i class="star-rating"></i>
                             </span>
-                            <h4>Luxury Hotel & Best Resort</h4>
-                            <h1>Enjoy a Luxury Experience</h1>
+                            <h4>Munnar Hotels & Nature Retreats</h4>
+                            <h1>Plan Your Munnar Stay</h1>
                             <div class="butn-light mt-30 mb-30"> 
-                                <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> 
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a> 
                             </div>
                         </div>
                     </div>
@@ -208,10 +222,10 @@ button.butn-dark2::before {
                                     <i class="star-rating"></i>
                                 </span>
                             </span>
-                            <h4>Luxury Hotel & Best Resort</h4>
-                            <h1>Enjoy a Luxury Experience</h1>
+                            <h4>Munnar Hotels & Nature Retreats</h4>
+                            <h1>Plan Your Munnar Stay</h1>
                             <div class="butn-light mt-30 mb-30"> 
-                                <a href="{% url 'admin_pages:book_now' %}" data-scroll-nav="1"><span>Rooms & Suites</span></a>
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a>
                             </div>
                         </div>
                     </div>
@@ -239,10 +253,10 @@ button.butn-dark2::before {
                                     <i class="star-rating"></i>
                                 </span>
                             </span>
-                            <h4>Luxury Hotel & Best Resort</h4>
-                            <h1>Enjoy a Luxury Experience</h1>
+                            <h4>Munnar Hotels & Nature Retreats</h4>
+                            <h1>Plan Your Munnar Stay</h1>
                             <div class="butn-light mt-30 mb-30"> 
-                                <a href="{% url 'admin_pages:book_now' %}" data-scroll-nav="1"><span>Rooms & Suites</span></a>
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a>
                             </div>
                         </div>
                     </div>
@@ -270,10 +284,10 @@ button.butn-dark2::before {
                                     <i class="star-rating"></i>
                                 </span>
                             </span>
-                            <h4>Luxury Hotel & Best Resort</h4>
-                            <h1>Enjoy a Luxury Experience</h1>
+                            <h4>Munnar Hotels & Nature Retreats</h4>
+                            <h1>Plan Your Munnar Stay</h1>
                             <div class="butn-light mt-30 mb-30"> 
-                                <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> 
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a> 
                             </div>
                         </div>
                     </div>
@@ -283,11 +297,11 @@ button.butn-dark2::before {
     </div>
 
     <div class="reservation">
-        <a href="tel:8551004444">
+        <a href="tel:+917356723332">
             <div class="icon d-flex justify-content-center align-items-center">
                 <i class="flaticon-call"></i>
             </div>
-            <div class="call"><span>855 100 4444</span> <br>Reservation</div>
+            <div class="call"><span>+91 73567 23332</span> <br>Reservation</div>
         </a>
     </div>
 </header>
@@ -303,10 +317,10 @@ button.butn-dark2::before {
                         <i class="star-rating"></i>
                     </span>
                     <div class="section-subtitle ">The Liok Hotel</div>
-                    <div class="section-title">Enjoy a Luxury Experience</div>
+                    <div class="section-title">Stay with Liok in Munnar</div>
                     
-                    <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane. Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
-                    <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
+                    <p>Liok Hotels offers a curated collection of boutique stays in Munnar, Kerala for travelers seeking mountain views, fresh air, and peaceful holiday experiences. Each property is designed for comfort, privacy, and easy access to the best scenic spots in the hill station.</p>
+                    <p>From short weekend trips to extended nature breaks, our stays combine warm hospitality, well-planned amenities, and local travel support for couples, families, and small groups.</p>
                     
                     <a href="{% url "admin_pages:contact" %}" class="btn-gold">
                         Contact Us <i class="ti-arrow-right"></i>
@@ -317,13 +331,13 @@ button.butn-dark2::before {
                 <div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
                     <div class="owl-carousel owl-theme about-slider">
                         <div class="item">
-                            <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="Luxury Room" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                            <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="Liok Hotels Munnar Stay" class="img-fluid" style="width: 100%; border-radius: 20px;">
                         </div>
                         <div class="item">
-                            <img src="{% static 'img/New_images/pool.jpg' %}" alt="Hotel Interior" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                            <img src="{% static 'img/New_images/pool.jpg' %}" alt="Liok Hotels Pool View" class="img-fluid" style="width: 100%; border-radius: 20px;">
                         </div>
                         <div class="item">
-                            <img src="{% static 'img/New_images/scenary.jpg' %}" alt="Resort View" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                            <img src="{% static 'img/New_images/scenary.jpg' %}" alt="Liok Hotels Munnar View" class="img-fluid" style="width: 100%; border-radius: 20px;">
                         </div>
                     </div>
                 </div>
@@ -354,7 +368,7 @@ button.butn-dark2::before {
             <div class="row align-items-end mb-30">
                 <div class="col-md-8 animate-text-section">
                     <div class="section-subtitle">Liok Hotels</div>
-                    <div class="section-title">Our Luxury Properties</div>
+                    <div class="section-title">Our Munnar Properties</div>
                 </div>
                 <div class="col-md-4 text-md-end text-start animate-text-section">
                     <a href="{% url 'admin_pages:properties_all' %}" class="btn-gold">
@@ -409,7 +423,7 @@ button.butn-dark2::before {
                         </div>
                         {% empty %}
                         <div class="col-md-12 text-center">
-                            <p>No properties found.</p>
+                            <p>Liok properties will be listed here soon.</p>
                         </div>
                         {% endfor %}
                         
@@ -440,13 +454,13 @@ button.butn-dark2::before {
         <div class="container">
             <div class="row">
                 <div class="col-md-4 animate-text-section">
-                    <div class="section-subtitle"><span>Best Prices</span></div>
-                    <div class="section-title"><span>Extra Services</span></div>
-                    <p class="color-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt pariatur temporibus soluta mollitia provident, tempora vero magnam iste quis, quia incidunt non eos, cumque reprehenderit minus. Itaque ipsa ea officia.</p>
+                    <div class="section-subtitle"><span>Guest Support</span></div>
+                    <div class="section-title"><span>Stay Add-Ons</span></div>
+                    <p class="color-2">Plan your Munnar stay with practical add-on services such as room assistance, local travel guidance, and guest support. Liok Hotels focuses on a smooth, comfortable experience from arrival to checkout.</p>
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-call"></span></div>
                         <div class="text">
-                            <p class="color-2">For information</p> <a href="tel:855-100-4444">855 100 4444</a>
+                            <p class="color-2">For information</p> <a href="tel:+917356723332">+91 73567 23332</a>
                         </div>
                     </div>
                 </div>
@@ -457,16 +471,16 @@ button.butn-dark2::before {
                         <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.5s">
                             <img src="{% static 'img/New_images/01.jpg' %}" alt="">
                             <div class="desc">
-                                <div class="name">Room cleaning</div>
-                                <div class="amount">$50<span>/ month</span></div>
+                                <div class="name">Airport Transfer Support</div>
+                                <div class="amount">On Request</div>
                                 </div>
                         </div>
     
                         <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.4s">
                             <img src="{% static 'img/New_images/02.jpg' %}" alt="">
                             <div class="desc">
-                                <div class="name">Drinks included</div>
-                                <div class="amount">$5<span>/ month</span></div>
+                                <div class="name">Campfire & Evening Tea</div>
+                                <div class="amount">On Request</div>
 
                                 </div>
                         </div>
@@ -483,7 +497,7 @@ button.butn-dark2::before {
                     <div class="col-md-8 offset-md-2 text-center animate-text-section">
                        <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
                         <div class="section-subtitle"><span>Liok Hotels</span></div>
-                        <div class="section-title"><span>Promotional Video</span></div>
+                        <div class="section-title"><span>Liok Munnar Highlights</span></div>
                     </div>
                 </div>
                 <div class="row">
@@ -506,7 +520,7 @@ button.butn-dark2::before {
             <div class="row">
                 <div class="col-md-12 animate-text-section">
                     <div class="section-subtitle">Our Services</div>
-                    <div class="section-title">Hotel Facilities</div>
+                    <div class="section-title">Liok Stay Facilities</div>
                 </div>
             </div>
             <div class="row">
@@ -514,7 +528,7 @@ button.butn-dark2::before {
                     <div class="single-facility animate-box" data-animate-effect="fadeInUp">
                         <span class="flaticon-world"></span>
                         <h5>Pick Up & Drop</h5>
-                        <p>We’ll pick up from airport while you comfy on your ride, mus nellentesque habitant.</p>
+                        <p>Convenient pickup and drop support can be arranged for a smoother arrival and departure experience.</p>
                         <div class="facility-shape"> <span class="flaticon-world"></span> </div>
                     </div>
                 </div>
@@ -522,7 +536,7 @@ button.butn-dark2::before {
                     <div class="single-facility animate-box" data-animate-effect="fadeInUp">
                         <span class="flaticon-car"></span>
                         <h5>Parking Space</h5>
-                        <p>Fusce tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
+                        <p>Dedicated parking is available across Liok stays for guests traveling by car.</p>
                         <div class="facility-shape"> <span class="flaticon-car"></span> </div>
                     </div>
                 </div>
@@ -530,7 +544,7 @@ button.butn-dark2::before {
                     <div class="single-facility animate-box" data-animate-effect="fadeInUp">
                         <span class="flaticon-bed"></span>
                         <h5>Room Service</h5>
-                        <p>Room tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
+                        <p>Fast in-room assistance ensures comfort throughout your stay.</p>
                         <div class="facility-shape"> <span class="flaticon-bed"></span> </div>
                     </div>
                 </div>
@@ -538,7 +552,7 @@ button.butn-dark2::before {
                     <div class="single-facility animate-box" data-animate-effect="fadeInUp">
                         <span class="flaticon-swimming"></span>
                         <h5>Swimming Pool</h5>
-                        <p>Swimming pool tincidunt nise ace park norttito sit space, mus nellentesque habitant.</p>
+                        <p>Select properties include access to relaxing pool areas with scenic surroundings.</p>
                         <div class="facility-shape"> <span class="flaticon-swimming"></span> </div>
                     </div>
                 </div>
@@ -546,7 +560,7 @@ button.butn-dark2::before {
                     <div class="single-facility animate-box" data-animate-effect="fadeInUp">
                         <span class="flaticon-wifi"></span>
                         <h5>Fibre Internet</h5>
-                        <p>Wifi tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
+                        <p>High-speed Wi-Fi helps you stay connected for work, travel plans, and entertainment.</p>
                         <div class="facility-shape"> <span class="flaticon-wifi"></span> </div>
                     </div>
                 </div>
@@ -554,7 +568,7 @@ button.butn-dark2::before {
                     <div class="single-facility animate-box" data-animate-effect="fadeInUp">
                         <span class="flaticon-breakfast"></span>
                         <h5>Breakfast</h5>
-                        <p>Eat tincidunt nisa ace park norttito sit amet space, mus nellentesque habitant</p>
+                        <p>Fresh breakfast options are served to help you start your Munnar day right.</p>
                         <div class="facility-shape"> <span class="flaticon-breakfast"></span> </div>
                     </div>
                 </div>
@@ -594,7 +608,7 @@ button.butn-dark2::before {
                                 </div>
                                 {% empty %}
                                 <div class="item">
-                                    <p>No testimonials available yet.</p>
+                                    <p>Guest reviews will be displayed here soon.</p>
                                 </div>
                                 {% endfor %}
                             </div>
@@ -611,7 +625,7 @@ button.butn-dark2::before {
             <div class="row">
                 <div class="col-md-6 p-0">
                     <div class="img left">
-                        <a href="restaurant.html">
+                        <a href="{% url 'admin_pages:nearby_attractions' %}">
                             <div class="reveal-img">
                                 <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="">
                             </div>
@@ -627,7 +641,7 @@ button.butn-dark2::before {
                             </div>
                             <h4>Scenic Leisure Spaces</h4>
                             <p>Spend quiet evenings in our open leisure areas surrounded by nature. Whether you are travelling with family or as a couple, Liok Hotels provides peaceful spaces to unwind and recharge.</p>
-                            {% comment %} <div class="butn-dark"> <a href="restaurant.html"><span>Learn More</span></a> </div> {% endcomment %}
+                            <div class="butn-dark"> <a href="{% url 'admin_pages:nearby_attractions' %}"><span>Learn More</span></a> </div>
                         </div>
                     </div>
                 </div>
@@ -642,13 +656,13 @@ button.butn-dark2::before {
                             </div>
                             <h4>Multi-Cuisine Restaurant</h4>
                             <p>Enjoy fresh Kerala flavours and popular Indian favourites prepared with local ingredients. Our restaurant offers a calm setting with hill views, perfect for family dinners and relaxed breakfasts during your stay at Liok Hotels.</p>
-                            {% comment %} <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div> {% endcomment %}
+                            <div class="butn-dark"> <a href="{% url 'admin_pages:contact' %}"><span>Learn More</span></a> </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 p-0 order1">
                     <div class="img">
-                        <a href="spa-wellness.html">
+                        <a href="{% url 'admin_pages:contact' %}">
                             <div class="reveal-img">
                                 <img src="{% static 'img/New_images/04.jpg' %}" alt="">
                             </div>
@@ -660,7 +674,7 @@ button.butn-dark2::before {
             <div class="row">
                 <div class="col-md-6 p-0">
                     <div class="img left">
-                        <a href="spa-wellness.html">
+                        <a href="{% url 'admin_pages:nearby_attractions' %}">
                              <div class="reveal-img">
                                 <img src="{% static 'img/New_images/scenary.jpg' %}" alt="">
                             </div>
@@ -676,7 +690,7 @@ button.butn-dark2::before {
                             </div>
                             <h4>Nature & Hill Experiences</h4>
                             <p>Wake up to misty mornings and panoramic mountain views. Explore nearby tea plantations, scenic trekking trails, and peaceful viewpoints around Munnar while staying at our Liok property.</p>
-                            {% comment %} <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div> {% endcomment %}
+                            <div class="butn-dark"> <a href="{% url 'admin_pages:nearby_attractions' %}"><span>Learn More</span></a> </div>
                         </div>
                     </div>
                 </div>
@@ -691,13 +705,13 @@ button.butn-dark2::before {
                             </div>
                             <h4>Premium Rooms & Cottages</h4>
                             <p>Our rooms and cottages are designed for comfort and privacy. Enjoy spacious interiors, modern amenities, and beautiful surroundings that make your stay relaxing and memorable.</p>
-                            {% comment %} <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div> {% endcomment %}
+                            <div class="butn-dark"> <a href="{% url 'admin_pages:properties_all' %}"><span>View All Properties</span></a> </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 p-0 order1">
                     <div class="img">
-                        <a href="spa-wellness.html">
+                        <a href="{% url 'admin_pages:properties_all' %}">
                              <div class="reveal-img">
                                 <img src="{% static 'img/New_images/room4.jpg' %}" alt="">
                             </div>
@@ -712,8 +726,8 @@ button.butn-dark2::before {
         <div class="container">
             <div class="row">
                 <div class="col-md-12 animate-text-section">
-                    <div class="section-subtitle"><span>Hotel Blog</span></div>
-                    <div class="section-title"><span>Our News</span></div>
+                    <div class="section-subtitle"><span>Liok Travel Blog</span></div>
+                    <div class="section-title"><span>Travel Stories</span></div>
                 </div>
             </div>
             <div class="row">
@@ -794,7 +808,7 @@ button.butn-dark2::before {
                                 <a class="color-1" href="tel:{{ property.contact_phone|default:'+91 89876 78765' }}">{{ property.contact_phone|default:'+91 89876 78765' }}</a>
                             </div>
                         </div>
-                        <p class="text-white"><i class="ti-check"></i><small>Professional assistance for your luxury stay.</small></p>
+                        <p class="text-white"><i class="ti-check"></i><small>Professional assistance for your Liok stay in Munnar.</small></p>
                     </div>
     
                     <div class="col-md-5 offset-md-2">

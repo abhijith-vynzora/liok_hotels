@@ -198,6 +198,32 @@
             /* We don't hide them with CSS because GSAP handles it immediately, 
             but if you see a "flash" of text on load, add 'opacity: 0' here. */
         }
+
+        /* Unified frontend button polish */
+        button,
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        .btn-booking,
+        .btn-gold,
+        .butn-dark a,
+        .butn-dark2,
+        .btn-form1-submit {
+            border-radius: 8px !important;
+        }
+
+        .butn-dark a,
+        .butn-dark a span,
+        .butn-dark:hover a,
+        .butn-dark:hover a span,
+        .butn-dark2,
+        .butn-dark2 span,
+        .butn-dark2:hover,
+        .butn-dark2:hover span,
+        .btn-form1-submit,
+        .btn-form1-submit:hover {
+            color: #fff !important;
+        }
     </style>
 
     <div class="preloader-bg"></div>
@@ -389,7 +415,7 @@
                         <div class="footer-column footer-about">
                             <h3 class="footer-title">Liok Hotels</h3>
                             <p class="footer-about-text">
-                                With over 13 years’ experience, Liok Hotels is one of the fastest growing independent hotel chains in Kerala. We deliver comfortable stays, premium service, and memorable hospitality experiences.
+                                Liok Hotels offers a collection of boutique stays in Munnar, Kerala, designed for nature-focused travel, family holidays, and couple getaways with comfort-first hospitality.
                             </p>
                         </div>
                     </div>
@@ -455,7 +481,7 @@
                     <div class="col-md-12">
                         <div class="footer-bottom-inner">
                             <p class="footer-bottom-copy-right">
-                                © Copyright 2023 Liok Hotels. All Rights Reserved.
+                                © Copyright {% now "Y" %} Liok Hotels. All Rights Reserved.
                             </p>
                         </div>
                     </div>

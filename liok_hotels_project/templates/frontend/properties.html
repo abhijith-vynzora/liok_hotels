@@ -1,6 +1,7 @@
 {% extends 'frontend/base.html' %}
 {% load static %}
-{% block title %}Properties - Luxury Hotel{% endblock %}
+{% block title %}Properties - Liok Hotels Munnar{% endblock %}
+{% block meta_description %}Explore Liok Hotels properties in Munnar with scenic locations, comfortable rooms, and direct booking options for couples and family stays.{% endblock %}
 
 {% block content %}
     <!-- Header Banner -->
@@ -83,6 +84,19 @@
     border-radius: 30px !important; /* Adjust for desired curvature */
     overflow: hidden !important;   /* Critical to clip images and backgrounds */
     margin-bottom: 20px; /* Space between rows */
+}
+
+/* Keep button text visible when dark hover styles apply */
+.services .butn-dark a,
+.services .butn-dark a span {
+    color: #ffffff !important;
+}
+
+.services .butn-dark:hover a,
+.services .butn-dark:hover a span,
+.services .butn-dark a:hover,
+.services .butn-dark a:hover span {
+    color: #ffffff !important;
 }
     </style>
     <!-- Testimonials -->
