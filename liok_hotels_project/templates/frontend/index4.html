@@ -151,6 +151,20 @@ button.butn-dark2::after,
 button.butn-dark2::before {
     display: none !important;
 }
+/* --- Fix for About Slider Images --- */
+.about-slider .item img {
+    height: 500px !important;      /* Force a standard height (adjust as needed) */
+    width: 100% !important;        /* Ensure it fills the width */
+    object-fit: cover !important;  /* zoom/crop the image to fill the box */
+    border-radius: 20px;           /* Keep your rounded corners */
+}
+
+/* Optional: Mobile adjustment */
+@media (max-width: 768px) {
+    .about-slider .item img {
+        height: 350px !important;  /* Smaller height for mobile screens */
+    }
+}
 </style>
 <header class="header slider-fade">
     <div class="owl-carousel owl-theme">
@@ -179,16 +193,25 @@ button.butn-dark2::before {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
-                            <span>
-                                <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;">
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i>
+                            <span style="display: inline-flex; align-items: center; gap: 8px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                                <span style="display: inline-flex; gap: 2px;">
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                </span>
                             </span>
                             <h4>Luxury Hotel & Best Resort</h4>
                             <h1>Enjoy a Luxury Experience</h1>
                             <div class="butn-light mt-30 mb-30"> 
-                                <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> 
+                                <a href="{% url 'admin_pages:book_now' %}" data-scroll-nav="1"><span>Rooms & Suites</span></a>
                             </div>
                         </div>
                     </div>
@@ -201,15 +224,25 @@ button.butn-dark2::before {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
-                            <span>
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i>
+                            <span style="display: inline-flex; align-items: center; gap: 8px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                                <span style="display: inline-flex; gap: 2px;">
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                </span>
                             </span>
-                            <h4>Unique Place to Relax & Enjoy</h4>
-                            <h1>The Perfect Base For You</h1>
+                            <h4>Luxury Hotel & Best Resort</h4>
+                            <h1>Enjoy a Luxury Experience</h1>
                             <div class="butn-light mt-30 mb-30"> 
-                                <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> 
+                                <a href="{% url 'admin_pages:book_now' %}" data-scroll-nav="1"><span>Rooms & Suites</span></a>
                             </div>
                         </div>
                     </div>
@@ -222,13 +255,23 @@ button.butn-dark2::before {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
-                            <span>
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i>
+                            <span style="display: inline-flex; align-items: center; gap: 8px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                                <span style="display: inline-flex; gap: 2px;">
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                    <i class="star-rating"></i>
+                                </span>
                             </span>
-                            <h4>The Ultimate Luxury Experience</h4>
-                            <h1>Enjoy The Best Moments of Life</h1>
+                            <h4>Luxury Hotel & Best Resort</h4>
+                            <h1>Enjoy a Luxury Experience</h1>
                             <div class="butn-light mt-30 mb-30"> 
                                 <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> 
                             </div>
@@ -274,13 +317,13 @@ button.butn-dark2::before {
                 <div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
                     <div class="owl-carousel owl-theme about-slider">
                         <div class="item">
-                            <img src="{% static 'img/rooms/8.jpg' %}" alt="Luxury Room" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                            <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="Luxury Room" class="img-fluid" style="width: 100%; border-radius: 20px;">
                         </div>
                         <div class="item">
-                            <img src="{% static 'img/rooms/2.jpg' %}" alt="Hotel Interior" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                            <img src="{% static 'img/New_images/pool.jpg' %}" alt="Hotel Interior" class="img-fluid" style="width: 100%; border-radius: 20px;">
                         </div>
                         <div class="item">
-                            <img src="{% static 'img/rooms/1.jpg' %}" alt="Resort View" class="img-fluid" style="width: 100%; border-radius: 20px;">
+                            <img src="{% static 'img/New_images/scenary.jpg' %}" alt="Resort View" class="img-fluid" style="width: 100%; border-radius: 20px;">
                         </div>
                     </div>
                 </div>
@@ -412,7 +455,7 @@ button.butn-dark2::before {
                     <div class="owl-carousel owl-theme">
                         
                         <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.5s">
-                            <img src="{% static 'img/pricing/1.jpg' %}" alt="">
+                            <img src="{% static 'img/New_images/01.jpg' %}" alt="">
                             <div class="desc">
                                 <div class="name">Room cleaning</div>
                                 <div class="amount">$50<span>/ month</span></div>
@@ -420,7 +463,7 @@ button.butn-dark2::before {
                         </div>
     
                         <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.4s">
-                            <img src="{% static 'img/pricing/2.jpg' %}" alt="">
+                            <img src="{% static 'img/New_images/02.jpg' %}" alt="">
                             <div class="desc">
                                 <div class="name">Drinks included</div>
                                 <div class="amount">$5<span>/ month</span></div>
@@ -434,12 +477,12 @@ button.butn-dark2::before {
         </div>
     </section>
 
-    <section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="3" data-background="{% static 'img/slider/2.jpg' %}">
+    <section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="5" data-background="{% static 'img/New_images/08.jpg' %}">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2 text-center animate-text-section">
                        <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
-                        <div class="section-subtitle"><span>The Cappa Luxury Hotel</span></div>
+                        <div class="section-subtitle"><span>Liok Hotels</span></div>
                         <div class="section-title"><span>Promotional Video</span></div>
                     </div>
                 </div>
@@ -520,7 +563,7 @@ button.butn-dark2::before {
     </section>
 
     <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="3">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/New_images/04.jpg' %}" data-overlay-dark="6">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
@@ -570,7 +613,7 @@ button.butn-dark2::before {
                     <div class="img left">
                         <a href="restaurant.html">
                             <div class="reveal-img">
-                                <img src="{% static 'img/restaurant/1.jpg' %}" alt="">
+                                <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="">
                             </div>
                         </a>
                     </div>
@@ -579,11 +622,12 @@ button.butn-dark2::before {
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
-                                <h6>Discover</h6>
+                                <h6>Relax</h6>
+
                             </div>
-                            <h4>The Restaurant</h4>
-                            <p>Restaurant inilla duiman at elit finibus viverra nec a lacus themo the nesudea seneoice misuscipit non sagie the fermen ziverra tristiue duru the ivite dianne onen nivami acsestion augue artine.</p>
-                            <div class="butn-dark"> <a href="restaurant.html"><span>Learn More</span></a> </div>
+                            <h4>Scenic Leisure Spaces</h4>
+                            <p>Spend quiet evenings in our open leisure areas surrounded by nature. Whether you are travelling with family or as a couple, Liok Hotels provides peaceful spaces to unwind and recharge.</p>
+                            {% comment %} <div class="butn-dark"> <a href="restaurant.html"><span>Learn More</span></a> </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -594,11 +638,11 @@ button.butn-dark2::before {
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
-                                <h6>Experiences</h6>
+                                <h6>Dining</h6>
                             </div>
-                            <h4>Spa Center</h4>
-                            <p>Spa center inilla duiman at elit finibus viverra nec a lacus themo the nesudea seneoice misuscipit non sagie the fermen ziverra tristiue duru the ivite dianne onen nivami acsestion augue artine.</p>
-                            <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div>
+                            <h4>Multi-Cuisine Restaurant</h4>
+                            <p>Enjoy fresh Kerala flavours and popular Indian favourites prepared with local ingredients. Our restaurant offers a calm setting with hill views, perfect for family dinners and relaxed breakfasts during your stay at Liok Hotels.</p>
+                            {% comment %} <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -606,7 +650,7 @@ button.butn-dark2::before {
                     <div class="img">
                         <a href="spa-wellness.html">
                             <div class="reveal-img">
-                                <img src="{% static 'img/spa/3.jpg' %}" alt="">
+                                <img src="{% static 'img/New_images/04.jpg' %}" alt="">
                             </div>
                         </a>
                     </div>
@@ -618,7 +662,7 @@ button.butn-dark2::before {
                     <div class="img left">
                         <a href="spa-wellness.html">
                              <div class="reveal-img">
-                                <img src="{% static 'img/spa/2.jpg' %}" alt="">
+                                <img src="{% static 'img/New_images/scenary.jpg' %}" alt="">
                             </div>
                         </a>
                     </div>
@@ -627,11 +671,12 @@ button.butn-dark2::before {
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
-                                <h6>Modern</h6>
+                                <h6>Experiences</h6>
+
                             </div>
-                            <h4>Fitness Center</h4>
-                            <p>Restaurant inilla duiman at elit finibus viverra nec a lacus themo the nesudea seneoice misuscipit non sagie the fermen ziverra tristiue duru the ivite dianne onen nivami acsestion augue artine.</p>
-                            <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div>
+                            <h4>Nature & Hill Experiences</h4>
+                            <p>Wake up to misty mornings and panoramic mountain views. Explore nearby tea plantations, scenic trekking trails, and peaceful viewpoints around Munnar while staying at our Liok property.</p>
+                            {% comment %} <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -642,11 +687,11 @@ button.butn-dark2::before {
                     <div class="content">
                         <div class="cont text-left">
                             <div class="info">
-                                <h6>Experiences</h6>
+                                <h6>Comfort</h6>
                             </div>
-                            <h4>The Health Club & Pool</h4>
-                            <p>The health club & pool at elit finibus viverra nec a lacus themo the nesudea seneoice misuscipit non sagie the fermen ziverra tristiue duru the ivite dianne onen nivami acsestion augue artine.</p>
-                            <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div>
+                            <h4>Premium Rooms & Cottages</h4>
+                            <p>Our rooms and cottages are designed for comfort and privacy. Enjoy spacious interiors, modern amenities, and beautiful surroundings that make your stay relaxing and memorable.</p>
+                            {% comment %} <div class="butn-dark"> <a href="spa-wellness.html"><span>Learn More</span></a> </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -654,7 +699,7 @@ button.butn-dark2::before {
                     <div class="img">
                         <a href="spa-wellness.html">
                              <div class="reveal-img">
-                                <img src="{% static 'img/spa/1.jpg' %}" alt="">
+                                <img src="{% static 'img/New_images/room4.jpg' %}" alt="">
                             </div>
                         </a>
                     </div>
@@ -733,7 +778,7 @@ button.butn-dark2::before {
    </style>
 
     <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="4">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/New_images/munnar.jpg' %}" data-overlay-dark="4">
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 mb-30 mt-30 animate-text-section">

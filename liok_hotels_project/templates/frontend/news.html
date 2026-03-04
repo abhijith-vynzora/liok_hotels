@@ -90,9 +90,29 @@
     border-radius: 20px;
     overflow: hidden;
 }
+/* 1. Normal State (Before Hover) */
+button.butn-dark2 {
+    background-color: #1b1b1b !important; /* Dark Black Background */
+    color: #ffffff !important;            /* White Text */
+    border: 1px solid #1b1b1b !important;
+    opacity: 1 !important;                /* Ensure it's visible */
+}
+
+/* 2. Hover State (When Mouse is Over) */
+button.butn-dark2:hover {
+    background-color: #aa8453 !important; /* Turns GOLD on hover */
+    color: #ffffff !important;            /* Text stays WHITE */
+    border-color: #aa8453 !important;
+}
+
+/* 3. Disable any conflicting animation layers */
+button.butn-dark2::after,
+button.butn-dark2::before {
+    display: none !important;
+}
 </style>
 
-    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/5.jpg' %}">
+    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/New_images/blogs.jpg' %}">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-left caption mt-90">
@@ -105,12 +125,12 @@
     
     <section class="news section-padding bg-blck wow animate__fadeInUp" data-wow-delay="0.3s">
         <div class="container">
-            <div class="row">
+            {% comment %} <div class="row">
                 <div class="col-md-12">
                     <div class="section-subtitle"><span>Hotel Blog</span></div>
                     <div class="section-title"><span>Our News</span></div>
                 </div>
-            </div>
+            </div> {% endcomment %}
             <div class="row">
                 {% for blog in blogs %}
                 <div class="col-md-4 mb-30 d-flex"> <div class="item wow animate__slideInRight" data-wow-delay="0.2s">
@@ -139,12 +159,11 @@
             
             </div>
     </section>
-
     <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="4">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/New_images/munnar.jpg' %}" data-overlay-dark="4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 mb-30 mt-30">
+                    <div class="col-md-5 mb-30 mt-30 animate-text-section">
                         <p>
                             <i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i>
                         </p>
@@ -161,7 +180,7 @@
                     </div>
     
                     <div class="col-md-5 offset-md-2">
-                        <div class="booking-box">
+                        <div class="booking-box animate-box" data-animate-effect="fadeInUp">
                             <div class="head-box">
                                 <h6>Inquiry</h6>
                                 <h4>Contact Us</h4>
@@ -233,7 +252,6 @@
             </div>
         </div>
     </section>
-    <!-- Clients -->
     <section class="clients">
         <div class="container">
             <div class="row">
@@ -262,17 +280,17 @@
             </div>
         </div>
     </section>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const alert = document.getElementById('contact-success-alert');
-        if (alert) {
-            setTimeout(function() {
-                alert.style.transition = 'opacity 0.5s ease';
-                alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 500);
-            }, 5000);
-        }
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alert = document.getElementById('contact-success-alert');
+            if (alert) {
+                setTimeout(function() {
+                    alert.style.transition = 'opacity 0.5s ease';
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 500);
+                }, 5000);
+            }
+        });
+    </script>
 
 {% endblock %}

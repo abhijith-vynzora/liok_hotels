@@ -4,7 +4,7 @@
 
 {% block content %}
     <!-- Header Banner -->
-    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/slider/3.jpg' %}">
+    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="{% static 'img/New_images/abt1.jpg' %}">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-left caption mt-90">
@@ -86,53 +86,48 @@
 }
     </style>
     <!-- Testimonials -->
-<section class="testimonials">
-    <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/slider/2.jpg' %}" data-overlay-dark="3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="testimonials-box">
-                        <div class="head-box">
-                            <h6>Testimonials</h6>
-                            <h4>What Client's Say?</h4>
-                            <div class="line"></div>
-                        </div>
-                        <div class="owl-carousel owl-theme">
-                            {% for testimonial in testimonials %}
-                            <div class="item"> 
-                                <span class="quote"><img src="{% static 'img/quot.png' %}" alt=""></span>
-                                <p>{{ testimonial.review | safe}}</p>
-                                <div class="info">
-                                    <div class="author-img">
-                                        {% if testimonial.image %}
-                                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
-                                        {% else %}
-                                            <img src="{% static 'img/team/4.jpg' %}" alt="{{ testimonial.name }}">
-                                        {% endif %}
-                                    </div>
-                                    <div class="cont"> 
-                                        {% comment %} <span>
-                                            {% for i in "12345" %}
-                                                <i class="star-rating"></i>
-                                            {% endfor %}
-                                        </span> {% endcomment %}
-                                        <h6>{{ testimonial.name }}</h6> 
-                                        <span>Guest review</span>
+    <section class="testimonials">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/New_images/04.jpg' %}" data-overlay-dark="6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="testimonials-box animate-text-section">
+                            <div class="head-box">
+                                <h6>Testimonials</h6>
+                                <h4>What Client's Say?</h4>
+                                <div class="line"></div>
+                            </div>
+                            <div class="owl-carousel owl-theme">
+                                {% for testimonial in testimonials %}
+                                <div class="item"> 
+                                    <span class="quote"><img src="{% static 'img/quot.png' %}" alt=""></span>
+                                    <p>{{ testimonial.review | safe}}</p>
+                                    <div class="info">
+                                        <div class="author-img">
+                                            {% if testimonial.image %}
+                                                <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+                                            {% else %}
+                                                <img src="{% static 'img/team/4.jpg' %}" alt="{{ testimonial.name }}">
+                                            {% endif %}
+                                        </div>
+                                        <div class="cont"> 
+                                            <h6>{{ testimonial.name }}</h6> 
+                                            <span>Guest review</span>
+                                        </div>
                                     </div>
                                 </div>
+                                {% empty %}
+                                <div class="item">
+                                    <p>No testimonials available yet.</p>
+                                </div>
+                                {% endfor %}
                             </div>
-                            {% empty %}
-                            <div class="item">
-                                <p>No testimonials available yet.</p>
-                            </div>
-                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     {% comment %} <!-- Reservation & Booking Form -->
