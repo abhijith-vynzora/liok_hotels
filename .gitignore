@@ -1,18 +1,4 @@
-# --- Python/Django ---
 __pycache__/
-*.py[cod]
-*$py.class
-.env
-db.sqlite3
-
-# --- Media and Static ---
-# We ignore the contents of media but keep the folder if desired
-media/
-static/admin-static/
-
-# --- System/IDE ---
+*.pyc
 .DS_Store
-.vscode/
-.idea/
-venv/
-env/
+staticfiles/
