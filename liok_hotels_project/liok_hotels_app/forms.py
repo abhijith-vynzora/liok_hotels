@@ -82,7 +82,7 @@ class BookingInquiryForm(forms.ModelForm):
         fields = [
             "first_name", "last_name", "phone", "email", 
             "property", "room_category", "check_in", "check_out", 
-            "adults", "children_8_12", "children_13_plus",  # Updated fields
+            "adults", "children_8_12",
             "message"
         ]
         widgets = {
@@ -90,5 +90,4 @@ class BookingInquiryForm(forms.ModelForm):
             'check_out': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'adults': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
             'children_8_12': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
-            'children_13_plus': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
         }

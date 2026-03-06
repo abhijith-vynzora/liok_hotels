@@ -152,7 +152,6 @@ class BookingInquiry(models.Model):
     # --- NEW FIELDS ---
     adults = models.PositiveIntegerField(default=1)
     children_8_12 = models.PositiveIntegerField(default=0)
-    children_13_plus = models.PositiveIntegerField(default=0)
     # ------------------
     
     message = models.TextField(blank=True)

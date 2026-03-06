@@ -705,7 +705,6 @@ def booking_view(request):
         # New Guest Fields
         adults = request.POST.get("adults", 1)
         children_8_12 = request.POST.get("children_8_12", 0)
-        children_13_plus = request.POST.get("children_13_plus", 0)
         
         message_text = request.POST.get("message", "").strip()
         
@@ -754,7 +753,6 @@ def booking_view(request):
                 check_out=check_out,
                 adults=int(adults),
                 children_8_12=int(children_8_12),
-                children_13_plus=int(children_13_plus),
                 message=message_text,
                 status='pending'
             )
@@ -820,11 +818,6 @@ def booking_view(request):
                                             <tr style="background:#f8f9fa;">
                                                 <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Children (8-12)</td>
                                                 <td style="padding:12px; border-bottom:1px solid #eee;">{children_8_12}</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="padding:12px; font-weight:bold; border-bottom:1px solid #eee;">Children (13+)</td>
-                                                <td style="padding:12px; border-bottom:1px solid #eee;">{children_13_plus}</td>
                                             </tr>
                                         </table>
                                         
