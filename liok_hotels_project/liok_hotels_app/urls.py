@@ -81,6 +81,7 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path('book-now/', views.booking_view, name='book_now'),
     path('nearby-attractions/', views.nearby_attractions_view, name='nearby_attractions'),
+    path('index.html', views.index_redirect, name='index_redirect'),
 ]
 
 if settings.DEBUG:

@@ -24,6 +24,10 @@ from .forms import (
 
 # =================ADMIIN AUTHENTICATION & DASHBOARD VIEWS==========================
 
+def index_redirect(request):
+    return redirect('admin_pages:home')
+
+
 def admin_login(request):
     if request.method == "POST":
         username = request.POST.get("username")

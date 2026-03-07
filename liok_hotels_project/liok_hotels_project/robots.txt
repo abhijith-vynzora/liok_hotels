@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /admin-login/
+
+Allow: /static/
+Allow: /media/
+
+Sitemap: https://liokhotels.com/sitemap.xml
