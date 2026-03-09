@@ -5734,7 +5734,7 @@ button.mfp-arrow {
 
 .footer-explore-list li a:hover {
     padding-left: 15px;
-    color: #aa8453);
+    color: #aa8453;
 }
 
 .footer-explore-list li a:before {
@@ -5780,7 +5780,7 @@ button.mfp-arrow {
 
 .footer-contact-phone {
     font-family: 'Gilda Display', serif;
-    font-size: 24px;
+    font-size: 18px;
     color: #fff;
     font-weight: 400;
     display: block;
