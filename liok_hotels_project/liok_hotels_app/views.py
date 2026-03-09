@@ -926,3 +926,6 @@ def frontend_blog_detail(request, slug):
     }
     
     return render(request, "frontend/news2.html", context)
+
+def custom_404(request, exception):
+    return render(request, 'frontend/404.html', status=404)

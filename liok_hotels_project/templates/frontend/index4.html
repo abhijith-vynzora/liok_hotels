@@ -202,6 +202,9 @@ unforgettable holiday experiences in Kerala’s misty hills.{% endblock %}
             height: 350px !important;
             /* Smaller height for mobile screens */
         }
+        .header.slider-fade .owl-dots {
+            display: none !important;
+        }
     }
 
     /* Keep service CTA text readable on dark hover states */
@@ -217,138 +220,44 @@ unforgettable holiday experiences in Kerala’s misty hills.{% endblock %}
         color: #ffffff !important;
     }
 </style>
-<header class="header slider-fade">
+<header class="header slider-fade" style="position: relative;">
     <div class="owl-carousel owl-theme">
-        {% comment %} <div class="text-center item bg-img" data-overlay-dark="6"
-            data-background="{% static 'haze_mountain.jpg' %}">
-            <div class="v-middle caption">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-md-1">
-                            <span>
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i><i class="star-rating"></i>
-                                <i class="star-rating"></i>
-                            </span>
-                            <h4>Munnar Hotels & Nature Retreats</h4>
-                            <h1>Plan Your Munnar Stay</h1>
-                            <div class="butn-light mt-30 mb-30">
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> {% endcomment %}
-        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'haze_mountain.jpg' %}">
-            <div class="v-middle caption">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-md-1">
-                            <span style="display: inline-flex; align-items: center; gap: 8px;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
-                                    <path fill="#4285F4"
-                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                    <path fill="#34A853"
-                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                    <path fill="#FBBC05"
-                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                    <path fill="#EA4335"
-                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                </svg>
-                                <span style="display: inline-flex; gap: 2px;">
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                </span>
-                            </span>
-                            <h4>Honeymoon Resort in Munnar, Kerala</h4>
-                            <h1>The Hotel in Munnar Couples Come Back To
-                            </h1>
-                            <div class="butn-light mt-30 mb-30">
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Book Your Stay</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'haze_mountain.jpg' %}"></div>
+        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'hotel1.jpg' %}"></div>
+        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'tree.jpg' %}"></div>
+    </div>
 
-        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'hotel1.jpg' %}">
-            <div class="v-middle caption">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-md-1">
-                            <span style="display: inline-flex; align-items: center; gap: 8px;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
-                                    <path fill="#4285F4"
-                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                    <path fill="#34A853"
-                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                    <path fill="#FBBC05"
-                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                    <path fill="#EA4335"
-                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                </svg>
-                                <span style="display: inline-flex; gap: 2px;">
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                </span>
-                            </span>
-                            <h4>⁠Luxury Stay in Munnar, Kerala</h4>
-                            <h1>Wake Up to Misty Hills
-& Mountain Views</h1>
-                            <div class="butn-light mt-30 mb-30">
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Plan Your Stay</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'tree.jpg' %}">
-            <div class="v-middle caption">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-md-1">
-                            <span style="display: inline-flex; align-items: center; gap: 8px;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
-                                    <path fill="#4285F4"
-                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                    <path fill="#34A853"
-                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                    <path fill="#FBBC05"
-                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                    <path fill="#EA4335"
-                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                </svg>
-                                <span style="display: inline-flex; gap: 2px;">
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                    <i class="star-rating"></i>
-                                </span>
-                            </span>
-                            <h4>Boutique Hotels & Nature Retreats, Munnar</h4>
-                            <h1>Your Munnar Getaway Starts Right Here</h1>
-                            <div class="butn-light mt-30 mb-30">
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Explore Properties</span></a>
-                            </div>
-                        </div>
+    <!-- Static Center Content overlay to prevent multiple h1 and make it persistent -->
+    <div class="caption position-absolute w-100" style="z-index: 9; top: 0; left: 0; height: 100vh; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+        <div class="container text-center" style="pointer-events: auto;">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <span style="display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                        </svg>
+                        <span style="display: inline-flex; gap: 2px;">
+                            <i class="star-rating"></i>
+                            <i class="star-rating"></i>
+                            <i class="star-rating"></i>
+                            <i class="star-rating"></i>
+                            <i class="star-rating"></i>
+                        </span>
+                    </span>
+                    <h4> ⁠Boutique Hotels & Nature Retreats, Munnar</h4>
+                    <h1 class="mb-3">Your Munnar Getaway Starts Right Here</h1>
+                    <div class="butn-light mt-30 mb-30">
+                        <a href="{% url 'admin_pages:book_now' %}"><span>Book Your Stay</span></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="reservation">
+    <div class="reservation" style="z-index: 10;">
         <a href="tel:+917356723332">
             <div class="icon d-flex justify-content-center align-items-center">
                 <i class="flaticon-call"></i>
