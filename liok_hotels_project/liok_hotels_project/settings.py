@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'liok_hotels_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'liokhotels_db',
+        'USER': 'liokuser',
+        'PASSWORD': '78fA/O;D4:07!--&',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
