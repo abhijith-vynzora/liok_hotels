@@ -70,27 +70,65 @@ Liok Hotels in Munnar.{% endblock %}
         transition: transform 0.5s ease;
     }
 
-    /* 1. Normal State (Before Hover) */
-    button.butn-dark2 {
-        background-color: #1b1b1b !important;
-        /* Dark Black Background */
-        color: #ffffff !important;
-        /* White Text */
-        border: 1px solid #1b1b1b !important;
-        opacity: 1 !important;
-        /* Ensure it's visible */
+    /* Rounding the Booking Inquiry Box */
+    .booking-box {
+        padding: 40px !important;
+        background: #fff !important;
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+        border-radius: 20px !important;
+        overflow: hidden;
     }
 
-    /* 2. Hover State (When Mouse is Over) */
+    .booking-box h4 {
+        color: #222 !important;
+        margin-bottom: 30px;
+    }
+
+    .booking-box label {
+        color: #aa8453 !important;
+        font-size: 11px;
+        letter-spacing: 2px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    /* Input Styling */
+    .contact-form-custom .form-control {
+        border: none !important;
+        border-bottom: 1px solid #e5e5e5 !important;
+        border-radius: 0 !important;
+        padding: 10px 0 !important;
+        background: transparent !important;
+        color: #222 !important;
+    }
+
+    .contact-form-custom .form-control::placeholder {
+        color: #999;
+    }
+
+    .contact-form-custom textarea {
+        resize: none;
+    }
+
+    .contact-form-custom .input1_inner::after {
+        display: none !important;
+    }
+
+    /* Rounding the Submit Button */
+    button.butn-dark2 {
+        border-radius: 10px !important;
+        background-color: #1b1b1b !important;
+        color: #ffffff !important;
+        border: 1px solid #1b1b1b !important;
+        opacity: 1 !important;
+    }
+
     button.butn-dark2:hover {
         background-color: #aa8453 !important;
-        /* Turns GOLD on hover */
         color: #ffffff !important;
-        /* Text stays WHITE */
         border-color: #aa8453 !important;
     }
 
-    /* 3. Disable any conflicting animation layers */
     button.butn-dark2::after,
     button.butn-dark2::before {
         display: none !important;
@@ -149,8 +187,8 @@ Liok Hotels in Munnar.{% endblock %}
     </div>
 </section>
 <section class="testimonials">
-    <div class="background bg-img bg-fixed section-padding"
-        data-background="{% static 'img/New_images/munnar.jpg' %}" data-overlay-dark="4">
+    <div class="background bg-img bg-fixed section-padding" data-background="{% static 'img/New_images/munnar.jpg' %}"
+        data-overlay-dark="4">
         <div class="container">
             <div class="row">
                 <div class="col-md-5 mb-30 mt-30 animate-text-section">
@@ -159,7 +197,9 @@ Liok Hotels in Munnar.{% endblock %}
                             class="star-rating"></i><i class="star-rating"></i>
                     </p>
                     <h5 class="text-white">Reach Out - We're Happy to Help Plan Your Munnar Visit <br> <br>
-                        Thinking about a trip to Munnar and want details on rooms, availability, or honeymoon arrangements at Liok? Drop us a message and our team will get back to you with everything you need to plan your stay.
+                        Thinking about a trip to Munnar and want details on rooms, availability, or honeymoon
+                        arrangements at Liok? Drop us a message and our team will get back to you with everything you
+                        need to plan your stay.
 
 
                     </h5>
@@ -171,7 +211,8 @@ Liok Hotels in Munnar.{% endblock %}
                             <a class="color-1" href="tel:+917356723332">+91 73567 23332</a>
                         </div>
                     </div>
-                    <p class="text-white"><i class="ti-check"></i><small>Reservation & Support - available for all queries about our Munnar properties.</small></p>
+                    <p class="text-white"><i class="ti-check"></i><small>Reservation & Support - available for all
+                            queries about our Munnar properties.</small></p>
                 </div>
 
                 <div class="col-md-5 offset-md-2">
