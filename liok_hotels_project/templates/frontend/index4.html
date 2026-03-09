@@ -1,188 +1,226 @@
 {% extends 'frontend/base.html' %}
 {% load static %}
-{% block title %}Home - Liok Hotels{% endblock %}
-{% block meta_description %}Liok Hotels offers boutique hotel stays in Munnar, Kerala with mountain views, nature experiences, and direct booking for family and couple getaways.{% endblock %}
+{% block title %}Liok Hotels | Luxury Resorts & Stays in Munnar Kerala{% endblock %}
+{% block meta_description %}Discover luxury stays with Liok Hotels in Munnar. Enjoy scenic resorts, premium rooms, and
+unforgettable holiday experiences in Kerala’s misty hills.{% endblock %}
 
 {% block content %}
 
 <style>
     /* Reusable Gold CTA Button */
-.btn-gold {
-    background-color: #aa8453; /* Your Brand Gold */
-    border: 1px solid #aa8453;
-    color: #fff !important;
-    padding: 12px 30px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 13px;
-    font-weight: 500;
-    display: inline-block;
-    border-radius: 5px; /* Sharp corners for luxury feel */
-    transition: all 0.4s ease;
-    text-decoration: none;
-    margin-top: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-/* Hover Effect: Turns dark or transparent */
-.btn-gold:hover {
-    background-color: transparent;
-    color: #aa8453 !important;
-    border-color: #aa8453;
-    transform: translateY(-3px); /* Subtle lift */
-}
-
-/* Optional: Icon spacing inside the button */
-.btn-gold i {
-    margin-left: 5px;
-    font-size: 11px;
-}
-/* Add Rounded Corners to Pricing Cards */
-.pricing-card {
-    border-radius: 20px !important; /* Adjust this number for more or less curve */
-    overflow: hidden !important;   /* Critical: clips the image to the border radius */
-
-}
-.facilties .single-facility {
-    border-radius: 20px !important; /* Adjust this for more or less curve */
-    overflow: hidden !important;   /* Ensures internal shapes don't break the radius */
-    
-}
-
-/* Rounding the Services Rows */
-.services .row {
-    border-radius: 30px !important; /* Adjust for desired curvature */
-    overflow: hidden !important;   /* Critical to clip images and backgrounds */
-    margin-bottom: 20px; /* Space between rows */
-}
-/* White Glass-morphism Box */
-.booking-box {
-    padding: 40px !important;
-    background: #fff !important;
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-}
-
-.booking-box h4 {
-    color: #222 !important;
-    margin-bottom: 30px;
-}
-
-.booking-box label {
-    color: #aa8453 !important;
-    font-size: 11px;
-    letter-spacing: 2px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-/* Input Styling */
-.contact-form-custom .form-control {
-    border: none !important;
-    border-bottom: 1px solid #e5e5e5 !important;
-    border-radius: 0 !important;
-    padding: 10px 0 !important;
-    background: transparent !important;
-    color: #222 !important;
-}
-
-.contact-form-custom .form-control::placeholder {
-    color: #999;
-}
-
-.contact-form-custom textarea {
-    resize: none;
-}
-
-/* Success Alert Animation */
-#contact-success-alert {
-    margin-bottom: 20px;
-    animation: slideInDown 0.5s ease-out;
-}
-
-@keyframes slideInDown {
-    from { transform: translateY(-20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-.property-card {
-    border-radius: 20px;   /* adjust if needed */
-    overflow: hidden;      /* very important */
-}
-
-/* --- Added for GSAP Compatibility in Services --- */
-.reveal-img {
-    height: 100%;
-    width: 100%;
-    display: block;
-    overflow: hidden; 
-}
-.reveal-img img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-/* FORCE BUTTON VISIBILITY */
-/* This overrides the GSAP animation specifically for the button so it never disappears */
-a.btn-gold {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-}
-
-/* --- FORCE FIX FOR SEND MESSAGE BUTTON --- */
-
-/* 1. Normal State (Before Hover) */
-button.butn-dark2 {
-    background-color: #1b1b1b !important; /* Dark Black Background */
-    color: #ffffff !important;            /* White Text */
-    border: 1px solid #1b1b1b !important;
-    opacity: 1 !important;                /* Ensure it's visible */
-}
-
-/* 2. Hover State (When Mouse is Over) */
-button.butn-dark2:hover {
-    background-color: #aa8453 !important; /* Turns GOLD on hover */
-    color: #ffffff !important;            /* Text stays WHITE */
-    border-color: #aa8453 !important;
-}
-
-/* 3. Disable any conflicting animation layers */
-button.butn-dark2::after,
-button.butn-dark2::before {
-    display: none !important;
-}
-/* --- Fix for About Slider Images --- */
-.about-slider .item img {
-    height: 500px !important;      /* Force a standard height (adjust as needed) */
-    width: 100% !important;        /* Ensure it fills the width */
-    object-fit: cover !important;  /* zoom/crop the image to fill the box */
-    border-radius: 20px;           /* Keep your rounded corners */
-}
-
-/* Optional: Mobile adjustment */
-@media (max-width: 768px) {
-    .about-slider .item img {
-        height: 350px !important;  /* Smaller height for mobile screens */
+    .btn-gold {
+        background-color: #aa8453;
+        /* Your Brand Gold */
+        border: 1px solid #aa8453;
+        color: #fff !important;
+        padding: 12px 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-block;
+        border-radius: 5px;
+        /* Sharp corners for luxury feel */
+        transition: all 0.4s ease;
+        text-decoration: none;
+        margin-top: 20px;
+        position: relative;
+        z-index: 2;
     }
-}
 
-/* Keep service CTA text readable on dark hover states */
-.services .butn-dark a,
-.services .butn-dark a span {
-    color: #ffffff !important;
-}
+    /* Hover Effect: Turns dark or transparent */
+    .btn-gold:hover {
+        background-color: transparent;
+        color: #aa8453 !important;
+        border-color: #aa8453;
+        transform: translateY(-3px);
+        /* Subtle lift */
+    }
 
-.services .butn-dark:hover a,
-.services .butn-dark:hover a span,
-.services .butn-dark a:hover,
-.services .butn-dark a:hover span {
-    color: #ffffff !important;
-}
+    /* Optional: Icon spacing inside the button */
+    .btn-gold i {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+
+    /* Add Rounded Corners to Pricing Cards */
+    .pricing-card {
+        border-radius: 20px !important;
+        /* Adjust this number for more or less curve */
+        overflow: hidden !important;
+        /* Critical: clips the image to the border radius */
+
+    }
+
+    .facilties .single-facility {
+        border-radius: 20px !important;
+        /* Adjust this for more or less curve */
+        overflow: hidden !important;
+        /* Ensures internal shapes don't break the radius */
+
+    }
+
+    /* Rounding the Services Rows */
+    .services .row {
+        border-radius: 30px !important;
+        /* Adjust for desired curvature */
+        overflow: hidden !important;
+        /* Critical to clip images and backgrounds */
+        margin-bottom: 20px;
+        /* Space between rows */
+    }
+
+    /* White Glass-morphism Box */
+    .booking-box {
+        padding: 40px !important;
+        background: #fff !important;
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+    }
+
+    .booking-box h4 {
+        color: #222 !important;
+        margin-bottom: 30px;
+    }
+
+    .booking-box label {
+        color: #aa8453 !important;
+        font-size: 11px;
+        letter-spacing: 2px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    /* Input Styling */
+    .contact-form-custom .form-control {
+        border: none !important;
+        border-bottom: 1px solid #e5e5e5 !important;
+        border-radius: 0 !important;
+        padding: 10px 0 !important;
+        background: transparent !important;
+        color: #222 !important;
+    }
+
+    .contact-form-custom .form-control::placeholder {
+        color: #999;
+    }
+
+    .contact-form-custom textarea {
+        resize: none;
+    }
+
+    /* Success Alert Animation */
+    #contact-success-alert {
+        margin-bottom: 20px;
+        animation: slideInDown 0.5s ease-out;
+    }
+
+    @keyframes slideInDown {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .property-card {
+        border-radius: 20px;
+        /* adjust if needed */
+        overflow: hidden;
+        /* very important */
+    }
+
+    /* --- Added for GSAP Compatibility in Services --- */
+    .reveal-img {
+        height: 100%;
+        width: 100%;
+        display: block;
+        overflow: hidden;
+    }
+
+    .reveal-img img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    /* FORCE BUTTON VISIBILITY */
+    /* This overrides the GSAP animation specifically for the button so it never disappears */
+    a.btn-gold {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+
+    /* --- FORCE FIX FOR SEND MESSAGE BUTTON --- */
+
+    /* 1. Normal State (Before Hover) */
+    button.butn-dark2 {
+        background-color: #1b1b1b !important;
+        /* Dark Black Background */
+        color: #ffffff !important;
+        /* White Text */
+        border: 1px solid #1b1b1b !important;
+        opacity: 1 !important;
+        /* Ensure it's visible */
+    }
+
+    /* 2. Hover State (When Mouse is Over) */
+    button.butn-dark2:hover {
+        background-color: #aa8453 !important;
+        /* Turns GOLD on hover */
+        color: #ffffff !important;
+        /* Text stays WHITE */
+        border-color: #aa8453 !important;
+    }
+
+    /* 3. Disable any conflicting animation layers */
+    button.butn-dark2::after,
+    button.butn-dark2::before {
+        display: none !important;
+    }
+
+    /* --- Fix for About Slider Images --- */
+    .about-slider .item img {
+        height: 500px !important;
+        /* Force a standard height (adjust as needed) */
+        width: 100% !important;
+        /* Ensure it fills the width */
+        object-fit: cover !important;
+        /* zoom/crop the image to fill the box */
+        border-radius: 20px;
+        /* Keep your rounded corners */
+    }
+
+    /* Optional: Mobile adjustment */
+    @media (max-width: 768px) {
+        .about-slider .item img {
+            height: 350px !important;
+            /* Smaller height for mobile screens */
+        }
+    }
+
+    /* Keep service CTA text readable on dark hover states */
+    .services .butn-dark a,
+    .services .butn-dark a span {
+        color: #ffffff !important;
+    }
+
+    .services .butn-dark:hover a,
+    .services .butn-dark:hover a span,
+    .services .butn-dark a:hover,
+    .services .butn-dark a:hover span {
+        color: #ffffff !important;
+    }
 </style>
 <header class="header slider-fade">
     <div class="owl-carousel owl-theme">
-        {% comment %} <div class="text-center item bg-img" data-overlay-dark="6" data-background="{% static 'haze_mountain.jpg' %}">
+        {% comment %} <div class="text-center item bg-img" data-overlay-dark="6"
+            data-background="{% static 'haze_mountain.jpg' %}">
             <div class="v-middle caption">
                 <div class="container">
                     <div class="row">
@@ -194,8 +232,8 @@ button.butn-dark2::before {
                             </span>
                             <h4>Munnar Hotels & Nature Retreats</h4>
                             <h1>Plan Your Munnar Stay</h1>
-                            <div class="butn-light mt-30 mb-30"> 
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a> 
+                            <div class="butn-light mt-30 mb-30">
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a>
                             </div>
                         </div>
                     </div>
@@ -209,10 +247,14 @@ button.butn-dark2::before {
                         <div class="col-md-10 offset-md-1">
                             <span style="display: inline-flex; align-items: center; gap: 8px;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
-                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                    <path fill="#4285F4"
+                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                    <path fill="#34A853"
+                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                    <path fill="#FBBC05"
+                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                    <path fill="#EA4335"
+                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                 </svg>
                                 <span style="display: inline-flex; gap: 2px;">
                                     <i class="star-rating"></i>
@@ -222,10 +264,11 @@ button.butn-dark2::before {
                                     <i class="star-rating"></i>
                                 </span>
                             </span>
-                            <h4>Munnar Hotels & Nature Retreats</h4>
-                            <h1>Plan Your Munnar Stay</h1>
-                            <div class="butn-light mt-30 mb-30"> 
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a>
+                            <h4>Honeymoon Resort in Munnar, Kerala</h4>
+                            <h1>The Hotel in Munnar Couples Come Back To
+                            </h1>
+                            <div class="butn-light mt-30 mb-30">
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Book Your Stay</span></a>
                             </div>
                         </div>
                     </div>
@@ -240,10 +283,14 @@ button.butn-dark2::before {
                         <div class="col-md-10 offset-md-1">
                             <span style="display: inline-flex; align-items: center; gap: 8px;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
-                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                    <path fill="#4285F4"
+                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                    <path fill="#34A853"
+                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                    <path fill="#FBBC05"
+                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                    <path fill="#EA4335"
+                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                 </svg>
                                 <span style="display: inline-flex; gap: 2px;">
                                     <i class="star-rating"></i>
@@ -253,10 +300,11 @@ button.butn-dark2::before {
                                     <i class="star-rating"></i>
                                 </span>
                             </span>
-                            <h4>Munnar Hotels & Nature Retreats</h4>
-                            <h1>Plan Your Munnar Stay</h1>
-                            <div class="butn-light mt-30 mb-30"> 
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a>
+                            <h4>⁠Luxury Stay in Munnar, Kerala</h4>
+                            <h1>Wake Up to Misty Hills
+& Mountain Views</h1>
+                            <div class="butn-light mt-30 mb-30">
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Plan Your Stay</span></a>
                             </div>
                         </div>
                     </div>
@@ -271,10 +319,14 @@ button.butn-dark2::before {
                         <div class="col-md-10 offset-md-1">
                             <span style="display: inline-flex; align-items: center; gap: 8px;">
                                 <svg width="24" height="24" viewBox="0 0 24 24" style="display: block;">
-                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                    <path fill="#4285F4"
+                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                    <path fill="#34A853"
+                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                    <path fill="#FBBC05"
+                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                    <path fill="#EA4335"
+                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                 </svg>
                                 <span style="display: inline-flex; gap: 2px;">
                                     <i class="star-rating"></i>
@@ -284,10 +336,10 @@ button.butn-dark2::before {
                                     <i class="star-rating"></i>
                                 </span>
                             </span>
-                            <h4>Munnar Hotels & Nature Retreats</h4>
-                            <h1>Plan Your Munnar Stay</h1>
-                            <div class="butn-light mt-30 mb-30"> 
-                                <a href="{% url 'admin_pages:book_now' %}"><span>Rooms & Suites</span></a> 
+                            <h4>Boutique Hotels & Nature Retreats, Munnar</h4>
+                            <h1>Your Munnar Getaway Starts Right Here</h1>
+                            <div class="butn-light mt-30 mb-30">
+                                <a href="{% url 'admin_pages:book_now' %}"><span>Explore Properties</span></a>
                             </div>
                         </div>
                     </div>
@@ -306,623 +358,630 @@ button.butn-dark2::before {
     </div>
 </header>
 
-    <section class="about section-padding">
-        <div class="container">
-            <div class="row">
-                
-                <div class="col-md-6 mb-30 animate-text-section">
-                    <span>
-                        <i class="star-rating"></i><i class="star-rating"></i>
-                        <i class="star-rating"></i><i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                    </span>
-                    <div class="section-subtitle ">The Liok Hotel</div>
-                    <div class="section-title">Stay with Liok in Munnar</div>
-                    
-                    <p>Liok Hotels offers a curated collection of boutique stays in Munnar, Kerala for travelers seeking mountain views, fresh air, and peaceful holiday experiences. Each property is designed for comfort, privacy, and easy access to the best scenic spots in the hill station.</p>
-                    <p>From short weekend trips to extended nature breaks, our stays combine warm hospitality, well-planned amenities, and local travel support for couples, families, and small groups.</p>
-                    
-                    <a href="{% url "admin_pages:contact" %}" class="btn-gold">
-                        Contact Us <i class="ti-arrow-right"></i>
-                    </a>
-    
-                </div>
-    
-                <div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
-                    <div class="owl-carousel owl-theme about-slider">
-                        <div class="item">
-                            <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="Liok Hotels Munnar Stay" class="img-fluid" style="width: 100%; border-radius: 20px;">
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/New_images/pool.jpg' %}" alt="Liok Hotels Pool View" class="img-fluid" style="width: 100%; border-radius: 20px;">
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/New_images/scenary.jpg' %}" alt="Liok Hotels Munnar View" class="img-fluid" style="width: 100%; border-radius: 20px;">
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-        </div>
-    </section>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (typeof $.fn.owlCarousel !== 'undefined') {
-                $('.about-slider').owlCarousel({
-                    items: 1,
-                    loop: true,
-                    margin: 0,
-                    autoplay: true,
-                    autoplayTimeout: 4000,
-                    smartSpeed: 1000,
-                    dots: true,
-                    nav: false
-                });
-            }
-        });
-    </script>
+<section class="about section-padding">
+    <div class="container">
+        <div class="row">
 
-    <section class="rooms1 section-padding bg-cream">
-        <div class="container">
-            <div class="row align-items-end mb-30">
-                <div class="col-md-8 animate-text-section">
-                    <div class="section-subtitle">Liok Hotels</div>
-                    <div class="section-title">Our Munnar Properties</div>
-                </div>
-                <div class="col-md-4 text-md-end text-start animate-text-section">
-                    <a href="{% url 'admin_pages:properties_all' %}" class="btn-gold">
-                        View All Properties <i class="ti-arrow-right"></i>
-                    </a>
-                </div>
+            <div class="col-md-6 mb-30 animate-text-section">
+                <span>
+                    <i class="star-rating"></i><i class="star-rating"></i>
+                    <i class="star-rating"></i><i class="star-rating"></i>
+                    <i class="star-rating"></i>
+                </span>
+                <div class="section-subtitle ">The Liok Hotel</div>
+                <div class="section-title">Stays in Munnar Built for Couples & Families</div>
+
+                <p>Liok Hotels brings together two boutique properties in Munnar, Kerala each set in the hills, each designed with care, and each offering the kind of honeymoon resort in Munnar experience that doesn't feel rehearsed. No oversized lobbies, no impersonal service  just well-designed spaces, honest hospitality, and scenery that speaks for itself.</p>
+                <p>From couples on a romantic getaway in Munnar to families on a long-planned hill station holiday, our guests come for the views and stay for the warmth. Every room, every meal, and every detail at our Munnar hotels is shaped around making your time here genuinely worth it.</p>
+
+                <a href="{% url "admin_pages:contact" %}" class="btn-gold">
+                    Get in Touch <i class="ti-arrow-right"></i>
+                </a>
+
             </div>
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="owl-carousel owl-theme">
-                        
-                        {% for prop in properties %}
-                        <div class="item property-card wow animate__fadeInRight" data-wow-delay="0.4s">
-                            <div class="position-re o-hidden">
-                                {% if prop.cover_image %}
-                                    <img src="{{ prop.cover_image.url }}" alt="{{ prop.name }}" style="height: 600px; width: 100%; object-fit: cover">
-                                {% else %}
-                                    <img src="{% static 'img/rooms/1.jpg' %}" alt="Default Image" style="height: 300px; width: 100%; object-fit: cover;">
-                                {% endif %}
-                            </div> 
-                            
-                            <span class="category">
-                                <a href="{% url 'admin_pages:book_now' %}?property={{ prop.id }}">Book</a>
-                            </span>
-                            
-                            <div class="con">
-                                <h6 style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
-                                    <i class="ti-location-pin"></i> {{ prop.address|truncatechars:30 }}
-                                </h6>
-                                
-                                <h5><a href="{% url 'admin_pages:property_detail' prop.slug %}">{{ prop.name }}</a></h5>
-                                
-                                <div class="line"></div>
-                                
-                                <div class="row facilities">
-                                    <div class="col col-md-7">
-                                        <ul>
-                                            <li><i class="flaticon-bed"></i></li>
-                                            <li><i class="flaticon-bath"></i></li>
-                                            <li><i class="flaticon-breakfast"></i></li>
-                                            <li><i class="flaticon-towel"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col col-md-5 text-end">
-                                        <div class="permalink">
-                                            <a href="{% url 'admin_pages:property_detail' prop.slug %}">Details <i class="ti-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% empty %}
-                        <div class="col-md-12 text-center">
-                            <p>Liok properties will be listed here soon.</p>
-                        </div>
-                        {% endfor %}
-                        
+
+            <div class="col-md-5 offset-md-1 animate-box" data-animate-effect="fadeInUp">
+                <div class="owl-carousel owl-theme about-slider">
+                    <div class="item">
+                        <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="Liok Hotels Munnar Stay"
+                            class="img-fluid" style="width: 100%; border-radius: 20px;">
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'img/New_images/pool.jpg' %}" alt="Liok Hotels Pool View" class="img-fluid"
+                            style="width: 100%; border-radius: 20px;">
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'img/New_images/scenary.jpg' %}" alt="Liok Hotels Munnar View"
+                            class="img-fluid" style="width: 100%; border-radius: 20px;">
                     </div>
                 </div>
             </div>
 
         </div>
-    </section>
-    <style>
-        /* Adjusts the top-right button alignment */
-        @media (min-width: 768px) {
-            .align-items-end .btn-gold {
-                margin-top: 0; /* Removes top margin on desktop for better alignment */
-                margin-bottom: 10px; /* Aligns with the base of the section title */
-            }
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (typeof $.fn.owlCarousel !== 'undefined') {
+            $('.about-slider').owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 0,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                smartSpeed: 1000,
+                dots: true,
+                nav: false
+            });
         }
-        
-        /* Ensure the button doesn't look cramped on mobile */
-        @media (max-width: 767px) {
-            .btn-gold {
-                margin-top: 15px;
-            }
-        }
-    </style>
-    
-    <section class="pricing section-padding bg-blck">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 animate-text-section">
-                    <div class="section-subtitle"><span>Guest Support</span></div>
-                    <div class="section-title"><span>Stay Add-Ons</span></div>
-                    <p class="color-2">Plan your Munnar stay with practical add-on services such as room assistance, local travel guidance, and guest support. Liok Hotels focuses on a smooth, comfortable experience from arrival to checkout.</p>
-                    <div class="reservations mb-30">
-                        <div class="icon"><span class="flaticon-call"></span></div>
-                        <div class="text">
-                            <p class="color-2">For information</p> <a href="tel:+917356723332">+91 73567 23332</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-md-8">
-                    <div class="owl-carousel owl-theme">
-                        
-                        <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.5s">
-                            <img src="{% static 'img/New_images/01.jpg' %}" alt="">
-                            <div class="desc">
-                                <div class="name">Airport Transfer Support</div>
-                                <div class="amount">On Request</div>
-                                </div>
-                        </div>
-    
-                        <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.4s">
-                            <img src="{% static 'img/New_images/02.jpg' %}" alt="">
-                            <div class="desc">
-                                <div class="name">Campfire & Evening Tea</div>
-                                <div class="amount">On Request</div>
+    });
+</script>
 
-                                </div>
-                        </div>
-    
-                    </div>
-                </div>
+<section class="rooms1 section-padding bg-cream">
+    <div class="container">
+        <div class="row align-items-end mb-30">
+            <div class="col-md-8 animate-text-section">
+                <div class="section-subtitle">Liok Hotels</div>
+                <div class="section-title">Our Munnar Properties</div>
+            </div>
+            <div class="col-md-4 text-md-end text-start animate-text-section">
+                <a href="{% url 'admin_pages:properties_all' %}" class="btn-gold">
+                    View All Properties <i class="ti-arrow-right"></i>
+                </a>
             </div>
         </div>
-    </section>
 
-    <section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="5" data-background="{% static 'img/New_images/08.jpg' %}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2 text-center animate-text-section">
-                       <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
-                        <div class="section-subtitle"><span>Liok Hotels</span></div>
-                        <div class="section-title"><span>Liok Munnar Highlights</span></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="text-center col-md-12">
-                        <a class="vid" href="https://youtu.be/7BGNAGahig8">
-                        <div class="vid-butn">
-                            <span class="icon">
-                                <i class="ti-control-play"></i>
-                            </span>
-                        </div>
-                    </a>
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="owl-carousel owl-theme">
 
-                </div>
-            </div>
-    </section>
-
-    <section class="facilties section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 animate-text-section">
-                    <div class="section-subtitle">Our Services</div>
-                    <div class="section-title">Liok Stay Facilities</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-world"></span>
-                        <h5>Pick Up & Drop</h5>
-                        <p>Convenient pickup and drop support can be arranged for a smoother arrival and departure experience.</p>
-                        <div class="facility-shape"> <span class="flaticon-world"></span> </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-car"></span>
-                        <h5>Parking Space</h5>
-                        <p>Dedicated parking is available across Liok stays for guests traveling by car.</p>
-                        <div class="facility-shape"> <span class="flaticon-car"></span> </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-bed"></span>
-                        <h5>Room Service</h5>
-                        <p>Fast in-room assistance ensures comfort throughout your stay.</p>
-                        <div class="facility-shape"> <span class="flaticon-bed"></span> </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-swimming"></span>
-                        <h5>Swimming Pool</h5>
-                        <p>Select properties include access to relaxing pool areas with scenic surroundings.</p>
-                        <div class="facility-shape"> <span class="flaticon-swimming"></span> </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-wifi"></span>
-                        <h5>Fibre Internet</h5>
-                        <p>High-speed Wi-Fi helps you stay connected for work, travel plans, and entertainment.</p>
-                        <div class="facility-shape"> <span class="flaticon-wifi"></span> </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-breakfast"></span>
-                        <h5>Breakfast</h5>
-                        <p>Fresh breakfast options are served to help you start your Munnar day right.</p>
-                        <div class="facility-shape"> <span class="flaticon-breakfast"></span> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/New_images/04.jpg' %}" data-overlay-dark="6">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <div class="testimonials-box animate-text-section">
-                            <div class="head-box">
-                                <h6>Testimonials</h6>
-                                <h4>What Client's Say?</h4>
-                                <div class="line"></div>
-                            </div>
-                            <div class="owl-carousel owl-theme">
-                                {% for testimonial in testimonials %}
-                                <div class="item"> 
-                                    <span class="quote"><img src="{% static 'img/quot.png' %}" alt=""></span>
-                                    <p>{{ testimonial.review | safe}}</p>
-                                    <div class="info">
-                                        <div class="author-img">
-                                            {% if testimonial.image %}
-                                                <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
-                                            {% else %}
-                                                <img src="{% static 'img/team/4.jpg' %}" alt="{{ testimonial.name }}">
-                                            {% endif %}
-                                        </div>
-                                        <div class="cont"> 
-                                            <h6>{{ testimonial.name }}</h6> 
-                                            <span>Guest review</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% empty %}
-                                <div class="item">
-                                    <p>Guest reviews will be displayed here soon.</p>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="services section-padding">
-        <div class="container" >
-            
-            <div class="row">
-                <div class="col-md-6 p-0">
-                    <div class="img left">
-                        <a href="{% url 'admin_pages:nearby_attractions' %}">
-                            <div class="reveal-img">
-                                <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6 p-0 bg-cream valign animate-text-section">
-                    <div class="content">
-                        <div class="cont text-left">
-                            <div class="info">
-                                <h6>Relax</h6>
-
-                            </div>
-                            <h4>Scenic Leisure Spaces</h4>
-                            <p>Spend quiet evenings in our open leisure areas surrounded by nature. Whether you are travelling with family or as a couple, Liok Hotels provides peaceful spaces to unwind and recharge.</p>
-                            <div class="butn-dark"> <a href="{% url 'admin_pages:nearby_attractions' %}"><span>Learn More</span></a> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 bg-cream p-0 order2 valign animate-text-section">
-                    <div class="content">
-                        <div class="cont text-left">
-                            <div class="info">
-                                <h6>Dining</h6>
-                            </div>
-                            <h4>Multi-Cuisine Restaurant</h4>
-                            <p>Enjoy fresh Kerala flavours and popular Indian favourites prepared with local ingredients. Our restaurant offers a calm setting with hill views, perfect for family dinners and relaxed breakfasts during your stay at Liok Hotels.</p>
-                            <div class="butn-dark"> <a href="{% url 'admin_pages:contact' %}"><span>Learn More</span></a> </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 p-0 order1">
-                    <div class="img">
-                        <a href="{% url 'admin_pages:contact' %}">
-                            <div class="reveal-img">
-                                <img src="{% static 'img/New_images/04.jpg' %}" alt="">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 p-0">
-                    <div class="img left">
-                        <a href="{% url 'admin_pages:nearby_attractions' %}">
-                             <div class="reveal-img">
-                                <img src="{% static 'img/New_images/scenary.jpg' %}" alt="">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6 p-0 bg-cream valign animate-text-section">
-                    <div class="content">
-                        <div class="cont text-left">
-                            <div class="info">
-                                <h6>Experiences</h6>
-
-                            </div>
-                            <h4>Nature & Hill Experiences</h4>
-                            <p>Wake up to misty mornings and panoramic mountain views. Explore nearby tea plantations, scenic trekking trails, and peaceful viewpoints around Munnar while staying at our Liok property.</p>
-                            <div class="butn-dark"> <a href="{% url 'admin_pages:nearby_attractions' %}"><span>Learn More</span></a> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 bg-cream p-0 order2 valign animate-text-section">
-                    <div class="content">
-                        <div class="cont text-left">
-                            <div class="info">
-                                <h6>Comfort</h6>
-                            </div>
-                            <h4>Premium Rooms & Cottages</h4>
-                            <p>Our rooms and cottages are designed for comfort and privacy. Enjoy spacious interiors, modern amenities, and beautiful surroundings that make your stay relaxing and memorable.</p>
-                            <div class="butn-dark"> <a href="{% url 'admin_pages:properties_all' %}"><span>View All Properties</span></a> </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 p-0 order1">
-                    <div class="img">
-                        <a href="{% url 'admin_pages:properties_all' %}">
-                             <div class="reveal-img">
-                                <img src="{% static 'img/New_images/room4.jpg' %}" alt="">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="news section-padding bg-blck wow animate__fadeInUp" data-wow-delay="0.3s">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 animate-text-section">
-                    <div class="section-subtitle"><span>Liok Travel Blog</span></div>
-                    <div class="section-title"><span>Travel Stories</span></div>
-                </div>
-            </div>
-            <div class="row">
-                {% for blog in blogs %}
-                <div class="col-md-4 mb-30">
-                    <div class="item wow animate__slideInRight" data-wow-delay="0.2s">
+                    {% for prop in properties %}
+                    <div class="item property-card wow animate__fadeInRight" data-wow-delay="0.4s">
                         <div class="position-re o-hidden">
-                            <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
-                            <div class="date">
-                                <a href="{% url 'admin_pages:news_detail' blog.slug %}">
-                                    <span>{{ blog.created_at|date:"M" }}</span>
-                                    <i>{{ blog.created_at|date:"d" }}</i>
-                                </a>
+                            {% if prop.cover_image %}
+                            <img src="{{ prop.cover_image.url }}" alt="{{ prop.name }}"
+                                style="height: 600px; width: 100%; object-fit: cover">
+                            {% else %}
+                            <img src="{% static 'img/rooms/1.jpg' %}" alt="Default Image"
+                                style="height: 300px; width: 100%; object-fit: cover;">
+                            {% endif %}
+                        </div>
+
+                        <span class="category">
+                            <a href="{% url 'admin_pages:book_now' %}?property={{ prop.id }}">Book</a>
+                        </span>
+
+                        <div class="con">
+                            <h6
+                                style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                                <i class="ti-location-pin"></i> {{ prop.address|truncatechars:30 }}
+                            </h6>
+
+                            <h5><a href="{% url 'admin_pages:property_detail' prop.slug %}">{{ prop.name }}</a></h5>
+
+                            <div class="line"></div>
+
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink">
+                                        <a href="{% url 'admin_pages:property_detail' prop.slug %}">Details <i
+                                                class="ti-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="con">
-                            <h5>
-                                <a href="{% url 'admin_pages:news_detail' blog.slug %}">{{ blog.title }}</a>
-                            </h5>
+                    </div>
+                    {% empty %}
+                    <div class="col-md-12 text-center">
+                        <p>Liok properties will be listed here soon.</p>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<style>
+    /* Adjusts the top-right button alignment */
+    @media (min-width: 768px) {
+        .align-items-end .btn-gold {
+            margin-top: 0;
+            /* Removes top margin on desktop for better alignment */
+            margin-bottom: 10px;
+            /* Aligns with the base of the section title */
+        }
+    }
+
+    /* Ensure the button doesn't look cramped on mobile */
+    @media (max-width: 767px) {
+        .btn-gold {
+            margin-top: 15px;
+        }
+    }
+</style>
+
+<section class="pricing section-padding bg-blck">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 animate-text-section">
+                <div class="section-subtitle"><span>Guest Support</span></div>
+                <div class="section-title"><span>Stay Add-Ons</span></div>
+                <p class="color-2">Plan your Munnar stay with practical add-on services such as room assistance, local
+                    travel guidance, and guest support. Liok Hotels focuses on a smooth, comfortable experience from
+                    arrival to checkout.</p>
+                <div class="reservations mb-30">
+                    <div class="icon"><span class="flaticon-call"></span></div>
+                    <div class="text">
+                        <p class="color-2">For information</p> <a href="tel:+917356723332">+91 73567 23332</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="owl-carousel owl-theme">
+
+                    <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.5s">
+                        <img src="{% static 'img/New_images/01.jpg' %}" alt="">
+                        <div class="desc">
+                            <div class="name">Airport Transfer Support</div>
+                            <div class="amount">On Request</div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-card wow animate__fadeInRight" data-wow-delay="0.4s">
+                        <img src="{% static 'img/New_images/02.jpg' %}" alt="">
+                        <div class="desc">
+                            <div class="name">Campfire & Evening Tea</div>
+                            <div class="amount">On Request</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="5"
+    data-background="{% static 'img/New_images/08.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center animate-text-section">
+                <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i
+                        class="star-rating"></i><i class="star-rating"></i></span>
+                <div class="section-subtitle"><span>Liok Hotels</span></div>
+                <div class="section-title"><span>Liok Munnar Highlights</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center col-md-12">
+                <a class="vid" href="https://youtu.be/7BGNAGahig8">
+                    <div class="vid-butn">
+                        <span class="icon">
+                            <i class="ti-control-play"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="facilties section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 animate-text-section">
+                <div class="section-subtitle">Our Services</div>
+                <div class="section-title">Liok Stay Facilities</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                    <span class="flaticon-world"></span>
+                    <h5>Pick Up & Drop</h5>
+                    <p>Convenient pickup and drop support can be arranged for a smoother arrival and departure
+                        experience.</p>
+                    <div class="facility-shape"> <span class="flaticon-world"></span> </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                    <span class="flaticon-car"></span>
+                    <h5>Parking Space</h5>
+                    <p>Dedicated parking is available across Liok stays for guests traveling by car.</p>
+                    <div class="facility-shape"> <span class="flaticon-car"></span> </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                    <span class="flaticon-bed"></span>
+                    <h5>Room Service</h5>
+                    <p>Fast in-room assistance ensures comfort throughout your stay.</p>
+                    <div class="facility-shape"> <span class="flaticon-bed"></span> </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                    <span class="flaticon-swimming"></span>
+                    <h5>Swimming Pool</h5>
+                    <p>Select properties include access to relaxing pool areas with scenic surroundings.</p>
+                    <div class="facility-shape"> <span class="flaticon-swimming"></span> </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                    <span class="flaticon-wifi"></span>
+                    <h5>Fibre Internet</h5>
+                    <p>High-speed Wi-Fi helps you stay connected for work, travel plans, and entertainment.</p>
+                    <div class="facility-shape"> <span class="flaticon-wifi"></span> </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                    <span class="flaticon-breakfast"></span>
+                    <h5>Breakfast</h5>
+                    <p>Fresh breakfast options are served to help you start your Munnar day right.</p>
+                    <div class="facility-shape"> <span class="flaticon-breakfast"></span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/New_images/04.jpg' %}"
+        data-overlay-dark="6">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="testimonials-box animate-text-section">
+                        <div class="head-box">
+                            <h6>Testimonials</h6>
+                            <h4>What Client's Say?</h4>
+                            <div class="line"></div>
+                        </div>
+                        <div class="owl-carousel owl-theme">
+                            {% for testimonial in testimonials %}
+                            <div class="item">
+                                <span class="quote"><img src="{% static 'img/quot.png' %}" alt=""></span>
+                                <p>{{ testimonial.review | safe}}</p>
+                                <div class="info">
+                                    <div class="author-img">
+                                        {% if testimonial.image %}
+                                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+                                        {% else %}
+                                        <img src="{% static 'img/team/4.jpg' %}" alt="{{ testimonial.name }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="cont">
+                                        <h6>{{ testimonial.name }}</h6>
+                                        <span>Guest review</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="item">
+                                <p>Guest reviews will be displayed here soon.</p>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-                {% empty %}
-                <div class="col-md-12">
-                    <p class="text-center">No blog posts available yet.</p>
-                </div>
-                {% endfor %}
             </div>
-            
-            {% if blogs.has_other_pages %}
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <ul class="news-pagination-wrap align-center mb-30 mt-30">
-                        {% if blogs.has_previous %}
-                        <li><a href="?page={{ blogs.previous_page_number }}"><i class="ti-angle-left"></i></a></li>
-                        {% endif %}
-                        
-                        {% for num in blogs.paginator.page_range %}
-                        <li><a href="?page={{ num }}" {% if blogs.number == num %}class="active"{% endif %}>{{ num }}</a></li>
-                        {% endfor %}
-                        
-                        {% if blogs.has_next %}
-                        <li><a href="?page={{ blogs.next_page_number }}"><i class="ti-angle-right"></i></a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-            {% endif %}
         </div>
-    </section>
-    
-   <style>
+    </div>
+</section>
+
+<section class="services section-padding">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 p-0">
+                <div class="img left">
+                    <a href="{% url 'admin_pages:nearby_attractions' %}">
+                        <div class="reveal-img">
+                            <img src="{% static 'img/New_images/sunrise.jpg' %}" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 p-0 bg-cream valign animate-text-section">
+                <div class="content">
+                    <div class="cont text-left">
+                        <div class="info">
+                            <h6>Relax</h6>
+
+                        </div>
+                        <h4>Scenic Leisure Spaces</h4>
+                        <p>Our leisure areas are designed with one purpose giving you room to slow down. Sunsets over the Western Ghats, open terraces, and the kind of stillness that makes a Munnar romantic getaway actually feel different from everyday life. Couples and families both love it here.                        </p>
+                        <div class="butn-dark"> <a href="{% url 'admin_pages:nearby_attractions' %}"><span>Learn
+                                    More</span></a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 bg-cream p-0 order2 valign animate-text-section">
+                <div class="content">
+                    <div class="cont text-left">
+                        <div class="info">
+                            <h6>Dining</h6>
+                        </div>
+                        <h4>Multi-Cuisine Restaurant</h4>
+                        <p>Our in-house restaurant at this boutique hotel in Munnar keeps things honest locally sourced ingredients, authentic Kerala recipes, and a few popular Indian favourites. The setting is calm, the portions are generous, and the hill views from your table make every meal better.
+                        </p>
+                        <div class="butn-dark"> <a href="{% url 'admin_pages:contact' %}"><span>Learn More</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 p-0 order1">
+                <div class="img">
+                    <a href="{% url 'admin_pages:contact' %}">
+                        <div class="reveal-img">
+                            <img src="{% static 'img/New_images/04.jpg' %}" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 p-0">
+                <div class="img left">
+                    <a href="{% url 'admin_pages:nearby_attractions' %}">
+                        <div class="reveal-img">
+                            <img src="{% static 'img/New_images/scenary.jpg' %}" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 p-0 bg-cream valign animate-text-section">
+                <div class="content">
+                    <div class="cont text-left">
+                        <div class="info">
+                            <h6>Experiences</h6>
+
+                        </div>
+                        <h4>Nature & Hill Experiences</h4>
+                        <p>Munnar's most iconic spots are within easy reach of both our Munnar hotels. Our team helps guests plan their days so nothing gets missed and nothing feels rushed.
+                        </p>
+                        <div class="butn-dark"> <a href="{% url 'admin_pages:nearby_attractions' %}"><span>Learn
+                                    More</span></a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 bg-cream p-0 order2 valign animate-text-section">
+                <div class="content">
+                    <div class="cont text-left">
+                        <div class="info">
+                            <h6>Comfort</h6>
+                        </div>
+                        <h4>Premium Rooms & Cottages</h4>
+                        <p>Every room and cottage across our Liok properties is built for real comfort, spacious interiors, modern amenities, and thoughtful design that frames the natural scenery outside. Whether it's a hill-facing suite or a private cottage, this is what a luxury stay in Munnar genuinely looks like.</p>
+                        <div class="butn-dark"> <a href="{% url 'admin_pages:properties_all' %}"><span>View All
+                                    Properties</span></a> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 p-0 order1">
+                <div class="img">
+                    <a href="{% url 'admin_pages:properties_all' %}">
+                        <div class="reveal-img">
+                            <img src="{% static 'img/New_images/room4.jpg' %}" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="news section-padding bg-blck wow animate__fadeInUp" data-wow-delay="0.3s">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 animate-text-section">
+                <div class="section-subtitle"><span>Liok Travel Blog</span></div>
+                <div class="section-title"><span>Stories from the Hills</span></div>
+            </div>
+        </div>
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-md-4 mb-30">
+                <div class="item wow animate__slideInRight" data-wow-delay="0.2s">
+                    <div class="position-re o-hidden">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                        <div class="date">
+                            <a href="{% url 'admin_pages:news_detail' blog.slug %}">
+                                <span>{{ blog.created_at|date:"M" }}</span>
+                                <i>{{ blog.created_at|date:"d" }}</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="con">
+                        <h5>
+                            <a href="{% url 'admin_pages:news_detail' blog.slug %}">{{ blog.title }}</a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-md-12">
+                <p class="text-center">No blog posts available yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if blogs.has_other_pages %}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="news-pagination-wrap align-center mb-30 mt-30">
+                    {% if blogs.has_previous %}
+                    <li><a href="?page={{ blogs.previous_page_number }}"><i class="ti-angle-left"></i></a></li>
+                    {% endif %}
+
+                    {% for num in blogs.paginator.page_range %}
+                    <li><a href="?page={{ num }}" {% if blogs.number == num %}class="active" {% endif %}>{{ num }}</a>
+                    </li>
+                    {% endfor %}
+
+                    {% if blogs.has_next %}
+                    <li><a href="?page={{ blogs.next_page_number }}"><i class="ti-angle-right"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
     .news .item img {
         border-radius: 20px;
-        
+
         object-fit: cover;
     }
+
     .news .item .con {
         border-radius: 20px;
         overflow: hidden;
     }
-   </style>
+</style>
 
-    <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="{% static 'img/New_images/munnar.jpg' %}" data-overlay-dark="4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 mb-30 mt-30 animate-text-section">
-                        <p>
-                            <i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i>
-                        </p>
-                        <h5 class="text-white">Have questions about Liok Hotels? Reach out to us directly for any special requests or information.</h5>
-                        
-                        <div class="reservations mb-30">
-                            <div class="icon color-1"><span class="flaticon-call"></span></div>
-                            <div class="text">
-                                <p class="color-1">Reservation & Support</p> 
-                                <a class="color-1" href="tel:{{ property.contact_phone|default:'+91 89876 78765' }}">{{ property.contact_phone|default:'+91 89876 78765' }}</a>
-                            </div>
-                        </div>
-                        <p class="text-white"><i class="ti-check"></i><small>Professional assistance for your Liok stay in Munnar.</small></p>
-                    </div>
-    
-                    <div class="col-md-5 offset-md-2">
-                        <div class="booking-box animate-box" data-animate-effect="fadeInUp">
-                            <div class="head-box">
-                                <h6>Inquiry</h6>
-                                <h4>Contact Us</h4>
-                            </div>
-                            <div class="booking-inner clearfix">
-                                <form method="post" action="{% url 'admin_pages:contact' %}" class="form1 clearfix contact-form-custom">
-                                    {% csrf_token %}
-    
-                                    {% if messages %}
-                                        <div id="contact-success-alert">
-                                            {% for message in messages %}
-                                                <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %} small py-2" role="alert">
-                                                    {{ message }}
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-    
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input1_wrapper">
-                                                <label>First Name</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input1_wrapper">
-                                                <label>Last Name</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Phone Number</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Email Address</label>
-                                                <div class="input1_inner">
-                                                    <input type="email" name="email" class="form-control" placeholder="Email (Optional)">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Your Message</label>
-                                                <div class="input1_inner">
-                                                    <textarea name="message" class="form-control" rows="3" placeholder="How can we help you?"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="butn-dark2 w-100 mt-15">Send Message</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="clients">
+<section class="testimonials">
+    <div class="background bg-img bg-fixed section-padding"
+        data-background="{% static 'img/New_images/munnar.jpg' %}" data-overlay-dark="4">
         <div class="container">
             <div class="row">
-                <div class="col-md-7">
-                <div class="owl-carousel owl-theme">
-                    <div class="clients-logo">
-                        <a href="#0"><img src="{% static 'img/clients/1.png' %}" alt=""></a>
+                <div class="col-md-5 mb-30 mt-30 animate-text-section">
+                    <p>
+                        <i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i
+                            class="star-rating"></i><i class="star-rating"></i>
+                    </p>
+                    <h5 class="text-white">Reach Out - We're Happy to Help Plan Your Munnar Visit <br> <br>
+                        Thinking about a trip to Munnar and want details on rooms, availability, or honeymoon arrangements at Liok? Drop us a message and our team will get back to you with everything you need to plan your stay.
+
+
+                    </h5>
+
+                    <div class="reservations mb-30">
+                        <div class="icon color-1"><span class="flaticon-call"></span></div>
+                        <div class="text">
+                            <a class="color-1" href="tel:+917356723332">+91 73567 23332</a>
+                        </div>
                     </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="{% static 'img/clients/2.png' %}" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="{% static 'img/clients/3.png' %}" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="{% static 'img/clients/4.png' %}" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="{% static 'img/clients/5.png' %}" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="{% static 'img/clients/6.png' %}" alt=""></a>
-                    </div>
+                    <p class="text-white"><i class="ti-check"></i><small>Reservation & Support - available for all queries about our Munnar properties.</small></p>
                 </div>
+
+                <div class="col-md-5 offset-md-2">
+                    <div class="booking-box animate-box" data-animate-effect="fadeInUp">
+                        <div class="head-box">
+                            <h6>Inquiry</h6>
+                            <h4>Contact Us</h4>
+                        </div>
+                        <div class="booking-inner clearfix">
+                            <form method="post" action="{% url 'admin_pages:contact' %}"
+                                class="form1 clearfix contact-form-custom">
+                                {% csrf_token %}
+
+                                {% if messages %}
+                                <div id="contact-success-alert">
+                                    {% for message in messages %}
+                                    <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %} small py-2"
+                                        role="alert">
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input1_wrapper">
+                                            <label>First Name</label>
+                                            <div class="input1_inner">
+                                                <input type="text" name="first_name" class="form-control"
+                                                    placeholder="First Name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input1_wrapper">
+                                            <label>Last Name</label>
+                                            <div class="input1_inner">
+                                                <input type="text" name="last_name" class="form-control"
+                                                    placeholder="Last Name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input1_wrapper">
+                                            <label>Phone Number</label>
+                                            <div class="input1_inner">
+                                                <input type="text" name="phone" class="form-control"
+                                                    placeholder="Phone Number" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input1_wrapper">
+                                            <label>Email Address</label>
+                                            <div class="input1_inner">
+                                                <input type="email" name="email" class="form-control"
+                                                    placeholder="Email (Optional)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input1_wrapper">
+                                            <label>Your Message</label>
+                                            <div class="input1_inner">
+                                                <textarea name="message" class="form-control" rows="3"
+                                                    placeholder="How can we help you?"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="butn-dark2 w-100 mt-15">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const alert = document.getElementById('contact-success-alert');
-            if (alert) {
-                setTimeout(function() {
-                    alert.style.transition = 'opacity 0.5s ease';
-                    alert.style.opacity = '0';
-                    setTimeout(() => alert.remove(), 500);
-                }, 5000);
-            }
-        });
-    </script>
-    
-    {% endblock %}
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alert = document.getElementById('contact-success-alert');
+        if (alert) {
+            setTimeout(function () {
+                alert.style.transition = 'opacity 0.5s ease';
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            }, 5000);
+        }
+    });
+</script>
+
+{% endblock %}

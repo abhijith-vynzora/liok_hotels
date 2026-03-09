@@ -1,15 +1,22 @@
 {% extends 'frontend/base.html' %}
 {% load static %}
-{% block title %}Contact {% endblock %}
+{% block title %}Contact Liok Hotels | Book Your Stay in Munnar{% endblock %}
+{% block meta_description %}Contact Liok Hotels for bookings, inquiries, and travel assistance. Plan your perfect stay
+in Munnar with our premium resorts.{% endblock %}
 
 {% block content %}
 <style>
     .contact__form .form-control {
-        border: 1px solid #e5e5e5 !important; /* Full solid border */
-        border-radius: 10px !important;          /* Sharp 90-degree corners */
-        padding: 12px 15px !important;       /* Internal spacing */
-        background: #fff !important;         /* Solid background */
-        box-shadow: none !important;         /* Remove soft glows */
+        border: 1px solid #e5e5e5 !important;
+        /* Full solid border */
+        border-radius: 10px !important;
+        /* Sharp 90-degree corners */
+        padding: 12px 15px !important;
+        /* Internal spacing */
+        background: #fff !important;
+        /* Solid background */
+        box-shadow: none !important;
+        /* Remove soft glows */
         height: auto;
         color: #222 !important;
         font-family: 'Barlow', sans-serif;
@@ -20,8 +27,9 @@
         height: 100%;
         width: 100%;
         display: block;
-        overflow: hidden; 
+        overflow: hidden;
     }
+
     .reveal-img img {
         height: 100%;
         width: 100%;
@@ -29,153 +37,158 @@
     }
 </style>
 
-    <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="3" data-background="{% static 'img/New_images/contact.jpg' %}">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-left caption mt-90 animate-text-section">
-                    <h5>Get in touch</h5>
-                    <h1>Contact Us</h1>
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="3"
+    data-background="{% static 'img/New_images/contact.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-left caption mt-90 animate-text-section">
+                <h5>Get in touch</h5>
+                <h1>Contact Us</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="contact section-padding">
+    <div class="container">
+        <div class="row mb-90">
+
+            <div class="col-md-6 mb-60 animate-text-section">
+                <h3>Liok Hotels</h3>
+                <p>
+                    Experience comfort, elegance, and personalized service at Liok Hotels.
+                    We’re here to assist you with reservations, inquiries, and any support you need.
+                </p>
+
+                <div class="reservations mb-30">
+                    <div class="icon">
+                        <span class="flaticon-call"></span>
+                    </div>
+                    <div class="text">
+                        <p>Reservation</p>
+                        <a href="tel:+918987678765">+91 89876 78765</a>
+                    </div>
                 </div>
+
+                <div class="reservations mb-30">
+                    <div class="icon">
+                        <span class="flaticon-envelope"></span>
+                    </div>
+                    <div class="text">
+                        <p>Email</p>
+                        <a href="mailto:info@liokhotels.com">info@liokhotels.com</a>
+                    </div>
+                </div>
+
+                <div class="reservations">
+                    <div class="icon">
+                        <span class="flaticon-location-pin"></span>
+                    </div>
+                    <div class="text">
+                        <p>Address</p>
+                        Kochi, Kerala, India
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-30 offset-md-1">
+
+                <div class="animate-text-section">
+                    <h3>Get in Touch</h3>
+                </div>
+
+                <form method="post" class="contact__form wow animate__fadeInUp" data-wow-delay="0.3s">
+                    {% csrf_token %}
+
+                    {% if messages %}
+                    <div class="row">
+                        {% for message in messages %}
+                        <div class="alert alert-success contact__msg" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="first_name" type="text" class="form-control" placeholder="First Name *"
+                                required>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="last_name" type="text" class="form-control" placeholder="Last Name *" required>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="phone" type="text" class="form-control" placeholder="Phone Number *" required>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <input name="email" type="email" class="form-control" placeholder="Email Address">
+                        </div>
+
+                        <div class="col-md-12 form-group mb-3">
+                            <textarea name="message" rows="4" class="form-control" placeholder="Your Message *"
+                                required></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="butn-dark2 w-100">
+                                <span>Send Message</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 map wow animate__fadeInUp" data-wow-delay="0.3s">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.773006054036!2d77.11930097536298!3d10.035581272420846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b079f00665d56f5%3A0x924c7f5031c164be!2sHaze%20Mountain%20Resorts%20by%20Liok%20hotels!5e0!3m2!1sen!2sin!4v1772538217021!5m2!1sen!2sin"
+                    width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
             </div>
         </div>
     </div>
 
-    <section class="contact section-padding">
-        <div class="container">
-            <div class="row mb-90">
-                
-                <div class="col-md-6 mb-60 animate-text-section">
-                    <h3>Liok Hotels</h3>
-                    <p>
-                    Experience comfort, elegance, and personalized service at Liok Hotels. 
-                    We’re here to assist you with reservations, inquiries, and any support you need.
-                    </p>
-
-                    <div class="reservations mb-30">
-                        <div class="icon">
-                            <span class="flaticon-call"></span>
-                        </div>
-                        <div class="text">
-                            <p>Reservation</p>
-                            <a href="tel:+918987678765">+91 89876 78765</a>
-                        </div>
-                    </div>
-
-                    <div class="reservations mb-30">
-                        <div class="icon">
-                            <span class="flaticon-envelope"></span>
-                        </div>
-                        <div class="text">
-                            <p>Email</p>
-                            <a href="mailto:info@liokhotels.com">info@liokhotels.com</a>
-                        </div>
-                    </div>
-
-                    <div class="reservations">
-                        <div class="icon">
-                            <span class="flaticon-location-pin"></span>
-                        </div>
-                        <div class="text">
-                            <p>Address</p>
-                            Kochi, Kerala, India
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-5 mb-30 offset-md-1">
-                    
-                    <div class="animate-text-section">
-                        <h3>Get in Touch</h3>
-                    </div>
-
-                    <form method="post" class="contact__form wow animate__fadeInUp" data-wow-delay="0.3s">
-                        {% csrf_token %}
-
-                        {% if messages %}
-                            <div class="row">
-                                {% for message in messages %}
-                                    <div class="alert alert-success contact__msg" role="alert">
-                                        {{ message }}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-
-                        <div class="row">
-                            <div class="col-md-6 form-group mb-3">
-                                <input name="first_name" type="text" class="form-control" placeholder="First Name *" required>
-                            </div>
-
-                            <div class="col-md-6 form-group mb-3">
-                                <input name="last_name" type="text" class="form-control" placeholder="Last Name *" required>
-                            </div>
-
-                            <div class="col-md-6 form-group mb-3">
-                                <input name="phone" type="text" class="form-control" placeholder="Phone Number *" required>
-                            </div>
-
-                            <div class="col-md-6 form-group mb-3">
-                                <input name="email" type="email" class="form-control" placeholder="Email Address">
-                            </div>
-
-                            <div class="col-md-12 form-group mb-3">
-                                <textarea name="message" rows="4" class="form-control" placeholder="Your Message *" required></textarea>
-                            </div>
-
-                            <div class="col-md-12">
-                                <button type="submit" class="butn-dark2 w-100">
-                                    <span>Send Message</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 map wow animate__fadeInUp" data-wow-delay="0.3s">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.773006054036!2d77.11930097536298!3d10.035581272420846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b079f00665d56f5%3A0x924c7f5031c164be!2sHaze%20Mountain%20Resorts%20by%20Liok%20hotels!5e0!3m2!1sen!2sin!4v1772538217021!5m2!1sen!2sin" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-
-                </div>
-            </div>
-        </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const form = document.querySelector('.contact__form');
-                const submitBtn = form.querySelector('button[type="submit"]');
-                
-                // Ensure button submits the form
-                if(submitBtn && form) {
-                    submitBtn.addEventListener('click', function(e) {
-                        // Optional: basic validation check before preventing default if needed
-                        if (!form.checkValidity()) {
-                            // Let the browser handle the validation popup
-                            return; 
-                        }
-                        // Otherwise allow standard submission or handle via AJAX if you prefer
-                    });
-                }
-            });
-        </script>
-    </section>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const form = document.querySelector('.contact__form');
             const submitBtn = form.querySelector('button[type="submit"]');
-            
+
             // Ensure button submits the form
-            submitBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (form.checkValidity()) {
-                    form.submit();
-                } else {
-                    form.reportValidity();
-                }
-            });
+            if (submitBtn && form) {
+                submitBtn.addEventListener('click', function (e) {
+                    // Optional: basic validation check before preventing default if needed
+                    if (!form.checkValidity()) {
+                        // Let the browser handle the validation popup
+                        return;
+                    }
+                    // Otherwise allow standard submission or handle via AJAX if you prefer
+                });
+            }
         });
-        </script>
-    
-    {% comment %} <section class="testimonials"> ... </section> {% endcomment %}
-    {% comment %} <section class="clients"> ... </section> {% endcomment %}
-   {% endblock %}
+    </script>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.contact__form');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        // Ensure button submits the form
+        submitBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (form.checkValidity()) {
+                form.submit();
+            } else {
+                form.reportValidity();
+            }
+        });
+    });
+</script>
+
+{% comment %} <section class="testimonials"> ... </section> {% endcomment %}
+{% comment %} <section class="clients"> ... </section> {% endcomment %}
+{% endblock %}
