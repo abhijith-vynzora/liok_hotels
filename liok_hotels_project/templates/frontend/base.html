@@ -1,26 +1,31 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    
+
     <title>{% block title %}Liok Hotels{% endblock %}</title>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5QVBB585');</script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5QVBB585');</script>
     <!-- End Google Tag Manager -->
-    
+
     <link rel="canonical" href="https://liokhotels.com{{ request.path }}">
 
-    <meta name="description" content="{% block meta_description %}Luxury hotel and resort with premium accommodations, world-class amenities.{% endblock %}">
+    <meta name="description"
+        content="{% block meta_description %}Luxury hotel and resort with premium accommodations, world-class amenities.{% endblock %}">
     <meta name="author" content="{% block meta_author %}Luxury Hotel{% endblock %}">
     <meta name="robots" content="index, follow">
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
@@ -29,15 +34,18 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Barlow:wght@400&family=Gilda+Display&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Barlow:wght@400&family=Gilda+Display&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <link rel="stylesheet" href="{% static 'css/plugins.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    
+
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
     <style>
         .navbar .container {
@@ -46,11 +54,11 @@
             justify-content: space-between !important;
             position: relative;
         }
-        
+
         .logo-wrapper {
             flex: 0 0 auto;
         }
-        
+
         .logo-img {
             height: 130px !important;
             width: auto !important;
@@ -59,22 +67,22 @@
             opacity: 1 !important;
             transition: height 0.3s ease;
         }
-        
+
         .nav-scroll .logo-img {
             height: 100px !important;
         }
-        
+
         .navbar-collapse {
             flex-grow: 0 !important;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
         }
-        
+
         .navbar-nav {
             margin: 0 auto;
         }
-        
+
         .btn-booking {
             background-color: #aa8453;
             color: #fff;
@@ -87,93 +95,99 @@
             text-decoration: none;
             display: inline-block;
         }
-        
+
         .btn-booking:hover {
             background-color: #8b6a3f;
             color: #fff;
         }
-        
+
         .navbar .d-none.d-lg-block {
             flex: 0 0 auto;
             margin-left: auto;
         }
-        
+
         .wow {
             visibility: hidden;
         }
-        
+
         @media (max-width: 991px) {
             .logo-img {
                 height: 50px !important;
             }
-            
+
             .nav-scroll .logo-img {
                 height: 70px !important;
             }
-            
+
             .navbar-collapse {
                 position: static;
                 transform: none;
                 left: auto;
             }
-            
+
             .navbar-toggler {
                 z-index: 10001 !important;
                 position: relative;
             }
-            
+
             .navbar {
                 z-index: 10000 !important;
             }
-            
+
             #navbar.collapse.show {
-                background: #fff !important; 
+                background: #fff !important;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
                 padding: 20px;
                 border-radius: 0 0 15px 15px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
                 z-index: 9999;
                 max-height: 80vh;
                 overflow-y: auto;
             }
-            
+
             .navbar-nav {
                 width: 100%;
             }
-            
+
             .navbar-nav .nav-link {
                 padding: 10px 0 !important;
                 border-bottom: 1px solid #eee;
             }
-            
+
             .navbar-nav .nav-link:last-child {
                 border-bottom: none;
             }
-            
+
             .btn-booking {
                 width: 100%;
                 text-align: center;
                 margin-top: 15px;
             }
         }
+
         .phone-link {
             color: #ffffff;
             text-decoration: none;
-            white-space: nowrap;   /* THIS prevents breaking */
+            white-space: nowrap;
+            /* THIS prevents breaking */
             display: inline-block;
         }
-        
+
         .phone-link:hover {
-            color: #c8a96a; /* optional gold hover */
+            color: #c8a96a;
+            /* optional gold hover */
         }
+
         .footer-contact-phone {
-            margin-bottom: 5px;   /* reduce space */
-            margin-top: 0;      /* remove top margin */
+            margin-bottom: 5px;
+            /* reduce space */
+            margin-top: 0;
+            /* remove top margin */
         }
-        
+
         .footer-contact-phone:last-child {
             margin-bottom: 0;
         }
@@ -182,8 +196,10 @@
 
         /* The container that hides the image initially */
         .reveal-img {
-            visibility: hidden; /* GSAP's autoAlpha will turn this on */
-            overflow: hidden;   /* This cuts off the image as it slides in */
+            visibility: hidden;
+            /* GSAP's autoAlpha will turn this on */
+            overflow: hidden;
+            /* This cuts off the image as it slides in */
             position: relative;
             display: block;
             width: 100%;
@@ -194,20 +210,14 @@
         .reveal-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures image fills the box without stretching */
+            object-fit: cover;
+            /* Ensures image fills the box without stretching */
             display: block;
-            will-change: transform; /* Optimizes performance for smooth animation */
+            will-change: transform;
+            /* Optimizes performance for smooth animation */
         }
 
         /* Optional: Ensures text doesn't flash before animating */
-        .animate-text-section h1, 
-        .animate-text-section h2, 
-        .animate-text-section p, 
-        .animate-text-section .btn-gold {
-            /* We don't hide them with CSS because GSAP handles it immediately, 
-            but if you see a "flash" of text on load, add 'opacity: 0' here. */
-        }
-
         /* Unified frontend button polish */
         button,
         input[type="button"],
@@ -223,7 +233,6 @@
 
         .butn-dark a,
         .butn-dark a span,
-        .butn-dark:hover a,
         .butn-dark:hover a span,
         .butn-dark2,
         .butn-dark2 span,
@@ -233,6 +242,14 @@
         .btn-form1-submit:hover {
             color: #fff !important;
         }
+
+        /* Ensure dropdown opens on hover for desktop */
+        @media (min-width: 992px) {
+            .navbar .dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+            }
+        }
     </style>
 
     <div class="preloader-bg"></div>
@@ -241,13 +258,13 @@
             <div class="preloader-position loader"> <span></span> </div>
         </div>
     </div>
-    
+
     <div class="progress-wrap cursor-pointer">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
         </svg>
     </div>
-    
+
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <div class="logo-wrapper">
@@ -255,30 +272,34 @@
                     <img src="{% static 'logo_gold.jpg' %}" class="logo-img" alt="Logo">
                 </a>
             </div>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="ti-menu"></i></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'admin_pages:home' %}">Home</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                            href="{% url 'admin_pages:home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'admin_pages:about' %}">About</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                            href="{% url 'admin_pages:about' %}">About</a>
                     </li>
-                   
+
                     {% comment %} <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'property_detail' or request.resolver_match.url_name == 'properties_all' %}active{% endif %}" 
-                           href="{% url 'admin_pages:properties_all' %}" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'property_detail' or request.resolver_match.url_name == 'properties_all' %}active{% endif %}"
+                            href="{% url 'admin_pages:properties_all' %}" role="button" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" aria-expanded="false">
                             Properties <i class="ti-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             {% for prop in all_properties %}
                             <li>
-                                <a class="dropdown-item {% if property.slug == prop.slug %}active{% endif %}" 
-                                   href="{% url 'admin_pages:property_detail' prop.slug %}">
+                                <a class="dropdown-item {% if property.slug == prop.slug %}active{% endif %}"
+                                    href="{% url 'admin_pages:property_detail' prop.slug %}">
                                     {{ prop.name }}
                                 </a>
                             </li>
@@ -288,67 +309,83 @@
                         </ul>
                     </li> {% endcomment %}
 
-                    <li class="nav-item dropdown">
-
-                        <!-- Main Link (Clickable) -->
-                        <a class="nav-link {% if request.resolver_match.url_name == 'properties_all' %}active{% endif %}" 
-                           href="{% url 'admin_pages:properties_all' %}">
-                            Properties
+                    <li class="nav-item dropdown d-none d-lg-block">
+                        <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'property_detail' or request.resolver_match.url_name == 'properties_all' %}active{% endif %}"
+                            href="{% url 'admin_pages:properties_all' %}"
+                            data-href="{% url 'admin_pages:properties_all' %}"
+                            onclick="window.location.href=this.getAttribute('data-href')" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Properties <i class="ti-angle-down"></i>
                         </a>
-                    
-                        <!-- Dropdown Arrow -->
-                        <a class="nav-link dropdown-toggle dropdown-toggle-split"
-                           href="#"
-                           role="button"
-                           data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                        </a>
-                    
-                        <!-- Dropdown Menu -->
                         <ul class="dropdown-menu">
-                    
-                            {% for prop in all_properties %}
+                            {% for prop in properties %}
                             <li>
-                                <a class="dropdown-item {% if property and property.slug == prop.slug %}active{% endif %}" 
-                                   href="{% url 'admin_pages:property_detail' prop.slug %}">
+                                <a class="dropdown-item {% if property and property.slug == prop.slug %}active{% endif %}"
+                                    href="{% url 'admin_pages:property_detail' prop.slug %}">
                                     {{ prop.name }}
                                 </a>
                             </li>
                             {% empty %}
+                            <li><a class="dropdown-item disabled" href="#">No properties found</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown d-lg-none">
+                        <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'property_detail' or request.resolver_match.url_name == 'properties_all' %}active{% endif %}"
+                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Properties <i class="ti-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item disabled" href="#">
-                                    No properties found
+                                <a class="dropdown-item" href="{% url 'admin_pages:properties_all' %}">
+                                    <strong>All Properties</strong>
                                 </a>
                             </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            {% for prop in properties %}
+                            <li>
+                                <a class="dropdown-item {% if property and property.slug == prop.slug %}active{% endif %}"
+                                    href="{% url 'admin_pages:property_detail' prop.slug %}">
+                                    {{ prop.name }}
+                                </a>
+                            </li>
+                            {% empty %}
+                            <li><a class="dropdown-item disabled" href="#">No properties found</a></li>
                             {% endfor %}
-                    
                         </ul>
-                    
                     </li>
-                    
+
+
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'nearby_attractions' %}active{% endif %}" href="{% url 'admin_pages:nearby_attractions' %}">Attractions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'news_list' %}active{% endif %}" href="{% url 'admin_pages:news_list' %}">Blogs</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'nearby_attractions' %}active{% endif %}"
+                            href="{% url 'admin_pages:nearby_attractions' %}">Attractions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}" href="{% url 'admin_pages:gallery' %}">Gallery</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'blog_list_public' %}active{% endif %}"
+                            href="{% url 'admin_pages:blog_list_public' %}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'admin_pages:contact' %}">Contact</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}"
+                            href="{% url 'admin_pages:gallery' %}">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                            href="{% url 'admin_pages:contact' %}">Contact</a>
                     </li>
                 </ul>
             </div>
-    
+
             <div class="d-none d-lg-block ms-3">
                 <a href="{% url 'admin_pages:book_now' %}" class="btn-booking">Book Now</a>
             </div>
         </div>
     </nav>
-    
+
     {% block content %}{% endblock %}
-    
+
     {% comment %} <footer class="footer">
         <div class="footer-top">
             <div class="container">
@@ -356,8 +393,9 @@
                     <div class="col-md-4">
                         <div class="footer-column footer-about">
                             <h3 class="footer-title">About Hotel</h3>
-                            <p class="footer-about-text">Welcome to the best five-star deluxe hotel. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat.</p>
-                            
+                            <p class="footer-about-text">Welcome to the best five-star deluxe hotel. Hotel elementum
+                                sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat.</p>
+
                             <div class="footer-language">
                                 <i class="lni ti-world"></i>
                                 <select onchange="location = this.value;">
@@ -367,7 +405,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-3 offset-md-1">
                         <div class="footer-column footer-explore clearfix">
                             <h3 class="footer-title">Explore</h3>
@@ -380,15 +418,16 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-4">
                         <div class="footer-column footer-contact">
                             <h3 class="footer-title">Contact</h3>
                             <p class="footer-contact-text">Your Address Here<br>City, State, Country</p>
                             <div class="footer-contact-info">
-                                <p class="footer-contact-phone"><span class="flaticon-call"></span> 855 100 4444</p>
-                                <p class="footer-contact-mail">info@luxuryhotel.com</p>
-                            </div>
+                                        <p class="footer-contact-phone"><span class="flaticon-call"></span> +91 73567 23332</p>
+                                        <p class="footer-contact-phone"><span class="flaticon-call"></span> +91 73567 23331</p>
+                                        <p class="footer-contact-mail">info@liokhotels.com</p>
+                                </div>
                             <div class="footer-about-social-list">
                                 <a href="#"><i class="ti-instagram"></i></a>
                                 <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -401,36 +440,39 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="footer-bottom-inner">
-                            <p class="footer-bottom-copy-right">© Copyright <span id="copyright-year"></span> by <a href="#">Your Hotel Name</a></p>
+                            <p class="footer-bottom-copy-right">© Copyright <span id="copyright-year"></span> by <a
+                                    href="#">Your Hotel Name</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer> {% endcomment %}
-    <footer class="footer">
+    {% comment %} <footer class="footer">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    
+
                     <!-- About -->
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="footer-column footer-about">
                             <h3 class="footer-title">Liok Hotels</h3>
                             <p class="footer-about-text">
-                                A collection of boutique hotels in Munnar, Kerala thoughtfully built for couples, families, and nature lovers seeking a genuine luxury stay in Munnar with real mountain views & comfort-first hospitality.
+                                A collection of boutique hotels in Munnar, Kerala thoughtfully built for couples,
+                                families, and nature lovers seeking a genuine luxury stay in Munnar with real mountain
+                                views & comfort-first hospitality.
                             </p>
                         </div>
                     </div>
-                    
+
                     <!-- Useful Links -->
-                    <div class="col-md-3 offset-md-1">
+                    <div class="col-md-2">
                         <div class="footer-column footer-explore clearfix">
                             <h3 class="footer-title">Useful Links</h3>
                             <ul class="footer-explore-list list-unstyled">
@@ -442,36 +484,24 @@
                             </ul>
                         </div>
                     </div>
-                    
-                    {% comment %} <!-- Our Resorts -->
-                    <div class="col-md-2">
-                        <div class="footer-column footer-explore clearfix">
-                            <h3 class="footer-title">Our Resorts</h3>
-                            <ul class="footer-explore-list list-unstyled">
-                                <li><a href="#">Glenmore Resorts</a></li>
-                                <li><a href="#">Tree Blanche Resorts</a></li>
-                                <li><a href="#">Haze Mountain Resort</a></li>
-                            </ul>
-                        </div>
-                    </div> {% endcomment %}
-                    
+
                     <!-- Contact -->
-                    <div class="col-md-2">
+                    <div class="col-md-3 offset-md-1">
                         <div class="footer-column footer-contact">
                             <h3 class="footer-title">Contact Us</h3>
-                        
+
                             <p class="footer-contact-mail">
-                                <a href="mailto:liokhotels@gmail.com" class="email-link">
-                                    liokhotels@gmail.com
+                                <a href="mailto:info@liokhotels.com" class="email-link">
+                                    info@liokhotels.com
                                 </a>
                             </p>
-                        
+
                             <p class="footer-contact-phone">
                                 <a href="tel:+917356723332" class="phone-link">
                                     +91 73567 23332
                                 </a>
                             </p>
-                            
+
                             <p class="footer-contact-phone">
                                 <a href="tel:+917356723331" class="phone-link">
                                     +91 73567 23331
@@ -479,11 +509,26 @@
                             </p>
                         </div>
                     </div>
-                    
+
+                    <!-- Social Links -->
+                    <div class="col-md-2 offset-md-1">
+                        <div class="footer-column footer-social">
+                            <h3 class="footer-title">Follow Us</h3>
+                            <p class="footer-contact-text mb-3">
+                                Stay connected for updates and glimpse into our properties.
+                            </p>
+                            <div class="footer-about-social-list">
+                                <a href="#" target="_blank" title="Facebook"><i class="ti-facebook"></i></a>
+                                <a href="#" target="_blank" title="Instagram"><i class="ti-instagram"></i></a>
+                                <a href="#" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
@@ -497,8 +542,93 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> {% endcomment %}
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container px-4 px-md-5">
+                <div class="row g-4">
     
+                    <!-- About -->
+                    <div class="col-md-3">
+                        <div class="footer-column footer-about">
+                            <h3 class="footer-title">Liok Hotels</h3>
+                            <p class="footer-about-text">
+                                A collection of boutique hotels in Munnar, Kerala thoughtfully built for couples,
+                                families, and nature lovers seeking a genuine luxury stay in Munnar with real mountain
+                                views & comfort-first hospitality.
+                            </p>
+                        </div>
+                    </div>
+    
+                    <!-- Useful Links -->
+<div class="col-md-3" style="padding-left: 3rem;">
+    <div class="footer-column footer-explore clearfix">
+        <h3 class="footer-title">Useful Links</h3>
+        <ul class="footer-explore-list list-unstyled">
+            <li><a href="{% url 'admin_pages:home' %}">Home</a></li>
+            <li><a href="{% url 'admin_pages:about' %}">About Us</a></li>
+            <li><a href="{% url 'admin_pages:properties_all' %}">Properties</a></li>
+            <li><a href="{% url 'admin_pages:gallery' %}">Gallery</a></li>
+            <li><a href="{% url 'admin_pages:contact' %}">Contact Us</a></li>
+        </ul>
+    </div>
+</div>
+                    <!-- Contact -->
+                    <div class="col-md-3">
+                        <div class="footer-column footer-contact">
+                            <h3 class="footer-title">Contact Us</h3>
+                            <p class="footer-contact-mail">
+                                <a href="mailto:info@liokhotels.com" class="email-link">
+                                    info@liokhotels.com
+                                </a>
+                            </p>
+                            <p class="footer-contact-phone">
+                                <a href="tel:+917356723332" class="phone-link">
+                                    +91 73567 23332
+                                </a>
+                            </p>
+                            <p class="footer-contact-phone">
+                                <a href="tel:+917356723331" class="phone-link">
+                                    +91 73567 23331
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+    
+                    <!-- Social Links -->
+                    <div class="col-md-3">
+                        <div class="footer-column footer-social">
+                            <h3 class="footer-title">Follow Us</h3>
+                            <p class="footer-contact-text mb-3">
+                                Stay connected for updates and glimpse into our properties.
+                            </p>
+                            <div class="footer-about-social-list">
+                                <a href="https://www.facebook.com/liokhotels/" target="_blank" title="Facebook"><i class="ti-facebook"></i></a>
+                                <a href="https://www.instagram.com/liokhotels/" target="_blank" title="Instagram"><i class="ti-instagram"></i></a>
+                                <a href="#" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <div class="container px-4 px-md-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-bottom-inner">
+                            <p class="footer-bottom-copy-right">
+                                © Copyright {% now "Y" %} Liok Hotels. All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/jquery-migrate-3.5.0.min.js' %}"></script>
     <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
@@ -522,28 +652,28 @@
 
     <script>
         new WOW({
-            boxClass: 'wow',      
+            boxClass: 'wow',
             animateClass: 'animate__animated',
-            offset: 100,          
-            mobile: true,       
-            live: true       
+            offset: 100,
+            mobile: true,
+            live: true
         }).init();
     </script>
-    
+
     <script>
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
     </script>
-    
+
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var logoImg = document.querySelector('.logo-img');
             var goldLogoPath = "{% static 'logo_gold.jpg' %}";
-    
+
             if (logoImg) {
                 logoImg.src = goldLogoPath;
-    
-                var observer = new MutationObserver(function(mutations) {
-                    mutations.forEach(function(mutation) {
+
+                var observer = new MutationObserver(function (mutations) {
+                    mutations.forEach(function (mutation) {
                         if (mutation.type === "attributes" && mutation.attributeName === "src") {
                             if (logoImg.getAttribute('src') !== goldLogoPath) {
                                 logoImg.src = goldLogoPath;
@@ -551,7 +681,7 @@
                         }
                     });
                 });
-    
+
                 observer.observe(logoImg, { attributes: true });
             }
         });
@@ -576,7 +706,7 @@
                 }
             });
 
-            tl.set(container, { autoAlpha: 1 }); 
+            tl.set(container, { autoAlpha: 1 });
             tl.from(container, {
                 duration: 1.5,
                 xPercent: -100, // Slide container from left
@@ -598,7 +728,7 @@
         textSections.forEach((section) => {
             // Select headings, paragraphs, buttons, and spans inside
             let elements = section.querySelectorAll("h1, h2, h3, h4, h5, h6, p, .btn-gold, span");
-            
+
             gsap.from(elements, {
                 scrollTrigger: {
                     trigger: section,
@@ -614,9 +744,10 @@
         });
     </script>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QVBB585"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QVBB585" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     {% block extra_js %}{% endblock %}
 </body>
+
 </html>

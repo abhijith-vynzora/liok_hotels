@@ -1,0 +1,143 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}{{ blog.title }} - Liok Hotels{% endblock %}
+{% block meta_description %}Explore travel insights, destination ideas, and guest-focused updates from Liok Hotels in
+Munnar, Kerala.{% endblock %}
+
+{% block content %}
+
+<style>
+    .news2 .post-img {
+        height: 600px !important;
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        border-radius: 20px;
+    }
+
+    /* Ensure image fits inside the reveal wrapper */
+    .news2 .post-img .reveal-img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .news2-sidebar .recent .thum {
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 20px !important;
+        overflow: hidden;
+    }
+
+    .news2-sidebar .widget {
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid #eee;
+    }
+
+    /* --- GSAP Animation Helper --- */
+    .reveal-img {
+        height: 100%;
+        width: 100%;
+        display: block;
+        overflow: hidden;
+    }
+
+    .reveal-img img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+</style>
+
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4"
+    data-background="{% if blog.image %}{{ blog.image.url }}{% else %}{% static 'img/slider/7.jpg' %}{% endif %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-left caption mt-90 animate-text-section">
+                <h5>Munnar Travel Story</h5>
+                <h1>{{ blog.title }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="news2 section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="item">
+
+                            <div class="post-img">
+                                <div class="reveal-img">
+                                    {% if blog.image %}
+                                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid">
+                                    {% else %}
+                                    <img src="{% static 'img/slider/7.jpg' %}" alt="Default Image" class="img-fluid">
+                                    {% endif %}
+                                </div>
+
+                                <div class="date">
+                                    <span>{{ blog.created_at|date:"M" }}</span>
+                                    <i>{{ blog.created_at|date:"d" }}</i>
+                                </div>
+                            </div>
+
+                            <div class="post-cont mt-30 animate-text-section">
+                                <h2 style="font-family: 'Gilda Display', serif; margin-bottom: 20px;">{{ blog.title }}
+                                </h2>
+
+                                <div class="content-text" style="line-height: 1.8; color: #666; font-size: 16px;">
+                                    {{ blog.description| safe }}
+                                </div>
+
+                                <div class="share-post mt-40">
+                                    <a href="{% url 'admin_pages:blog_list_public' %}" class="btn-gold">
+                                        <span><i class="ti-arrow-left"></i> Back to Blog</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="news2-sidebar row">
+
+                    <div class="col-md-12 animate-text-section">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h6>Recent Posts</h6>
+                            </div>
+                            <ul class="recent">
+                                {% for recent in recent_posts %}
+                                <li>
+                                    <div class="thum">
+                                        {% if recent.image %}
+                                        <img src="{{ recent.image.url }}" alt="{{ recent.title }}"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                        {% else %}
+                                        <img src="{% static 'img/slider/7.jpg' %}" alt="Default"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                        {% endif %}
+                                    </div>
+                                    <a href="{% url 'admin_pages:blog_detail_public' recent.slug %}">{{ recent.title
+                                        }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

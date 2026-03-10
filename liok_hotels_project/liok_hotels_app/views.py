@@ -910,7 +910,7 @@ def frontend_blog_list(request):
         "recent_posts": recent_posts,
     }
     
-    return render(request, "frontend/news.html", context)
+    return render(request, "frontend/blog.html", context)
 
 def frontend_blog_detail(request, slug):
     # 1. Fetch the single blog post requested
@@ -925,7 +925,7 @@ def frontend_blog_detail(request, slug):
         "recent_posts": recent_posts,
     }
     
-    return render(request, "frontend/news2.html", context)
+    return render(request, "frontend/blog_detail.html", context)
 
 def custom_404(request, exception):
     return render(request, 'frontend/404.html', status=404)

@@ -14,7 +14,7 @@ class StaticViewSitemap(Sitemap):
             "admin_pages:about",
             "admin_pages:properties_all",
             "admin_pages:rooms",
-            "admin_pages:news_list",
+            "admin_pages:blog_list_public",
             "admin_pages:gallery",
             "admin_pages:contact",
             "admin_pages:book_now",
@@ -46,7 +46,7 @@ class BlogSitemap(Sitemap):
         return Blog.objects.all()
 
     def location(self, obj):
-        return reverse("admin_pages:news_detail", kwargs={"slug": obj.slug})
+        return reverse("admin_pages:blog_detail_public", kwargs={"slug": obj.slug})
 
 
 class RoomSitemap(Sitemap):
