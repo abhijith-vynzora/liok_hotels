@@ -9,9 +9,9 @@ SECRET_KEY = 'django-insecure-4of7qn^+yzjatd*=^ph7-0l4vb3t#9b&x(8gh3qz4_0%$t!$)n
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "liokhotels.com",
-    "www.liokhotels.com",
     "43.205.178.30",
+    "liokhotels.com",
+    "www.liokhotels.com"
 ]
 
 
@@ -125,5 +125,3 @@ EMAIL_HOST_USER = 'info@liokhotels.com'
 EMAIL_HOST_PASSWORD = 'gsEfs2XwmgyZ'
 
 DEFAULT_FROM_EMAIL = 'info@liokhotels.com'
-
-
